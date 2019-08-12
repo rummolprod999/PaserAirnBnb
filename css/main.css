@@ -1,7 +1,25 @@
 
 #header{
-    background-color: #ccc;
+    background-color: #f4f4f4;
+}
+body {
+    font-family: Verdana, Arial, sans-serif;
+    background-color: #f7f7f7;
 }
 #footer{
-    background-color: #ccc;
+    border-top: 1px solid #ccc;
+    font-size: .8em;
+    text-align: center;
+    padding: 10px 10px 30px 10px;
+}
+#article{
+    background-color: #fafafa;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 15px;
+    height: 700px;
+}
+#login_form_div{
+    width: 50%;
+    margin: auto auto;
 }

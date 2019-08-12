@@ -1,4 +1,5 @@
 
+<div id="login_form_div">
 <form role="form" method="post">
     <fieldset>
         <legend>Вход на сайт</legend>
@@ -16,3 +17,4 @@
         <button type="submit" class="btn btn-default">Войти</button>
     </fieldset>
 </form>
+</div>

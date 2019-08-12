@@ -5,6 +5,10 @@ if (isset($_POST['login'], $_POST['password'])) {
     } else {
         setcookie('session_id', md5(trim($_POST['password']) . trim($_POST['login'])));
     }
+    require_once 'controllers/AuthController.php';
+    if(AuthController::check_login_pass($_POST['password'], $_POST['login'])){
+        AuthController::$is_login = true;
+    }
 
 }
 require_once 'templates/header.php';
