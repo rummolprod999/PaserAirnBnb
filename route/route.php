@@ -1,6 +1,6 @@
 <?php
 require_once 'RouterLite.php';
-if(AuthController::check_auth() || AuthController::$is_login){
+if(AuthController::$is_login || AuthController::check_auth()){
     RouterLite::addRoute('/', 'DefaultController/index_page');
 
 } else{
