@@ -42,17 +42,15 @@ final class RouterLite
         if ($requestedUrl === null) {
             $exp = explode('?', $_SERVER["REQUEST_URI"]);
             $uri = reset($exp);
-            $requestedUrl = urldecode(rtrim($uri, '/'));
+            $requestedUrl = urldecode(($uri == '/')?$uri:rtrim($uri, '/'));
         }
 
         self::$requestedUrl = $requestedUrl;
-
         // если URL и маршрут полностью совпадают
         if (isset(self::$routes[$requestedUrl])) {
             self::$params = self::splitUrl(self::$routes[$requestedUrl]);
             return self::executeAction();
         }
-
         foreach (self::$routes as $route => $uri) {
             // Заменяем wildcards на рег. выражения
             if (strpos($route, ':') !== false) {
@@ -75,10 +73,10 @@ final class RouterLite
      * Запуск соответствующего действия/экшена/метода контроллера
      */
     public static function executeAction() {
-        $controller = isset(self::$params[0]) ? self::$params[0]: 'DefaultController';
-        $action = isset(self::$params[1]) ? self::$params[1]: 'default_method';
+        $controller = isset(self::$params[0]) ? self::$params[0]: 'AuthController';
+        $action = isset(self::$params[1]) ? self::$params[1]: 'index_page';
         $params = array_slice(self::$params, 2);
-
+        $controller = new $controller();
         return call_user_func_array(array($controller, $action), $params);
     }
 

@@ -3,7 +3,7 @@
 
 class DefaultController
 {
-function default_method(){
-    echo "default page";
+function index_page(){
+    echo "index page";
 }
 }
