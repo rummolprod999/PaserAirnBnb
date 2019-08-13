@@ -1,9 +1,10 @@
 <?php
+require_once 'Controller.php';
 
-
-class DefaultController
+class DefaultController extends Controller
 {
-function index_page(){
-    echo "index page";
-}
+    function index_page()
+    {
+        echo $this->template('templates/default.php', array("title" => "Default page"));
+    }
 }

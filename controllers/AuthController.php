@@ -6,7 +6,7 @@ class AuthController extends Controller {
     private static $password = "1234";
     public static $is_login = false;
     function index_page(){
-        echo $this->template('templates/auth.php', []);
+        echo $this->template('templates/auth.php', array("title" => "Auth"));
     }
 
     static function check_auth(){
