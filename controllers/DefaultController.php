@@ -5,6 +5,6 @@ class DefaultController extends Controller
 {
     function index_page()
     {
-        echo $this->template('templates/default.php', array("title" => "Default page"));
+        echo $this->template('templates/default.php', ["title" => "Главная страница"]);
     }
 }

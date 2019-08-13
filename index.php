@@ -10,6 +10,8 @@ if (isset($_POST['login'], $_POST['password'])) {
     require_once 'controllers/AuthController.php';
     if(AuthController::check_login_pass($password, $login)){
         AuthController::$is_login = true;
+    } else{
+        AuthController::$wrong_pass =true;
     }
 
 }
