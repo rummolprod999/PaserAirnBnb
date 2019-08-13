@@ -1,11 +1,20 @@
 <?php
 require_once 'Controller.php';
+require_once 'models/AuthModel.php';
 
 class AuthController extends Controller {
-    private static $user = "admin";
-    private static $password = "1234";
+    private static $user;
+    private static $password;
     public static $is_login = false;
     public static $wrong_pass = false;
+    private $model;
+    public function __construct()
+    {
+        $this->model = new AuthModel();
+        self::$user = $this->model->user;
+        self::$password = $this->model->password;
+    }
+
     function index_page(){
         echo $this->template('templates/auth.php', ["title" => "Аутентификация"]);
     }

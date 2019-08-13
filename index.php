@@ -8,6 +8,7 @@ if (isset($_POST['login'], $_POST['password'])) {
         setcookie('session_id', md5(trim($password) . trim($login)));
     }
     require_once 'controllers/AuthController.php';
+    $a = new AuthController();
     if(AuthController::check_login_pass($password, $login)){
         AuthController::$is_login = true;
     } else{
