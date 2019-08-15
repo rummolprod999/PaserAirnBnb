@@ -11,15 +11,19 @@ body {
     font-size: .8em;
     text-align: center;
     padding: 10px 10px 30px 10px;
+    /*height: 50px;*/
 }
 #article{
     background-color: #fafafa;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
     padding: 15px;
-    height: 700px;
+    min-height: 700px;
 }
 #login_form_div{
     width: 50%;
     margin: auto auto;
+}
+#table_div{
+    margin-top: 50px;
 }
