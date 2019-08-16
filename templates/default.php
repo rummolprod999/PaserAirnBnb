@@ -29,7 +29,7 @@
         <?php foreach ($data['url_arr'] as $row): ?>
             <tr>
                 <td><strong><?php echo $row['id'] ?></strong></td>
-                <td><a href="#"><?php echo 'Статистика' ?></a></td>
+                <td><a href="<?php echo '/stat/' . $row['id'] ?>"><?php echo 'Статистика' ?></a></td>
                 <td><a target="_blank" href="<?php echo $row['url'] ?>"><?php echo $row['url'] ?></a></td>
                 <td><?php echo $row['owner'] ?></td>
                 <td><?php echo 'Изменения' ?></td>

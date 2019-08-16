@@ -2,6 +2,7 @@
 // from https://toster.ru/q/178365
 require_once 'controllers/DefaultController.php';
 require_once 'controllers/AuthController.php';
+require_once 'controllers/StatController.php';
 
 final class RouterLite
 {
