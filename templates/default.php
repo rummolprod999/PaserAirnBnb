@@ -33,7 +33,7 @@
                     <td><a href="<?php echo '/stat/' . $row['id'] ?>"><?php echo 'Статистика' ?></a></td>
                     <td><a target="_blank" href="<?php echo $row['url'] ?>"><?php echo $row['url'] ?></a></td>
                     <td><?php echo $row['owner'] ?></td>
-                    <td><?php echo 'Изменения' ?></td>
+                    <td class = 'text-danger'><?php echo $row['changes'] ?></td>
                     <td>
                         <form class="form-inline" method="post"><input type="hidden" name="remove_url"
                                                                        value='<?php echo $row['id'] ?>'>
