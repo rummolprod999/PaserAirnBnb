@@ -28,6 +28,11 @@ class StatModel extends Model
         $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
         $stmt->execute();
         $data['prices'] = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $stmt = $this->conn->prepare('SELECT date, available, available_for_checkin, bookable FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id');
+        $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
+        $stmt->execute();
+        $data['days'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
 }
