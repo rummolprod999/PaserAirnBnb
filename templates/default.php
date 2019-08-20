@@ -15,6 +15,9 @@
             <?php if (isset($data['rem_mess'])) {
                 echo $data['rem_mess'];
             } ?>
+            <?php if (isset($data['launch_mess'])) {
+                echo $data['launch_mess'];
+            } ?>
         </div>
         <table class="table table-bordered">
             <thead>
@@ -45,5 +48,8 @@
             <?php endforeach; ?>
             </tbody>
         </table>
+        <div><form class="form-inline" method="post"><input type="hidden" name="launch"
+                                                            value='true'>
+                <button type="submit" class="btn btn-success btn-lg">Запуск парсера</button></div>
     </div>
 </div>

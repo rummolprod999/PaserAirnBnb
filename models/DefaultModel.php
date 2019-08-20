@@ -14,7 +14,11 @@ class DefaultModel extends Model
     {
         $add_mess = $this->add_url();
         $rem_mess = $this->remove_url();
+        $launch_mess = $this->launch_parser();
         $data = $this->get_list_url();
+        if ($launch_mess !== '') {
+            $data['launch_mess'] = $launch_mess;
+        }
         if ($add_mess !== '') {
             $data['add_mess'] = $add_mess;
         }
@@ -22,6 +26,20 @@ class DefaultModel extends Model
             $data['rem_mess'] = $rem_mess;
         }
         return $data;
+    }
+
+    function launch_parser()
+    {
+        $message = '';
+        if (isset($_POST['launch']) && !empty($_POST['launch']) && $_POST['launch'] === 'true') {
+            try {
+                exec('java -jar ./anb-1.0-jar-with-dependencies.jar anb > /dev/null &');
+                $message = '<div class="alert alert-success" role="alert">Парсер запущен, для просмотра результатов перйдите в "Просмотр логов"</div>';
+            } catch (Exception $e) {
+                $message = $e->getMessage();
+            }
+        }
+        return $message;
     }
 
     function add_url()
