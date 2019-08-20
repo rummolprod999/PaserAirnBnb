@@ -3,8 +3,9 @@
 function print_calendar($data)
 {
     ob_start();
-    echo '<div>' . date('F') . '</div>';
-    $dayofmonth = date('t');
+    $currs = strtotime($data[0]['date']);
+    echo '<div>' . date('F', $currs) . '</div>';
+    $dayofmonth = date('t', $currs);
 
     $day_count = 1;
     $num = 0;
@@ -13,7 +14,7 @@ function print_calendar($data)
 
         $dayofweek = date('w',
 
-            mktime(0, 0, 0, date('m'), $day_count, date('Y')));
+            mktime(0, 0, 0, date('m', $currs), $day_count, date('Y', $currs)));
 
         $dayofweek = $dayofweek - 1;
 
@@ -63,7 +64,7 @@ function print_calendar($data)
 
             if (!empty($iValue[$j])) {
 
-                if ($data['days'][$c]['available'] == '1' && $data['days'][$c]['available_for_checkin'] == '1' && $data['days'][$c]['bookable'] == '1')
+                if ($data[$c]['available'] == '1' /*&& $data[$c]['available_for_checkin'] == '1' && $data[$c]['bookable'] == '1' */)
 
                     echo '<td class="table-success"><font color=red>' . $iValue[$j] . '</font></td>';
 

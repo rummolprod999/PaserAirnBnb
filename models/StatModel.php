@@ -8,9 +8,11 @@ class StatModel extends Model
         parent::__construct();
         $this->create_connection();
     }
+
     public function get_data()
     {
     }
+
     public function get_info_url($id_url)
     {
         $stmt = $this->conn->prepare('SELECT id, url, owner, apartment_name FROM anb_url WHERE id = :id');
@@ -29,10 +31,35 @@ class StatModel extends Model
         $stmt->execute();
         $data['prices'] = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $stmt = $this->conn->prepare('SELECT date, available, available_for_checkin, bookable FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id');
+        $stmt = $this->conn->prepare('SELECT date, available, available_for_checkin, bookable FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id AND MONTH(date) = MONTH(NOW())');
         $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
         $stmt->execute();
         $data['days'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $stmt = $this->conn->prepare('SELECT date, available, available_for_checkin, bookable FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id AND MONTH(date) = MONTH(DATE_ADD(DATE_SUB(LAST_DAY(NOW()),INTERVAL DAY(LAST_DAY(NOW()))- 1 DAY), INTERVAL 1 MONTH))');
+        $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
+        $stmt->execute();
+        $data['days2'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $stmt = $this->conn->prepare('SELECT date, available, available_for_checkin, bookable FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id AND MONTH(date) = MONTH(DATE_ADD(DATE_SUB(LAST_DAY(NOW()),INTERVAL DAY(LAST_DAY(NOW()))- 1 DAY), INTERVAL 2 MONTH))');
+        $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
+        $stmt->execute();
+        $data['days3'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $stmt = $this->conn->prepare('SELECT date, available, available_for_checkin, bookable FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id AND MONTH(date) = MONTH(DATE_ADD(DATE_SUB(LAST_DAY(NOW()),INTERVAL DAY(LAST_DAY(NOW()))- 1 DAY), INTERVAL 3 MONTH))');
+        $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
+        $stmt->execute();
+        $data['days4'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $stmt = $this->conn->prepare('SELECT date, available, available_for_checkin, bookable FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id AND MONTH(date) = MONTH(DATE_ADD(DATE_SUB(LAST_DAY(NOW()),INTERVAL DAY(LAST_DAY(NOW()))- 1 DAY), INTERVAL 4 MONTH))');
+        $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
+        $stmt->execute();
+        $data['days5'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $stmt = $this->conn->prepare('SELECT date, available, available_for_checkin, bookable FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id AND MONTH(date) = MONTH(DATE_ADD(DATE_SUB(LAST_DAY(NOW()),INTERVAL DAY(LAST_DAY(NOW()))- 1 DAY), INTERVAL 5 MONTH))');
+        $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
+        $stmt->execute();
+        $data['days6'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
 }

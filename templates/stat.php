@@ -22,7 +22,27 @@
                 <div><p><strong>Доступность для заказа</strong></p></div>
                 <?php
                 if (isset($data['days'])) {
-                   echo print_calendar($data);
+                   echo print_calendar($data['days']);
+                } ?>
+                <?php
+                if (isset($data['days2'])) {
+                    echo print_calendar($data['days2']);
+                } ?>
+                <?php
+                if (isset($data['days3'])) {
+                    echo print_calendar($data['days3']);
+                } ?>
+                <?php
+                if (isset($data['days4'])) {
+                    echo print_calendar($data['days4']);
+                } ?>
+                <?php
+                if (isset($data['days5'])) {
+                    echo print_calendar($data['days5']);
+                } ?>
+                <?php
+                if (isset($data['days6'])) {
+                    echo print_calendar($data['days6']);
                 } ?>
             </div>
             <div class="py-4 col-xs-6 col-md-4">
