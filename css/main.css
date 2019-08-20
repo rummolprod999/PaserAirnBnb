@@ -27,3 +27,30 @@ body {
 #table_div{
     margin-top: 50px;
 }
+#nav {
+    background-color: #eee;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+#nav li {
+    float: left;
+    list-style: none;
+}
+#nav a {
+    display: block;
+    color: black;
+    padding: 10px 25px;
+    text-decoration: none;
+    border-right: 1px solid #ccc;
+}
+#nav li:last-child a {
+    border-right: none;
+}
+#nav a:hover {
+    font-weight: bold;
+}
+#nav:after {
+    content: " ";
+    display: table;
+    clear: both;
+}

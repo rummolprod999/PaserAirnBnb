@@ -1,3 +1,4 @@
+<?php require_once  'templates/navigation.php'?>
 <div id="article">
     <div><h1 class="text-center">Таблица с данными</h1></div>
     <div id="table_div">

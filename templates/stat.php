@@ -1,3 +1,4 @@
+<?php require_once  'templates/navigation.php'?>
 <div><h1 class="text-center">Статистика</h1></div>
 <div id="article">
     <div><strong>Название апартаментов: </strong><?php if (isset($data['info_url']['apartment_name'])) {

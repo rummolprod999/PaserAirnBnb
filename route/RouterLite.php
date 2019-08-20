@@ -3,6 +3,7 @@
 require_once 'controllers/DefaultController.php';
 require_once 'controllers/AuthController.php';
 require_once 'controllers/StatController.php';
+require_once 'controllers/SettingsController.php';
 
 final class RouterLite
 {
