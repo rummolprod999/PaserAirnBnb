@@ -33,6 +33,9 @@ class DefaultModel extends Model
         $message = '';
         if (isset($_POST['launch']) && !empty($_POST['launch']) && $_POST['launch'] === 'true') {
             try {
+                $locale = 'ru_RU.UTF-8';
+                setlocale(LC_ALL, $locale);
+                putenv('LC_ALL=' . $locale);
                 exec('java -jar ./anb-1.0-jar-with-dependencies.jar anb > /dev/null &');
                 $message = '<div class="alert alert-success" role="alert">Парсер запущен, для просмотра результатов перйдите в "Просмотр логов"</div>';
             } catch (Exception $e) {
