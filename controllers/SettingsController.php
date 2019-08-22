@@ -14,7 +14,8 @@ class SettingsController extends Controller
     private function read_log(){
     $message = '';
     if(file_exists($this->log_file)){
-        $message = trim(file_get_contents($this->log_file));
+        $file = file($this->log_file);
+        $message = array_reverse($file);
     }
     return $message;
     }

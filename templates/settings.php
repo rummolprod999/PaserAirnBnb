@@ -7,9 +7,12 @@
     <div class="container-fluid">
         <div class="row my-5">
             <div class="col-12"><p>Содержимое лог файла</p></div>
-            <div class="col-sm border border-info"><pre class="pre-scrollable"><code><?php if (isset($data['file_log'])) {
-                    echo $data['file_log'];
-                } ?></code></pre>
+            <div class="col-sm border border-info"><pre
+                        class="pre-scrollable"><code><?php if (isset($data['file_log'])) {
+                            foreach ($data['file_log'] as $f) {
+                                echo $f;
+                            }
+                        } ?></code></pre>
             </div>
         </div>
     </div>
