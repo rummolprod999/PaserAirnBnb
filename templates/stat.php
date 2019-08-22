@@ -12,7 +12,7 @@
     <div><strong>Ссылка: </strong><a target="_blank" href="<?php if (isset($data['info_url']['url'])) {
             echo $data['info_url']['url'];
         } ?>"><?php echo $data['info_url']['url'] ?></a></div>
-    <div><strong>Минимальное количестов дней для
+    <div><strong>Минимальное количество дней для
             заказа: </strong><?php if (isset($data['min_nights']['min_nights'])) {
             echo $data['min_nights']['min_nights'];
         } ?></div>
@@ -43,6 +43,14 @@
                 <?php
                 if (isset($data['days6'])) {
                     echo print_calendar($data['days6']);
+                } ?>
+                <?php
+                if (isset($data['days7'])) {
+                    echo print_calendar($data['days7']);
+                } ?>
+                <?php
+                if (isset($data['days8'])) {
+                    echo print_calendar($data['days8']);
                 } ?>
             </div>
             <div class="py-4 col-xs-6 col-md-4">
