@@ -1,4 +1,4 @@
-<?php require_once  'templates/navigation.php'?>
+<?php require_once 'templates/navigation.php' ?>
 <div id="article">
     <div><h1 class="text-center">Таблица с данными</h1></div>
     <div id="table_div">
@@ -37,7 +37,7 @@
                     <td><a href="<?php echo '/stat/' . $row['id'] ?>"><?php echo 'Статистика' ?></a></td>
                     <td><a target="_blank" href="<?php echo $row['url'] ?>"><?php echo $row['url'] ?></a></td>
                     <td><?php echo $row['owner'] ?></td>
-                    <td class = 'text-danger'><?php echo $row['changes'] ?></td>
+                    <td class='text-danger'><?php echo ($row['changes'] !== '')? $row['changes'] . '</br>': '' ?><?php echo $row['change_price'] ?></td>
                     <td>
                         <form class="form-inline" method="post"><input type="hidden" name="remove_url"
                                                                        value='<?php echo $row['id'] ?>'>
@@ -48,8 +48,10 @@
             <?php endforeach; ?>
             </tbody>
         </table>
-        <div><form class="form-inline" method="post"><input type="hidden" name="launch"
-                                                            value='true'>
-                <button type="submit" class="btn btn-success btn-lg">Запуск парсера</button></div>
+        <div>
+            <form class="form-inline" method="post"><input type="hidden" name="launch"
+                                                           value='true'>
+                <button type="submit" class="btn btn-success btn-lg">Запуск парсера</button>
+        </div>
     </div>
 </div>

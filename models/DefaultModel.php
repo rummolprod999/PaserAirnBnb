@@ -84,7 +84,7 @@ class DefaultModel extends Model
 
     public function get_list_url()
     {
-        $query = 'SELECT id, url, owner, changes FROM anb_url';
+        $query = 'SELECT id, url, owner, changes, change_price FROM anb_url';
         $data = [];
         $data['url_arr'] = $this->conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
         return $data;
