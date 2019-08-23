@@ -26,7 +26,7 @@ class StatModel extends Model
         $stmt->execute();
         $data['min_nights'] = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $stmt = $this->conn->prepare('SELECT ch.check_in, ch.check_out, ch.price FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb WHERE a.id = :id LIMIT 1');
+        $stmt = $this->conn->prepare('SELECT ch.check_in, ch.check_out, ch.price, ch.check_in_first_15, ch.check_out_first_15, ch.price_first_15, ch.check_in_second_15, ch.check_out_second_15, ch.price_second_15, ch.check_in_30, ch.check_out_30, ch.price_30 FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb WHERE a.id = :id LIMIT 1');
         $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
         $stmt->execute();
         $data['prices'] = $stmt->fetch(PDO::FETCH_ASSOC);

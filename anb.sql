@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Авг 22 2019 г., 11:45
+-- Время создания: Авг 23 2019 г., 12:43
 -- Версия сервера: 10.3.17-MariaDB-1:10.3.17+maria~disco-log
 -- Версия PHP: 7.2.21-1+ubuntu19.04.1+deb.sury.org+1
 
@@ -49,7 +49,16 @@ CREATE TABLE `checkup` (
   `price` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `check_in` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `check_out` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date_last` datetime NOT NULL
+  `date_last` datetime NOT NULL,
+  `price_first_15` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `check_in_first_15` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `check_out_first_15` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price_second_15` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `check_in_second_15` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `check_out_second_15` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price_30` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `check_in_30` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `check_out_30` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
