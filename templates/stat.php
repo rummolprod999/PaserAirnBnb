@@ -22,7 +22,7 @@
                 <div><p><strong>Доступность для заказа</strong></p></div>
                 <?php
                 if (isset($data['days'])) {
-                   echo print_calendar($data['days']);
+                    echo print_calendar($data['days']);
                 } ?>
                 <?php
                 if (isset($data['days2'])) {
