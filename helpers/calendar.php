@@ -64,7 +64,7 @@ function print_calendar($data)
 
             if (!empty($iValue[$j])) {
 
-                if ($data[$c]['available'] == '1' /*&& $data[$c]['available_for_checkin'] == '1' && $data[$c]['bookable'] == '1' */)
+                if ($data[$c]['available'] == '1' /* && $data[$c]['available_for_checkin'] == '1' && $data[$c]['bookable'] == '1' */)
 
                     echo '<td class="table-success"><font color=black>' . $iValue[$j] . '</font>' . '</br><font color=green>' . $data[$c]['price_day'] . '</font>' . '</td>';
 
