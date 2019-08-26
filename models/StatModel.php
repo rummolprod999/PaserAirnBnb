@@ -30,6 +30,17 @@ class StatModel extends Model
         $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
         $stmt->execute();
         $data['prices'] = $stmt->fetch(PDO::FETCH_ASSOC);
+        $data['prices']['check_in_first_15'] = explode(',', $data['prices']['check_in_first_15']);
+        $data['prices']['check_out_first_15'] = explode(',', $data['prices']['check_out_first_15']);
+        $data['prices']['price_first_15'] = explode(',', $data['prices']['price_first_15']);
+
+        $data['prices']['check_in_second_15'] = explode(',', $data['prices']['check_in_second_15']);
+        $data['prices']['check_out_second_15'] = explode(',', $data['prices']['check_out_second_15']);
+        $data['prices']['price_second_15'] = explode(',', $data['prices']['price_second_15']);
+
+        $data['prices']['check_in_30'] = explode(',', $data['prices']['check_in_30']);
+        $data['prices']['check_out_30'] = explode(',', $data['prices']['check_out_30']);
+        $data['prices']['price_30'] = explode(',', $data['prices']['price_30']);
 
         $stmt = $this->conn->prepare('SELECT date, available, available_for_checkin, bookable, price_day FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id AND MONTH(date) = MONTH(NOW())');
         $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);

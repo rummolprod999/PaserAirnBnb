@@ -54,45 +54,53 @@
                 } ?>
             </div>
             <div class="py-4 col-xs-6 col-md-4">
-                <div><p><strong>Цена за минимальный период</strong></p></div>
-                <div><strong>Период: </strong><?php if (isset($data['prices']['check_in'])) {
-                        echo $data['prices']['check_in'];
-                    } ?> - <?php if (isset($data['prices']['check_out'])) {
-                        echo $data['prices']['check_out'];
-                    } ?></div>
-                <div><strong>Цена: </strong><?php if (isset($data['prices']['price'])) {
-                        echo $data['prices']['price'];
-                    } ?></div>
-                <div class="mb-5"></div>
-                <div><p><strong>Цена за период 1 - 15</strong></p></div>
-                <div><strong>Период: </strong><?php if (isset($data['prices']['check_in_first_15'])) {
-                        echo $data['prices']['check_in_first_15'];
-                    } ?> - <?php if (isset($data['prices']['check_out_first_15'])) {
-                        echo $data['prices']['check_out_first_15'];
-                    } ?></div>
-                <div><strong>Цена: </strong><?php if (isset($data['prices']['price_first_15'])) {
-                        echo $data['prices']['price_first_15'];
-                    } ?></div>
-                <div class="mb-5"></div>
-                <div><p><strong>Цена за период 16 - 30</strong></p></div>
-                <div><strong>Период: </strong><?php if (isset($data['prices']['check_in_second_15'])) {
-                        echo $data['prices']['check_in_second_15'];
-                    } ?> - <?php if (isset($data['prices']['check_out_second_15'])) {
-                        echo $data['prices']['check_out_second_15'];
-                    } ?></div>
-                <div><strong>Цена: </strong><?php if (isset($data['prices']['price_second_15'])) {
-                        echo $data['prices']['price_second_15'];
-                    } ?></div>
-                <div class="mb-5"></div>
-                <div><p><strong>Цена за период 1 - 30</strong></p></div>
-                <div><strong>Период: </strong><?php if (isset($data['prices']['check_in_30'])) {
-                        echo $data['prices']['check_in_30'];
-                    } ?> - <?php if (isset($data['prices']['check_out_30'])) {
-                        echo $data['prices']['check_out_30'];
-                    } ?></div>
-                <div><strong>Цена: </strong><?php if (isset($data['prices']['price_30'])) {
-                        echo $data['prices']['price_30'];
-                    } ?></div>
+                <div class="alert alert-warning">
+                    <div><p><strong>Цена за минимальный период</strong></p></div>
+                    <div><strong>Период: </strong><?php if (isset($data['prices']['check_in'])) {
+                            echo $data['prices']['check_in'];
+                        } ?> - <?php if (isset($data['prices']['check_out'])) {
+                            echo $data['prices']['check_out'];
+                        } ?></div>
+                    <div><strong>Цена: </strong><?php if (isset($data['prices']['price'])) {
+                            echo $data['prices']['price'];
+                        } ?></div>
+                </div>
+                <?php foreach ($data['prices']['check_in_first_15'] as $k => $v): ?>
+                    <?php if ($data['prices']['check_in_first_15'][$k] === '') break; ?>
+                    <div class="mb-5"></div>
+                    <div class="alert alert-info">
+                        <div><p><strong>Цена за период 1 - 15</strong></p></div>
+                        <div><strong>Период: </strong><?php if (isset($data['prices']['check_in_first_15'][$k])) {
+                                echo $data['prices']['check_in_first_15'][$k];
+                            } ?> - <?php if (isset($data['prices']['check_out_first_15'][$k])) {
+                                echo $data['prices']['check_out_first_15'][$k];
+                            } ?></div>
+                        <div><strong>Цена: </strong><?php if (isset($data['prices']['price_first_15'][$k])) {
+                                echo $data['prices']['price_first_15'][$k];
+                            } ?></div>
+                        <div class="mb-5"></div>
+                        <div><p><strong>Цена за период 16 - 30</strong></p></div>
+                        <div><strong>Период: </strong><?php if (isset($data['prices']['check_in_second_15'][$k])) {
+                                echo $data['prices']['check_in_second_15'][$k];
+                            } ?> - <?php if (isset($data['prices']['check_out_second_15'][$k])) {
+                                echo $data['prices']['check_out_second_15'][$k];
+                            } ?></div>
+                        <div><strong>Цена: </strong><?php if (isset($data['prices']['price_second_15'][$k])) {
+                                echo $data['prices']['price_second_15'][$k];
+                            } ?></div>
+                        <div class="mb-5"></div>
+                        <div><p><strong>Цена за период 1 - 30</strong></p></div>
+                        <div><strong>Период: </strong><?php if (isset($data['prices']['check_in_30'][$k])) {
+                                echo $data['prices']['check_in_30'][$k];
+                            } ?> - <?php if (isset($data['prices']['check_out_30'][$k])) {
+                                echo $data['prices']['check_out_30'][$k];
+                            } ?></div>
+                        <div><strong>Цена: </strong><?php if (isset($data['prices']['price_30'][$k])) {
+                                echo $data['prices']['price_30'][$k];
+                            } ?></div>
+                    </div>
+                <?php endforeach; ?>
+
             </div>
         </div>
     </div>
