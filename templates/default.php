@@ -17,9 +17,13 @@
             } ?>
             <?php if (isset($data['launch_mess'])) {
                 echo $data['launch_mess'];
+                header('location:/?pars=true');
+            } ?>
+            <?php if (isset($_GET['pars']) && $_GET['pars'] === 'true') {
+                echo '<div class="alert alert-success" role="alert">Парсер запущен, для просмотра результатов перйдите в "Просмотр логов"</div>';
             } ?>
         </div>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-hover">
             <thead>
             <tr>
                 <th>ID</th>

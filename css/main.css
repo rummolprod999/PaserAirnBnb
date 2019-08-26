@@ -15,9 +15,9 @@ body {
     /*height: 50px;*/
 }
 #article{
-    background-color: #fafafa;
+    /*background-color: #fafafa;
     border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #ccc;*/
     padding: 15px;
     min-height: 700px;
 }
