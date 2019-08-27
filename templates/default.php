@@ -23,6 +23,7 @@
                 echo '<div class="alert alert-success" role="alert">Парсер запущен, для просмотра результатов перйдите в "Просмотр логов"</div>';
             } ?>
         </div>
+        <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead>
             <tr>
@@ -41,7 +42,7 @@
                     <td><a href="<?php echo '/stat/' . $row['id'] ?>"><?php echo 'Статистика' ?></a></td>
                     <td><a target="_blank" href="<?php echo $row['url'] ?>"><?php echo $row['url'] ?></a></td>
                     <td><?php echo $row['owner'] ?></td>
-                    <td class='text-danger'><?php echo ($row['changes'] !== '')? $row['changes'] . '</br>': '' ?><?php echo $row['change_price'] ?></td>
+                    <td class='text-danger'><?php echo ($row['changes'] !== '') ? $row['changes'] . '</br>' : '' ?><?php echo $row['change_price'] ?></td>
                     <td>
                         <form class="form-inline" method="post"><input type="hidden" name="remove_url"
                                                                        value='<?php echo $row['id'] ?>'>
@@ -52,6 +53,7 @@
             <?php endforeach; ?>
             </tbody>
         </table>
+        </div>
         <div>
             <form class="form-inline" method="post"><input type="hidden" name="launch"
                                                            value='true'>

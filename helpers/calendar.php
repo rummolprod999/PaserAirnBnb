@@ -54,7 +54,7 @@ function print_calendar($data)
 
     }
 
-    echo '<table class="table table-bordered">';
+    echo '<div class="table-responsive"><table class="table table-bordered">';
     $c = 0;
     foreach ($week as $iValue) {
 
@@ -82,6 +82,6 @@ function print_calendar($data)
 
     }
 
-    echo '</table>';
+    echo '</table></div>';
     return ob_get_clean();
 }
