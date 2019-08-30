@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Авг 30 2019 г., 09:28
+-- Время создания: Авг 30 2019 г., 09:57
 -- Версия сервера: 10.3.17-MariaDB-1:10.3.17+maria~disco-log
 -- Версия PHP: 7.2.21-1+ubuntu19.04.1+deb.sury.org+1
 
@@ -34,7 +34,7 @@ CREATE TABLE `anb_url` (
   `owner` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   `apartment_name` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `changes` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `change_price` varchar(4000) COLLATE utf8mb4_unicode_ci NOT NULL
+  `change_price` varchar(8000) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
