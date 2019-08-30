@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Авг 26 2019 г., 13:33
+-- Время создания: Авг 30 2019 г., 09:28
 -- Версия сервера: 10.3.17-MariaDB-1:10.3.17+maria~disco-log
 -- Версия PHP: 7.2.21-1+ubuntu19.04.1+deb.sury.org+1
 
@@ -34,7 +34,7 @@ CREATE TABLE `anb_url` (
   `owner` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   `apartment_name` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `changes` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `change_price` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL
+  `change_price` varchar(4000) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -78,6 +78,18 @@ CREATE TABLE `days` (
   `price_day` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `price_changes`
+--
+
+CREATE TABLE `price_changes` (
+  `id` int(11) NOT NULL,
+  `id_url` int(11) NOT NULL,
+  `price` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Индексы сохранённых таблиц
 --
@@ -104,6 +116,14 @@ ALTER TABLE `days`
   ADD KEY `id_checkup` (`id_checkup`);
 
 --
+-- Индексы таблицы `price_changes`
+--
+ALTER TABLE `price_changes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_url` (`id_url`),
+  ADD KEY `price` (`price`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -126,6 +146,12 @@ ALTER TABLE `days`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT для таблицы `price_changes`
+--
+ALTER TABLE `price_changes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Ограничения внешнего ключа сохраненных таблиц
 --
 
@@ -140,6 +166,12 @@ ALTER TABLE `checkup`
 --
 ALTER TABLE `days`
   ADD CONSTRAINT `days_ibfk_1` FOREIGN KEY (`id_checkup`) REFERENCES `checkup` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `price_changes`
+--
+ALTER TABLE `price_changes`
+  ADD CONSTRAINT `price_changes_ibfk_1` FOREIGN KEY (`id_url`) REFERENCES `anb_url` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
