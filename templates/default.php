@@ -11,9 +11,11 @@
             </form>
             <?php if (isset($data['add_mess'])) {
                 echo $data['add_mess'];
+                header('location:/?add=true');
             } ?>
             <?php if (isset($data['rem_mess'])) {
                 echo $data['rem_mess'];
+                header('location:/?rem=true');
             } ?>
             <?php if (isset($data['launch_mess'])) {
                 echo $data['launch_mess'];
