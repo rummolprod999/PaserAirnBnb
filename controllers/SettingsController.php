@@ -23,7 +23,7 @@ class SettingsController extends Controller
     {
         $data = $this->model->get_data();
         $data['file_log'] = $this->read_log();
-        echo $this->template('templates/settings.php', ["title" => "Настройки", "data" => $data]);
+        echo $this->template('templates/settings.php', ["title" => "Log", "data" => $data]);
     }
 
 }

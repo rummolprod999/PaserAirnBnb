@@ -14,6 +14,6 @@ class DefaultController extends Controller
     function index_page()
     {
         $data = $this->model->get_data();
-        echo $this->template('templates/default.php', ["title" => "Главная страница", "data" => $data]);
+        echo $this->template('templates/default.php', ["title" => "Main Page", "data" => $data]);
     }
 }

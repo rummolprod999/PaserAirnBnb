@@ -14,6 +14,6 @@ class StatController extends Controller
     {
         $this->id_url = $id_url;
         $data = $this->model->get_info_url($this->id_url);
-        echo $this->template('templates/stat.php', ["title" => "Статистика", "data" => $data]);
+        echo $this->template('templates/stat.php', ["title" => "Statistics", "data" => $data]);
     }
 }

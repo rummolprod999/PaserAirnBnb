@@ -16,7 +16,7 @@ class AuthController extends Controller {
     }
 
     function index_page(){
-        echo $this->template('templates/auth.php', ["title" => "Аутентификация"]);
+        echo $this->template('templates/auth.php', ["title" => "Authentication"]);
     }
 
     static function check_auth(){
