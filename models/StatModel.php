@@ -13,12 +13,28 @@ class StatModel extends Model
     {
     }
 
+    private function bookable_seen($id_url){
+        $message = '';
+        if (isset($_POST['remove_bookable']) && !empty($_POST['remove_bookable']) && $_POST['remove_bookable'] === 'remove') {
+            $stmt = $this->conn->prepare('UPDATE bookable_changes SET  seen = 1 WHERE id_url = :id_url');
+            $stmt->bindValue(':id_url', (int)$id_url, PDO::PARAM_INT);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                $message = '<div class="alert alert-warning" role="alert">Booking have been cleaned</div>';
+                return $message;
+            }
+        }
+        return $message;
+    }
     public function get_info_url($id_url)
     {
+        $data = [];
+        $bookable_clean = $this->bookable_seen($id_url);
+        $data['bookable_clean'] = $bookable_clean;
         $stmt = $this->conn->prepare('SELECT id, url, owner, apartment_name FROM anb_url WHERE id = :id');
         $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
         $stmt->execute();
-        $data = [];
+
         $data['info_url'] = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $stmt = $this->conn->prepare('SELECT d.min_nights FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id AND d.date = CURDATE() LIMIT 1');

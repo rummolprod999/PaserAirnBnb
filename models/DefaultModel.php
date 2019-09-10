@@ -101,9 +101,9 @@ class DefaultModel extends Model
             $stmt->execute();
             $res_price_change = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $stmt = $this->conn->prepare('SELECT date_cal, date_parsing, num_parsing, seen FROM bookable_changes WHERE seen = 0 AND num_parsing = :num_parsing AND id_url = :id_url');
+            $stmt = $this->conn->prepare('SELECT date_cal, date_parsing, num_parsing, seen FROM bookable_changes WHERE seen = 0 AND id_url = :id_url');
             $stmt->bindValue(':id_url', (int)$r['id'], PDO::PARAM_INT);
-            $stmt->bindValue(':num_parsing', (int)$r['num_parsing'], PDO::PARAM_INT);
+            //$stmt->bindValue(':num_parsing', (int)$r['num_parsing'], PDO::PARAM_INT);
             $stmt->execute();
             $res_bookable_change = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

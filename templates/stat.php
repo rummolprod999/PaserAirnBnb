@@ -15,6 +15,17 @@
     <div><strong>Minimum number of days to order: </strong><?php if (isset($data['min_nights']['min_nights'])) {
             echo $data['min_nights']['min_nights'];
         } ?></div>
+    <?php if (isset($data['bookable_clean'])) {
+        echo $data['bookable_clean'];
+        //header('location:/?clean=true');
+    } ?>
+    <?php if (isset($_GET['clean']) && $_GET['clean'] === 'true') {
+        echo '<div class="alert alert-warning" role="alert">Booking have been cleaned</div>';
+    } ?>
+    <form class="form-inline" method="post"><input type="hidden" name="remove_bookable"
+                                                   value='remove'>
+        <button type="submit" class="btn btn-danger mb-2">I have seen booking changes</button>
+    </form>
     <div class="container-fluid">
         <div class="row">
             <div class="py-4 col-xs-12 col-md-8">
