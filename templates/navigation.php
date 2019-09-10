@@ -1,8 +1,8 @@
 <div id="header">
     <div id="nav">
         <ul>
-            <li><a href="/">Главная</a></li>
-            <li><a href="/settings">Просмотр логов</a></li>
+            <li><a href="/">Main Page</a></li>
+            <li><a href="/settings">View Logs</a></li>
             <li></li>
         </ul>
     </div>
