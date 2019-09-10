@@ -37,7 +37,7 @@ class DefaultModel extends Model
                 setlocale(LC_ALL, $locale);
                 putenv('LC_ALL=' . $locale);
                 exec('java -jar ./anb-1.0-jar-with-dependencies.jar anb > /dev/null &');
-                $message = '<div class="alert alert-success" role="alert">Парсер запущен, для просмотра результатов перйдите в "Просмотр логов"</div>';
+                $message = '<div class="alert alert-success" role="alert">The parser is running, to view the results, go to "View Logs"</div>';
             } catch (Exception $e) {
                 $message = $e->getMessage();
             }
@@ -53,14 +53,14 @@ class DefaultModel extends Model
             $stmt->bindValue(':url', trim($_POST['add_url']), PDO::PARAM_STR);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
-                $message = '<div class="alert alert-danger" role="alert">Такая страница уже есть в базе</div>';
+                $message = 'false';
                 return $message;
             }
             $stmt = $this->conn->prepare('INSERT INTO anb_url SET url = :url');
             $stmt->bindValue(':url', trim($_POST['add_url']), PDO::PARAM_STR);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
-                $message = '<div class="alert alert-success" role="alert">Страница успешно добавлена</div>';
+                $message = 'true';
                 return $message;
             }
         }
@@ -75,7 +75,7 @@ class DefaultModel extends Model
             $stmt->bindValue(':id', (int)$_POST['remove_url'], PDO::PARAM_INT);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
-                $message = '<div class="alert alert-warning" role="alert">Страница успешно удалена</div>';
+                $message = '<div class="alert alert-warning" role="alert">Page deleted successfully</div>';
                 return $message;
             }
         }
