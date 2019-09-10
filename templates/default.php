@@ -7,6 +7,8 @@
                 <label class="sr-only" for="inlineFormInputName2">URL:</label>
                 <input type="text" class="form-control mb-2 mr-sm-2 w-25" id="inlineFormInputName2" name="add_url"
                        placeholder="https://www.airbnb.ru/rooms/20384625" required>
+                <label class="sr-only" for="inlineFormInputName2">Own:</label>
+                <input class="form-check-input" type="checkbox" value="true" id="defaultCheck1" name="own">
                 <button type="submit" class="btn btn-primary mb-2">Add</button>
             </form>
             <?php if (isset($data['add_mess'])) {
@@ -52,7 +54,7 @@
                 </thead>
                 <tbody>
                 <?php foreach ($data['url_arr'] as $row): ?>
-                    <tr>
+                    <tr <?php if ($row['own'] == '1') echo 'class="table-warning"' ?>>
                         <td><strong><?php echo $row['id'] ?></strong></td>
                         <td><a href="<?php echo '/stat/' . $row['id'] ?>"><?php echo 'Statistics' ?></a></td>
                         <td><a target="_blank" href="<?php echo $row['url'] ?>"><?php echo $row['url'] ?></a></td>

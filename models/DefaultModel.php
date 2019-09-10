@@ -48,6 +48,10 @@ class DefaultModel extends Model
     function add_url()
     {
         $message = '';
+        $own = 0;
+        if (isset($_POST['own']) && $_POST['own'] === 'true') {
+            $own = 1;
+        }
         if (isset($_POST['add_url']) && !empty($_POST['add_url'])) {
             $stmt = $this->conn->prepare('SELECT id FROM anb_url WHERE url = :url');
             $stmt->bindValue(':url', trim($_POST['add_url']), PDO::PARAM_STR);
@@ -56,8 +60,9 @@ class DefaultModel extends Model
                 $message = 'false';
                 return $message;
             }
-            $stmt = $this->conn->prepare('INSERT INTO anb_url SET url = :url');
+            $stmt = $this->conn->prepare('INSERT INTO anb_url SET url = :url, own = :own');
             $stmt->bindValue(':url', trim($_POST['add_url']), PDO::PARAM_STR);
+            $stmt->bindValue(':own', $own, PDO::PARAM_INT);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 $message = 'true';
@@ -84,7 +89,7 @@ class DefaultModel extends Model
 
     public function get_list_url()
     {
-        $query = 'SELECT id, url, owner, changes, change_price FROM anb_url';
+        $query = 'SELECT id, url, owner, changes, change_price, own FROM anb_url';
         $data = [];
         $data['url_arr'] = $this->conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
         return $data;
