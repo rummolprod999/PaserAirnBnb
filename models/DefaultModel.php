@@ -89,9 +89,30 @@ class DefaultModel extends Model
 
     public function get_list_url()
     {
-        $query = 'SELECT id, url, owner, changes, change_price, own FROM anb_url';
+        /*$query = 'SELECT id, url, owner, changes, change_price, own, num_parsing FROM anb_url'; ;*/
         $data = [];
-        $data['url_arr'] = $this->conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
+        $query = 'SELECT id, url, owner, changes, change_price, own, num_parsing FROM anb_url';
+        $data_new = [];
+        $res = $this->conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($res as $r) {
+            $stmt = $this->conn->prepare('SELECT price_was, price, date_cal, date_parsing, num_parsing, seen FROM price_changes WHERE seen = 0 AND num_parsing = :num_parsing AND id_url = :id_url');
+            $stmt->bindValue(':id_url', (int)$r['id'], PDO::PARAM_INT);
+            $stmt->bindValue(':num_parsing', (int)$r['num_parsing'], PDO::PARAM_INT);
+            $stmt->execute();
+            $res_price_change = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $stmt = $this->conn->prepare('SELECT date_cal, date_parsing, num_parsing, seen FROM bookable_changes WHERE seen = 0 AND num_parsing = :num_parsing AND id_url = :id_url');
+            $stmt->bindValue(':id_url', (int)$r['id'], PDO::PARAM_INT);
+            $stmt->bindValue(':num_parsing', (int)$r['num_parsing'], PDO::PARAM_INT);
+            $stmt->execute();
+            $res_bookable_change = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+            $r['res_price_change'] = $res_price_change;
+            $r['res_bookable_change'] = $res_bookable_change;
+            $data_new[] = $r;
+        }
+        $data['url_arr'] = $data_new;
         return $data;
     }
 }

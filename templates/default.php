@@ -59,7 +59,15 @@
                         <td><a href="<?php echo '/stat/' . $row['id'] ?>"><?php echo 'Statistics' ?></a></td>
                         <td><a target="_blank" href="<?php echo $row['url'] ?>"><?php echo $row['url'] ?></a></td>
                         <td><?php echo $row['owner'] ?></td>
-                        <td class='text-danger'><?php echo ($row['changes'] !== '') ? $row['changes'] . '</br>' : '' ?><?php echo $row['change_price'] ?></td>
+                        <td class='text-danger'><?php if (isset($row['res_bookable_change'])) {
+                            foreach ($row['res_bookable_change'] as $rp){
+                                echo "NEW BOOKING: {$rp['date_cal']}</br>";
+                            }
+                            } ?><?php if (isset($row['res_price_change'])) {
+                            foreach ($row['res_price_change'] as $rp){
+                                echo "{$rp['date_cal']}: {$rp['price_was']} -> {$rp['price']}</br>";
+                            }
+                            } ?></td>
                         <td>
                             <form class="form-inline" method="post"><input type="hidden" name="remove_url"
                                                                            value='<?php echo $row['id'] ?>'>
