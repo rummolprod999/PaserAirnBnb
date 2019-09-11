@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Авг 30 2019 г., 09:57
+-- Время создания: Сен 11 2019 г., 10:02
 -- Версия сервера: 10.3.17-MariaDB-1:10.3.17+maria~disco-log
--- Версия PHP: 7.2.21-1+ubuntu19.04.1+deb.sury.org+1
+-- Версия PHP: 7.2.22-1+ubuntu19.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,7 +34,25 @@ CREATE TABLE `anb_url` (
   `owner` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   `apartment_name` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `changes` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `change_price` varchar(8000) COLLATE utf8mb4_unicode_ci NOT NULL
+  `change_price` varchar(8000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `own` tinyint(1) NOT NULL DEFAULT 0,
+  `num_parsing` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `bookable_changes`
+--
+
+CREATE TABLE `bookable_changes` (
+  `id` int(11) NOT NULL,
+  `id_url` int(11) NOT NULL,
+  `booking` tinyint(4) NOT NULL DEFAULT 0,
+  `date_cal` date NOT NULL,
+  `date_parsing` datetime NOT NULL,
+  `num_parsing` int(11) NOT NULL,
+  `seen` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -87,7 +105,12 @@ CREATE TABLE `days` (
 CREATE TABLE `price_changes` (
   `id` int(11) NOT NULL,
   `id_url` int(11) NOT NULL,
-  `price` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL
+  `price_was` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_cal` date NOT NULL,
+  `date_parsing` datetime NOT NULL,
+  `num_parsing` int(11) NOT NULL,
+  `seen` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -99,7 +122,19 @@ CREATE TABLE `price_changes` (
 --
 ALTER TABLE `anb_url`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `url` (`url`(768));
+  ADD KEY `url` (`url`(768)),
+  ADD KEY `num_parsing` (`num_parsing`);
+
+--
+-- Индексы таблицы `bookable_changes`
+--
+ALTER TABLE `bookable_changes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_url` (`id_url`),
+  ADD KEY `date_cal` (`date_cal`),
+  ADD KEY `date_parsing` (`date_parsing`),
+  ADD KEY `num_parsing` (`num_parsing`),
+  ADD KEY `seen` (`seen`);
 
 --
 -- Индексы таблицы `checkup`
@@ -121,7 +156,11 @@ ALTER TABLE `days`
 ALTER TABLE `price_changes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_url` (`id_url`),
-  ADD KEY `price` (`price`);
+  ADD KEY `price` (`price`),
+  ADD KEY `date_parsing` (`date_parsing`),
+  ADD KEY `num_parsing` (`num_parsing`),
+  ADD KEY `seen` (`seen`),
+  ADD KEY `price_was` (`price_was`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -131,6 +170,12 @@ ALTER TABLE `price_changes`
 -- AUTO_INCREMENT для таблицы `anb_url`
 --
 ALTER TABLE `anb_url`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `bookable_changes`
+--
+ALTER TABLE `bookable_changes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -154,6 +199,12 @@ ALTER TABLE `price_changes`
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
+
+--
+-- Ограничения внешнего ключа таблицы `bookable_changes`
+--
+ALTER TABLE `bookable_changes`
+  ADD CONSTRAINT `bookable_changes_ibfk_1` FOREIGN KEY (`id_url`) REFERENCES `anb_url` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `checkup`
