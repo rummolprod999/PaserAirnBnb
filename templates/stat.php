@@ -29,7 +29,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="py-4 col-xs-12 col-md-8">
-                <div><p><strong>Order Availability</strong></p></div>
+                <div><p><strong>Availability</strong></p></div>
                 <?php
                 if (isset($data['days'])) {
                     echo print_calendar($data['days']);

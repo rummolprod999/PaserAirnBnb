@@ -1,6 +1,6 @@
 <?php require_once 'templates/navigation.php' ?>
 <div id="article">
-    <div><h1 class="text-center">APARTMENT LIST</h1></div>
+    <div><h1 class="text-center">APARTMENTS LIST</h1></div>
     <div id="table_div">
         <div>
             <form class="form-inline" method="post">
