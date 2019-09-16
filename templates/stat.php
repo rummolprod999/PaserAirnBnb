@@ -16,12 +16,12 @@
             echo $data['min_nights']['min_nights'];
         } ?></div>
     <div><strong>Cleaning fee: </strong><?php if (isset($data['cleaning_price']['price_cleaning'])) {
-            echo '$' . $data['cleaning_price']['price_cleaning'];
+            echo "\${$data['cleaning_price']['price_cleaning']}";
         } ?></div>
     <div><strong>Long terms: </strong><?php if (isset($data['discounts'])) {
             $discounts = '';
             foreach ($data['discounts'] as $disc){
-                $discounts .= $disc . ', ';
+                $discounts .= "{$disc}, ";
             }
             echo trim($discounts, ', ');
         } ?></div>
