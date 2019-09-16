@@ -49,6 +49,7 @@
                     <th>Url</th>
                     <th>Owner</th>
                     <th>Changes</th>
+                    <th>Long terms</th>
                     <th>Remove</th>
                 </tr>
                 </thead>
@@ -68,6 +69,11 @@
                             } ?><?php if (isset($row['res_price_change'])) {
                                 foreach ($row['res_price_change'] as $rp) {
                                     echo "{$rp['date_cal']}: \${$rp['price_was']} -> \${$rp['price']}</br>";
+                                }
+                            } ?></td>
+                        <td class='text-success'><?php if (isset($row['discounts'])) {
+                                foreach ($row['discounts'] as $rd) {
+                                    echo "{$rd}</br>";
                                 }
                             } ?></td>
                         <td>

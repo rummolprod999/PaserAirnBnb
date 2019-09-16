@@ -91,7 +91,7 @@ class DefaultModel extends Model
     {
         /*$query = 'SELECT id, url, owner, changes, change_price, own, num_parsing FROM anb_url'; ;*/
         $data = [];
-        $query = 'SELECT id, url, owner, own, num_parsing FROM anb_url';
+        $query = 'SELECT id, url, owner, own, num_parsing FROM anb_url ORDER BY own DESC';
         $data_new = [];
         $res = $this->conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
         foreach ($res as $r) {
@@ -110,6 +110,11 @@ class DefaultModel extends Model
 
             $r['res_price_change'] = $res_price_change;
             $r['res_bookable_change'] = $res_bookable_change;
+
+            $stmt = $this->conn->prepare('SELECT d.discount FROM discounts d WHERE d.id_url = :id ');
+            $stmt->bindValue(':id', (int)$r['id'], PDO::PARAM_INT);
+            $stmt->execute();
+            $r['discounts'] = $stmt->fetchAll(PDO::FETCH_COLUMN);
             $data_new[] = $r;
         }
         $data['url_arr'] = $data_new;
