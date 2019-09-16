@@ -6,18 +6,18 @@
         <form>
             <div class="form-group row">
                 <label for="date_start" class="col-sm-1 col-form-label">Start date:</label>
-                <div class="col-sm-10">
-                    <input type="date" id="date_start" name="date_start" required/>
+                <div class="col-xs-5 col-sm-2">
+                    <input type="date" id="date_start" name="date_start" class="form-control" required/>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="date_end" class="col-sm-1 col-form-label">End date:</label>
-                <div class="col-sm-10">
-                    <input type="date" id="date_end" name="date_end" required/>
+                <div class="col-xs-5 col-sm-2">
+                    <input type="date" id="date_end" name="date_end" class="form-control" required/>
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-sm-10">
+                <div class="col-xs-3">
                     <button type="submit" class="btn btn-primary btn-lg">Get changes</button>
                 </div>
             </div>
