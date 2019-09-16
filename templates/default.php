@@ -46,6 +46,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Statistics</th>
+                    <th>Changes</th>
                     <th>Url</th>
                     <th>Owner</th>
                     <th>Changes</th>
@@ -60,6 +61,7 @@
                     } ?>>
                         <td><strong><?php echo $row['id'] ?></strong></td>
                         <td><a href="<?php echo '/stat/' . $row['id'] ?>"><?php echo 'Statistics' ?></a></td>
+                        <td><a href="<?php echo '/changes/' . $row['id'] ?>"><?php echo 'Changes' ?></a></td>
                         <td><a target="_blank" href="<?php echo $row['url'] ?>"><?php echo $row['url'] ?></a></td>
                         <td><?php echo $row['owner'] ?></td>
                         <td class='text-danger'><?php if (isset($row['res_bookable_change'])) {

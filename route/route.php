@@ -4,6 +4,7 @@ if(AuthController::$is_login || AuthController::check_auth()){
     RouterLite::addRoute('/', 'DefaultController/index_page');
     RouterLite::addRoute('/stat/:num', 'StatController/index_page/$1');
     RouterLite::addRoute('/settings', 'SettingsController/index_page');
+    RouterLite::addRoute('/changes/:num', 'ChangesController/index_page/$1');
 
 } else{
     RouterLite::addRoute('/', 'AuthController');
