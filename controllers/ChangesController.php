@@ -13,7 +13,7 @@ class ChangesController extends Controller
     function index_page($id_url)
     {
         $this->id_url = $id_url;
-        $data = $this->model->get_data($this->id_url);
+        $data = $this->model->get_info_url($this->id_url);
         echo $this->template('templates/changes.php', ["title" => "Changes", "data" => $data]);
     }
 }
