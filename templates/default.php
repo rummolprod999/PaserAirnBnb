@@ -67,7 +67,7 @@
                                 }
                             } ?><?php if (isset($row['res_price_change'])) {
                                 foreach ($row['res_price_change'] as $rp) {
-                                    echo "{$rp['date_cal']}: {$rp['price_was']} -> {$rp['price']}</br>";
+                                    echo "{$rp['date_cal']}: \${$rp['price_was']} -> \${$rp['price']}</br>";
                                 }
                             } ?></td>
                         <td>
