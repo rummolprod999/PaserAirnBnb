@@ -15,6 +15,16 @@
     <div><strong>Minimum number of days to order: </strong><?php if (isset($data['min_nights']['min_nights'])) {
             echo $data['min_nights']['min_nights'];
         } ?></div>
+    <div><strong>Cleaning fee: </strong><?php if (isset($data['cleaning_price']['price_cleaning'])) {
+            echo '$' . $data['cleaning_price']['price_cleaning'];
+        } ?></div>
+    <div><strong>Long terms: </strong><?php if (isset($data['discounts'])) {
+            $discounts = '';
+            foreach ($data['discounts'] as $disc){
+                $discounts .= $disc . ', ';
+            }
+            echo trim($discounts, ', ');
+        } ?></div>
     <?php if (isset($data['bookable_clean'])) {
         echo $data['bookable_clean'];
         //header('location:/?clean=true');
