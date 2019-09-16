@@ -28,7 +28,7 @@
             <div class="py-4 col-xs-12 col-md-6">
                 <?php if (isset($data['bookable_changes']) && $data['bookable_changes'] != null): ?>
                     <?php foreach ($data['bookable_changes'] as $row): ?>
-                        <p class="text-danger"><?php echo '<span class="text-secondary">' . $row['date_parsing'] . '</span>' . '  BOOKABLE: ' . $row['date_cal'] ?></p>
+                        <p class="text-danger"><?php echo '<span class="text-secondary">' . $row['date_parsing'] . '</span>' . '  NEW BOOKING: ' . $row['date_cal'] ?></p>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
