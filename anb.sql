@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Сен 11 2019 г., 10:02
--- Версия сервера: 10.3.17-MariaDB-1:10.3.17+maria~disco-log
+-- Время создания: Сен 16 2019 г., 15:35
+-- Версия сервера: 10.3.18-MariaDB-1:10.3.18+maria~disco-log
 -- Версия PHP: 7.2.22-1+ubuntu19.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -33,8 +33,6 @@ CREATE TABLE `anb_url` (
   `url` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `owner` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   `apartment_name` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `changes` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `change_price` varchar(8000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `own` tinyint(1) NOT NULL DEFAULT 0,
   `num_parsing` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -93,7 +91,20 @@ CREATE TABLE `days` (
   `available_for_checkin` int(1) NOT NULL,
   `bookable` int(1) NOT NULL,
   `date` date NOT NULL,
-  `price_day` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL
+  `price_day` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `discounts`
+--
+
+CREATE TABLE `discounts` (
+  `id` int(11) NOT NULL,
+  `id_url` int(11) NOT NULL,
+  `discount` varchar(2500) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_parsing` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -105,12 +116,24 @@ CREATE TABLE `days` (
 CREATE TABLE `price_changes` (
   `id` int(11) NOT NULL,
   `id_url` int(11) NOT NULL,
-  `price_was` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `price` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price_was` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
   `date_cal` date NOT NULL,
   `date_parsing` datetime NOT NULL,
   `num_parsing` int(11) NOT NULL,
   `seen` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `price_cleaning`
+--
+
+CREATE TABLE `price_cleaning` (
+  `id` int(11) NOT NULL,
+  `id_url` int(11) NOT NULL,
+  `price_cleaning` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -151,6 +174,14 @@ ALTER TABLE `days`
   ADD KEY `id_checkup` (`id_checkup`);
 
 --
+-- Индексы таблицы `discounts`
+--
+ALTER TABLE `discounts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_url` (`id_url`),
+  ADD KEY `date_parsing` (`date_parsing`);
+
+--
 -- Индексы таблицы `price_changes`
 --
 ALTER TABLE `price_changes`
@@ -161,6 +192,13 @@ ALTER TABLE `price_changes`
   ADD KEY `num_parsing` (`num_parsing`),
   ADD KEY `seen` (`seen`),
   ADD KEY `price_was` (`price_was`);
+
+--
+-- Индексы таблицы `price_cleaning`
+--
+ALTER TABLE `price_cleaning`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_url` (`id_url`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -191,9 +229,21 @@ ALTER TABLE `days`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT для таблицы `discounts`
+--
+ALTER TABLE `discounts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `price_changes`
 --
 ALTER TABLE `price_changes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `price_cleaning`
+--
+ALTER TABLE `price_cleaning`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -223,6 +273,12 @@ ALTER TABLE `days`
 --
 ALTER TABLE `price_changes`
   ADD CONSTRAINT `price_changes_ibfk_1` FOREIGN KEY (`id_url`) REFERENCES `anb_url` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `price_cleaning`
+--
+ALTER TABLE `price_cleaning`
+  ADD CONSTRAINT `price_cleaning_ibfk_1` FOREIGN KEY (`id_url`) REFERENCES `anb_url` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

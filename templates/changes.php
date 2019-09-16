@@ -26,7 +26,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="py-4 col-xs-12 col-md-6">
-                <?php if (isset($data['bookable_changes']) && $data['bookable_changes'] != null): ?>
+                <?php if (isset($data['bookable_changes']) && $data['bookable_changes'] !== null): ?>
                     <?php foreach ($data['bookable_changes'] as $row): ?>
                         <p class="text-danger"><?php echo '<span class="text-secondary">' . $row['date_parsing'] . '</span>' . '  NEW BOOKING: ' . $row['date_cal'] ?></p>
                     <?php endforeach; ?>
@@ -35,7 +35,7 @@
         </div>
         <div class="row">
             <div class="py-4 col-xs-12 col-md-6">
-                <?php if (isset($data['price_changes']) && $data['price_changes'] != null): ?>
+                <?php if (isset($data['price_changes']) && $data['price_changes'] !== null): ?>
                     <?php foreach ($data['price_changes'] as $row): ?>
                         <p class="text-danger"><?php echo '<span class="text-secondary">' . $row['date_parsing'] . '</span>' . '  PRICE CHANGE: ' . $row['date_cal'] . '   $' . $row['price_was'] . ' -> ' . '$' . $row['price'] ?></p>
                     <?php endforeach; ?>
