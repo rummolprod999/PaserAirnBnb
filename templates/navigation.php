@@ -3,6 +3,7 @@
         <ul>
             <li><a href="/">Main Page</a></li>
             <li><a href="/settings">View Logs</a></li>
+            <li><a href="/analytics">Analytics</a></li>
             <li></li>
         </ul>
     </div>
