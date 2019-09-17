@@ -6,7 +6,7 @@
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>Periods</th>
+                    <th>Period</th>
                     <th>Prices</th>
                 </tr>
                 </thead>
