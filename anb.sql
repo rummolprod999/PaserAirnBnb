@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Сен 16 2019 г., 15:35
+-- Время создания: Сен 17 2019 г., 15:21
 -- Версия сервера: 10.3.18-MariaDB-1:10.3.18+maria~disco-log
 -- Версия PHP: 7.2.22-1+ubuntu19.04.1+deb.sury.org+1
 
@@ -21,6 +21,21 @@ SET time_zone = "+00:00";
 --
 -- База данных: `anb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `analitic`
+--
+
+CREATE TABLE `analitic` (
+  `id` int(11) NOT NULL,
+  `id_url` int(11) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `perid_nights` int(11) NOT NULL,
+  `price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -141,6 +156,16 @@ CREATE TABLE `price_cleaning` (
 --
 
 --
+-- Индексы таблицы `analitic`
+--
+ALTER TABLE `analitic`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_url` (`id_url`),
+  ADD KEY `start_date` (`start_date`),
+  ADD KEY `end_date` (`end_date`),
+  ADD KEY `perid_nights` (`perid_nights`);
+
+--
 -- Индексы таблицы `anb_url`
 --
 ALTER TABLE `anb_url`
@@ -205,6 +230,12 @@ ALTER TABLE `price_cleaning`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `analitic`
+--
+ALTER TABLE `analitic`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `anb_url`
 --
 ALTER TABLE `anb_url`
@@ -249,6 +280,12 @@ ALTER TABLE `price_cleaning`
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
+
+--
+-- Ограничения внешнего ключа таблицы `analitic`
+--
+ALTER TABLE `analitic`
+  ADD CONSTRAINT `analitic_ibfk_1` FOREIGN KEY (`id_url`) REFERENCES `anb_url` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `bookable_changes`

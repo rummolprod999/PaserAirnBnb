@@ -13,7 +13,7 @@
                 <tbody>
                 <?php foreach ($data as $d): ?>
                     <tr>
-                        <td><?php echo "{$d[0]['start_date']} - {$d[0]['end_date']}" ?></td>
+                        <td><?php echo "<span class = 'text-info'>{$d[0]['start_date']} - {$d[0]['end_date']}</span>" ?></td>
                         <td><?php foreach ($d
 
                                            as $p) {
