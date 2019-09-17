@@ -7,7 +7,7 @@
                 <label class="sr-only" for="inlineFormInputName2">URL:</label>
                 <input type="text" class="form-control mb-2 mr-sm-2 w-25" id="inlineFormInputName2" name="add_url"
                        placeholder="https://www.airbnb.ru/rooms/XXXXXXX" required>
-                <label  for="inlineFormInputName2">Owner:</label>
+                <label for="inlineFormInputName2">Owner:</label>
                 <input class="form-check-input" type="checkbox" value="true" id="inlineFormInputName2" name="own">
                 <button type="submit" class="btn btn-primary mb-2">Add</button>
             </form>
@@ -49,6 +49,7 @@
                     <th>Changes</th>
                     <th>Url</th>
                     <th>Owner</th>
+                    <th>Min days</th>
                     <th>Changes</th>
                     <th>Long terms</th>
                     <th>Remove</th>
@@ -64,7 +65,10 @@
                         <td><a href="<?php echo "/changes/{$row['id']}" ?>"><?php echo 'Changes' ?></a></td>
                         <td><a target="_blank" href="<?php echo $row['url'] ?>"><?php echo $row['url'] ?></a></td>
                         <td><?php echo $row['owner'] ?></td>
-                        <td class='text-danger'><?php if (isset($row['res_bookable_change'])) {
+                        <td><?php if (isset($row['min_nights']['min_nights'])) {
+                                echo $row['min_nights']['min_nights'];
+                            } ?></td>
+                        <td class='text-danger text-nowrap'><?php if (isset($row['res_bookable_change'])) {
                                 foreach ($row['res_bookable_change'] as $rp) {
                                     echo "NEW BOOKING: {$rp['date_cal']}</br>";
                                 }
@@ -73,7 +77,7 @@
                                     echo "{$rp['date_cal']}: \${$rp['price_was']} -> \${$rp['price']}</br>";
                                 }
                             } ?></td>
-                        <td class='text-success'><?php if (isset($row['discounts'])) {
+                        <td class='text-success text-nowrap'><?php if (isset($row['discounts'])) {
                                 foreach ($row['discounts'] as $rd) {
                                     echo "{$rd}</br>";
                                 }

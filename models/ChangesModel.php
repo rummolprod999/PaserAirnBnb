@@ -34,9 +34,18 @@ class ChangesModel extends Model
         return null;
     }
 
+    private function get_description($id_url){
+        $stmt = $this->conn->prepare('SELECT a.apartment_name FROM anb_url a WHERE a.id = :id');
+        $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
+        $stmt->execute();
+        $dt = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $dt;
+    }
+
     public function get_info_url($id_url)
     {
         $data = [];
+        $data['descr'] = $this->get_description($id_url);
         $data['bookable_changes'] = $this->get_changes_bookable($id_url);
         $data['price_changes'] = $this->get_changes_price($id_url);
         return $data;

@@ -115,6 +115,11 @@ class DefaultModel extends Model
             $stmt->bindValue(':id', (int)$r['id'], PDO::PARAM_INT);
             $stmt->execute();
             $r['discounts'] = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+            $stmt = $this->conn->prepare('SELECT d.min_nights FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id AND d.date = CURDATE() LIMIT 1');
+            $stmt->bindValue(':id', (int)$r['id'], PDO::PARAM_INT);
+            $stmt->execute();
+            $r['min_nights'] = $stmt->fetch(PDO::FETCH_ASSOC);
             $data_new[] = $r;
         }
         $data['url_arr'] = $data_new;
