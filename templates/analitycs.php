@@ -2,6 +2,7 @@
 <div id="article">
     <div><h1 class="text-center">ANALITYCS</h1></div>
     <div id="table_div">
+        <h4 class="text-center">7 DAYS(6 NIGHTS)</h4>
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
                 <thead>
