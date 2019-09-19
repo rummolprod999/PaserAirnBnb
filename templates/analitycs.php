@@ -19,9 +19,9 @@
 
                                            as $p) {
                                 if ($p['own'] === '1') {
-                                    echo "<a href='/stat/{$p['id']}' target='_blank'><span class='text-success'>\${$p['price']}</span>, </a>";
+                                    echo "<a href='/stat/{$p['id']}' target='_blank'><span class='text-success'>\${$p['price']}</span></a>, ";
                                 } else {
-                                    echo "<a href='/stat/{$p['id']}' target='_blank'>\${$p['price']}, </a>";
+                                    echo "<a href='/stat/{$p['id']}' target='_blank'>\${$p['price']}</a>, ";
                                 }
                             } ?></td>
                     </tr>
