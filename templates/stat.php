@@ -12,7 +12,7 @@
     <div><strong>Url: </strong><a target="_blank" href="<?php if (isset($data['info_url']['url'])) {
             echo $data['info_url']['url'];
         } ?>"><?php echo $data['info_url']['url'] ?></a></div>
-    <div><strong>Minimum number of days to order: </strong><?php if (isset($data['min_nights']['min_nights'])) {
+    <div><strong>Minimum number of nights to order: </strong><?php if (isset($data['min_nights']['min_nights'])) {
             echo $data['min_nights']['min_nights'];
         } ?></div>
     <div><strong>Cleaning fee: </strong><?php if (isset($data['cleaning_price']['price_cleaning'])) {

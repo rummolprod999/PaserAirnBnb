@@ -49,7 +49,7 @@
                     <th>Changes</th>
                     <th>Url</th>
                     <th>Owner</th>
-                    <th>Min days</th>
+                    <th>Min nights</th>
                     <th>Changes</th>
                     <th>Long terms</th>
                     <th>Remove</th>
