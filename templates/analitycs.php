@@ -17,16 +17,18 @@ $divs = 0;
     <ul class="nav nav-pills nav-fill" role="tablist">
         <?php foreach ($data as $m): ?>
             <li role="presentation" class="nav-item"><a href="#tab<?php echo array_key_first($m) ?>" role="tab"
-                                       data-toggle="tab" class="nav-link<?php if ($tabs === 0) {
+                                                        data-toggle="tab" class="nav-link<?php if ($tabs === 0) {
                     echo ' active';
-                } ?>"><?php $tabs++; echo array_key_first($m) ?></a></li>
-        <?php endforeach;?>
+                } ?>"><?php $tabs++;
+                    echo array_key_first($m) ?></a></li>
+        <?php endforeach; ?>
     </ul>
     <div class="tab-content">
         <?php foreach ($data as $m): ?>
             <div role="tabpanel" class="tab-pane <?php if ($divs === 0) {
                 echo 'active';
-            } ?>" id="tab<?php $divs++; echo array_key_first($m) ?>">
+            } ?>" id="tab<?php $divs++;
+            echo array_key_first($m) ?>">
                 <div id="table_div">
                     <h4 class="text-center"><?php echo (int)(array_key_first($m) + 1) ?>
                         DAYS(<?php echo (int)(array_key_first($m)) ?> NIGHTS)</h4>
@@ -59,6 +61,6 @@ $divs = 0;
                     </div>
                 </div>
             </div>
-        <?php endforeach?>
+        <?php endforeach ?>
 
     </div>
