@@ -20,7 +20,7 @@
         } ?></div>
     <div><strong>Long terms: </strong><?php if (isset($data['discounts'])) {
             $discounts = '';
-            foreach ($data['discounts'] as $disc){
+            foreach ($data['discounts'] as $disc) {
                 $discounts .= "{$disc}, ";
             }
             echo trim($discounts, ', ');

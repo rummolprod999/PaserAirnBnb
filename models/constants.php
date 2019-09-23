@@ -1,2 +1,2 @@
 <?php
-define('N',PHP_EOL);
+define('N', PHP_EOL);

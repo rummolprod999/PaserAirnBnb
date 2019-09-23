@@ -12,7 +12,7 @@ class AnalitycsModel extends Model
     public function get_data()
     {
         $data = [];
-        for($i = 6; $i <= 31; $i++){
+        for ($i = 6; $i <= 31; $i++) {
             $query = "SELECT a.start_date, a.end_date FROM analitic a WHERE a.perid_nights = {$i} GROUP BY a.start_date, a.end_date ORDER BY a.start_date";
             $period = [];
             $res = $this->conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
@@ -28,7 +28,7 @@ class AnalitycsModel extends Model
                 }
                 $period[] = $periods;
             }
-            if(count($period) > 0){
+            if (count($period) > 0) {
                 $data[] = [$i => $period];
             }
         }

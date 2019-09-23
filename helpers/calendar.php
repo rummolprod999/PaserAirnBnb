@@ -63,15 +63,11 @@ function print_calendar($data, $book_changes)
         for ($j = 0; $j < 7; $j++) {
 
             if (!empty($iValue[$j])) {
-                if(in_array($data[$c]['date'], $book_changes, true)){
+                if (in_array($data[$c]['date'], $book_changes, true)) {
                     echo "<td class=\"table-danger\"><font color=black>{$iValue[$j]}</font></br><font color=green>\${$data[$c]['price_day']}</font></td>";
-                }
-
-                elseif ($data[$c]['available'] === '1' && $data[$c]['bookable'] === '1' /* && $data[$c]['available_for_checkin'] == '1'  */) {
+                } elseif ($data[$c]['available'] === '1' && $data[$c]['bookable'] === '1' /* && $data[$c]['available_for_checkin'] == '1'  */) {
                     echo "<td class=\"table-success\"><font color=black>{$iValue[$j]}</font></br><font color=green>\${$data[$c]['price_day']}</font></td>";
-                }
-
-                else {
+                } else {
                     echo "<td>{$iValue[$j]}</br><font color=green>\${$data[$c]['price_day']}</font></td>";
                 }
                 $c++;

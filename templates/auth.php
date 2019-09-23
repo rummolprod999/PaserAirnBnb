@@ -1,24 +1,24 @@
 <div id="article">
     <div id="login_form_div">
         <?php if (AuthController::$wrong_pass) { ?>
-            <div class="alert alert-danger" role="alert">Неправильный логин или пароль</div>
+            <div class="alert alert-danger" role="alert">Wrong login or password</div>
         <?php } ?>
         <form role="form" method="post">
             <fieldset>
-                <legend>Вход на сайт</legend>
+                <legend>Enter</legend>
                 <div class="form-group">
-                    <label for="inputLogin">Логин</label>
-                    <input id="inputLogin" placeholder="Введите логин" class="form-control" name="login" required>
+                    <label for="inputLogin">Login</label>
+                    <input id="inputLogin" placeholder="Enter login" class="form-control" name="login" required>
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword">Пароль</label>
-                    <input type="password" id="inputPassword" placeholder="Введите пароль" class="form-control"
+                    <label for="inputPassword">Password</label>
+                    <input type="password" id="inputPassword" placeholder="Enter password" class="form-control"
                            name="password" required>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" name="remember"> Запомнить меня</label>
+                    <label><input type="checkbox" name="remember">Remember</label>
                 </div>
-                <button type="submit" class="btn btn-default">Войти</button>
+                <button type="submit" class="btn btn-default">Sign in</button>
             </fieldset>
         </form>
     </div>

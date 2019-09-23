@@ -9,6 +9,7 @@ class SettingsModel extends Model
         parent::__construct();
         $this->create_connection();
     }
+
     public function get_data()
     {
         $stmt = $this->conn->prepare('SELECT c.date_last FROM anb_url a LEFT JOIN checkup c on a.id = c.iid_anb WHERE c.date_last IS NOT NULL LIMIT 1');
