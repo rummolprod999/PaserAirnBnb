@@ -107,6 +107,13 @@ class StatModel extends Model
         $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
         $stmt->execute();
         $data['days8'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $stmt = $this->conn->prepare('SELECT date_cal FROM bookable_changes WHERE seen = 0 AND id_url = :id_url');
+        $stmt->bindValue(':id_url', (int)$id_url, PDO::PARAM_INT);
+        //$stmt->bindValue(':num_parsing', (int)$r['num_parsing'], PDO::PARAM_INT);
+        $stmt->execute();
+        $res_bookable_change = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        $data['res_bookable_change'] = $res_bookable_change;
         return $data;
     }
 }

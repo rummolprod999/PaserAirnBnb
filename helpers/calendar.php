@@ -1,6 +1,6 @@
 <?php
 
-function print_calendar($data)
+function print_calendar($data, $book_changes)
 {
     ob_start();
     $currs = strtotime($data[0]['date']);
@@ -63,10 +63,13 @@ function print_calendar($data)
         for ($j = 0; $j < 7; $j++) {
 
             if (!empty($iValue[$j])) {
+                if(in_array($data[$c]['date'], $book_changes, true)){
+                    echo "<td class=\"table-danger\"><font color=black>{$iValue[$j]}</font></br><font color=green>\${$data[$c]['price_day']}</font></td>";
+                }
 
-                if ($data[$c]['available'] === '1' && $data[$c]['bookable'] === '1' /* && $data[$c]['available_for_checkin'] == '1'  */)
-
+                elseif ($data[$c]['available'] === '1' && $data[$c]['bookable'] === '1' /* && $data[$c]['available_for_checkin'] == '1'  */) {
                     echo "<td class=\"table-success\"><font color=black>{$iValue[$j]}</font></br><font color=green>\${$data[$c]['price_day']}</font></td>";
+                }
 
                 else {
                     echo "<td>{$iValue[$j]}</br><font color=green>\${$data[$c]['price_day']}</font></td>";

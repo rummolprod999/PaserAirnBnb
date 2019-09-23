@@ -42,35 +42,35 @@
                 <div><p><strong>Availability</strong></p></div>
                 <?php
                 if (isset($data['days'])) {
-                    echo print_calendar($data['days']);
+                    echo print_calendar($data['days'], $data['res_bookable_change']);
                 } ?>
                 <?php
                 if (isset($data['days2'])) {
-                    echo print_calendar($data['days2']);
+                    echo print_calendar($data['days2'], $data['res_bookable_change']);
                 } ?>
                 <?php
                 if (isset($data['days3'])) {
-                    echo print_calendar($data['days3']);
+                    echo print_calendar($data['days3'], $data['res_bookable_change']);
                 } ?>
                 <?php
                 if (isset($data['days4'])) {
-                    echo print_calendar($data['days4']);
+                    echo print_calendar($data['days4'], $data['res_bookable_change']);
                 } ?>
                 <?php
                 if (isset($data['days5'])) {
-                    echo print_calendar($data['days5']);
+                    echo print_calendar($data['days5'], $data['res_bookable_change']);
                 } ?>
                 <?php
                 if (isset($data['days6'])) {
-                    echo print_calendar($data['days6']);
+                    echo print_calendar($data['days6'], $data['res_bookable_change']);
                 } ?>
                 <?php
                 if (isset($data['days7'])) {
-                    echo print_calendar($data['days7']);
+                    echo print_calendar($data['days7'], $data['res_bookable_change']);
                 } ?>
                 <?php
                 if (isset($data['days8'])) {
-                    echo print_calendar($data['days8']);
+                    echo print_calendar($data['days8'], $data['res_bookable_change']);
                 } ?>
             </div>
             <div class="py-4 col-xs-6 col-md-4">
