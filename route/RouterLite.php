@@ -6,6 +6,7 @@ require_once 'controllers/StatController.php';
 require_once 'controllers/SettingsController.php';
 require_once 'controllers/ChangesController.php';
 require_once 'controllers/AnalitycsController.php';
+require_once 'controllers/Analitycs2Controller.php';
 
 final class RouterLite
 {
