@@ -31,11 +31,11 @@
     } ?>
     <?php if (isset($data['suspend'])) {
         echo $data['suspend'];
-        header("location:http://{$_SERVER['HTTP_HOST']}{$_SERVER['PATH_INFO']}?suspend=true");
+        header("location:?suspend=true");
     } ?>
     <?php if (isset($data['unsuspend'])) {
         echo $data['unsuspend'];
-        header("location:http://{$_SERVER['HTTP_HOST']}{$_SERVER['PATH_INFO']}?unsuspend=true");
+        header("location:?unsuspend=true");
     } ?>
     <?php if (isset($_GET['clean']) && $_GET['clean'] === 'true') {
         echo '<div class="alert alert-warning" role="alert">Booking have been cleaned</div>';
