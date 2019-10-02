@@ -59,6 +59,8 @@
                 <?php foreach ($data['url_arr'] as $row): ?>
                     <tr <?php if ($row['own'] === '1') {
                         echo 'class="table-warning"';
+                    } ?><?php if ($row['id'] === '38') {
+                        echo 'class="table-danger"';
                     } ?>>
                         <td><strong><?php echo $row['id'] ?></strong></td>
                         <td><a href="<?php echo "/stat/{$row['id']}" ?>"><?php echo 'Statistics' ?></a></td>
