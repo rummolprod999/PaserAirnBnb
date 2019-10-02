@@ -29,13 +29,38 @@
         echo $data['bookable_clean'];
         //header('location:/?clean=true');
     } ?>
+    <?php if (isset($data['suspend'])) {
+        echo $data['suspend'];
+        header("location:http://{$_SERVER['HTTP_HOST']}{$_SERVER['PATH_INFO']}?suspend=true");
+    } ?>
+    <?php if (isset($data['unsuspend'])) {
+        echo $data['unsuspend'];
+        header("location:http://{$_SERVER['HTTP_HOST']}{$_SERVER['PATH_INFO']}?unsuspend=true");
+    } ?>
     <?php if (isset($_GET['clean']) && $_GET['clean'] === 'true') {
         echo '<div class="alert alert-warning" role="alert">Booking have been cleaned</div>';
+    } ?>
+    <?php if (isset($_GET['suspend']) && $_GET['suspend'] === 'true') {
+        echo '<div class="alert alert-warning" role="alert">Apartment have been suspend</div>';
+    } ?>
+    <?php if (isset($_GET['unsuspend']) && $_GET['unsuspend'] === 'true') {
+        echo '<div class="alert alert-warning" role="alert">Apartment have been unsuspend</div>';
     } ?>
     <form class="form-inline" method="post"><input type="hidden" name="remove_bookable"
                                                    value='remove'>
         <button type="submit" class="btn btn-danger mb-2">I have seen booking changes</button>
     </form>
+
+    <div class="btn-group-vertical" role="group" aria-label="Button group">
+        <form class="form-inline" method="post"><input type="hidden" name="suspend"
+                                                       value='true'>
+            <button type="submit" class="btn btn-warning mb-2">Suspend</button>
+        </form>
+        <form class="form-inline" method="post"><input type="hidden" name="unsuspend"
+                                                       value='true'>
+            <button type="submit" class="btn btn-success mb-2">Unsuspend</button>
+        </form>
+    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="py-4 col-xs-12 col-md-8">

@@ -61,6 +61,8 @@
                         echo 'class="table-warning"';
                     } ?><?php if ($row['id'] === '38') {
                         echo 'class="table-danger"';
+                    } ?><?php if ($row['suspend'] === '1') {
+                        echo 'class="table-secondary"';
                     } ?>>
                         <td><strong><?php echo $row['id'] ?></strong></td>
                         <td><a href="<?php echo "/stat/{$row['id']}" ?>"><?php echo 'Statistics' ?></a></td>

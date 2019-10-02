@@ -13,7 +13,35 @@ class StatModel extends Model
     {
     }
 
-    private function bookable_seen($id_url){
+    private function suspend($id_url)
+    {
+        $message = '';
+        if (isset($_POST['suspend']) && !empty($_POST['suspend']) && $_POST['suspend'] === 'true') {
+            $stmt = $this->conn->prepare('UPDATE anb_url SET  suspend = 1 WHERE id = :id_url');
+            $stmt->bindValue(':id_url', (int)$id_url, PDO::PARAM_INT);
+            $stmt->execute();
+            $message = '<div class="alert alert-warning" role="alert">Apartment have been suspend</div>';
+
+        }
+        return $message;
+    }
+
+    private function unsuspend($id_url)
+    {
+        $message = '';
+        if (isset($_POST['unsuspend']) && !empty($_POST['unsuspend']) && $_POST['unsuspend'] === 'true') {
+            $stmt = $this->conn->prepare('UPDATE anb_url SET  suspend = 0 WHERE id = :id_url');
+            $stmt->bindValue(':id_url', (int)$id_url, PDO::PARAM_INT);
+            $stmt->execute();
+            $message = '<div class="alert alert-warning" role="alert">Apartment have been unsuspend</div>';
+            return $message;
+
+        }
+        return $message;
+    }
+
+    private function bookable_seen($id_url)
+    {
         $message = '';
         if (isset($_POST['remove_bookable']) && !empty($_POST['remove_bookable']) && $_POST['remove_bookable'] === 'remove') {
             $stmt = $this->conn->prepare('UPDATE bookable_changes SET  seen = 1 WHERE id_url = :id_url');
@@ -26,11 +54,20 @@ class StatModel extends Model
         }
         return $message;
     }
+
     public function get_info_url($id_url)
     {
         $data = [];
         $bookable_clean = $this->bookable_seen($id_url);
         $data['bookable_clean'] = $bookable_clean;
+        $suspend = $this->suspend($id_url);
+        if ($suspend !== '') {
+            $data['suspend'] = $suspend;
+        }
+        $unsuspend = $this->unsuspend($id_url);
+        if ($unsuspend !== '') {
+            $data['unsuspend'] = $unsuspend;
+        }
         $stmt = $this->conn->prepare('SELECT id, url, owner, apartment_name FROM anb_url WHERE id = :id');
         $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
         $stmt->execute();

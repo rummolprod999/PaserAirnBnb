@@ -91,7 +91,7 @@ class DefaultModel extends Model
     {
         /*$query = 'SELECT id, url, owner, changes, change_price, own, num_parsing FROM anb_url'; ;*/
         $data = [];
-        $query = 'SELECT id, url, owner, own, num_parsing FROM anb_url ORDER BY own DESC';
+        $query = 'SELECT id, url, owner, own, num_parsing, suspend FROM anb_url ORDER BY own DESC';
         $data_new = [];
         $res = $this->conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
         foreach ($res as $r) {
