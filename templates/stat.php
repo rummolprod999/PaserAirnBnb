@@ -12,9 +12,15 @@
     <div><strong>Url: </strong><a target="_blank" href="<?php if (isset($data['info_url']['url'])) {
             echo $data['info_url']['url'];
         } ?>"><?php echo $data['info_url']['url'] ?></a></div>
-    <div><strong>Minimum number of nights to order: </strong><?php if (isset($data['min_nights']['min_nights'])) {
-            echo $data['min_nights']['min_nights'];
-        } ?></div>
+    <div><strong>Minimum number of nights to order: </strong><span class="text-info"><?php if (isset($data['min_nights'])) {
+            $min_nights = $data['min_nights'];
+            $iMax = count($min_nights);
+            if ($iMax > 0) {
+                for ($i = 0; $i < $iMax; $i += 2) {
+                    echo "{$min_nights[$i]['date']} - {$min_nights[$i+1]['date']}: {$min_nights[$i+1]['min_nights']} days; ";
+                }
+            }
+        } ?></span></div>
     <div><strong>Cleaning fee: </strong><?php if (isset($data['cleaning_price']['price_cleaning'])) {
             echo "\${$data['cleaning_price']['price_cleaning']}";
         } ?></div>

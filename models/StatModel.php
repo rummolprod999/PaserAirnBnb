@@ -74,11 +74,11 @@ class StatModel extends Model
 
         $data['info_url'] = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $stmt = $this->conn->prepare('SELECT d.min_nights FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id AND d.date = CURDATE() LIMIT 1');
+        /*$stmt = $this->conn->prepare('SELECT d.min_nights FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id AND d.date = CURDATE() LIMIT 1');
         $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
         $stmt->execute();
-        $data['min_nights'] = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        $data['min_nights'] = $stmt->fetch(PDO::FETCH_ASSOC);*/
+        $data['min_nights'] = $this->get_min_nights($id_url);
         $stmt = $this->conn->prepare('SELECT p.price_cleaning FROM price_cleaning p WHERE p.id_url = :id LIMIT 1');
         $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
         $stmt->execute();
@@ -152,5 +152,26 @@ class StatModel extends Model
         $res_bookable_change = $stmt->fetchAll(PDO::FETCH_COLUMN);
         $data['res_bookable_change'] = $res_bookable_change;
         return $data;
+    }
+
+    function get_min_nights($id){
+        $stmt = $this->conn->prepare('SELECT d.min_nights, d.date FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id ORDER BY d.date');
+        $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+        $stmt->execute();
+        $buffer = [];
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if(count($result) > 0){
+            $buffer[] = $result[0];
+            $count_res = count($result);
+            for($i = 0; $i < $count_res; $i++){
+                if(end($buffer)['min_nights'] !== $result[$i]['min_nights']){
+                    $buffer[] = $result[$i-1];
+                    $buffer[] = $result[$i];
+                }
+            }
+            $buffer[] = end($result);
+        }
+        return  $buffer;
+
     }
 }

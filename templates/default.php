@@ -57,20 +57,26 @@
                 </thead>
                 <tbody>
                 <?php foreach ($data['url_arr'] as $row): ?>
-                    <tr <?php if ($row['own'] === '1') {
-                        echo 'class="table-warning"';
-                    } ?><?php if ($row['id'] === '38') {
-                        echo 'class="table-danger"';
-                    } ?><?php if ($row['suspend'] === '1') {
+                    <tr <?php if ($row['suspend'] === '1') {
                         echo 'class="table-secondary"';
+                    } elseif ($row['own'] === '1') {
+                        echo 'class="table-warning"';
+                    } elseif ($row['id'] === '38') {
+                        echo 'class="table-danger"';
                     } ?>>
                         <td><strong><?php echo $row['id'] ?></strong></td>
                         <td><a href="<?php echo "/stat/{$row['id']}" ?>"><?php echo 'Statistics' ?></a></td>
                         <td><a href="<?php echo "/changes/{$row['id']}" ?>"><?php echo 'Changes' ?></a></td>
                         <td><a target="_blank" href="<?php echo $row['url'] ?>"><?php echo $row['url'] ?></a></td>
                         <td><?php echo $row['owner'] ?></td>
-                        <td><?php if (isset($row['min_nights']['min_nights'])) {
-                                echo $row['min_nights']['min_nights'];
+                        <td class='text-info text-nowrap'><?php if (isset($row['min_nights'])) {
+                                $min_nights = $row['min_nights'];
+                                $iMax = count($min_nights);
+                                if ($iMax > 0) {
+                                    for ($i = 0; $i < $iMax; $i += 2) {
+                                        echo "{$min_nights[$i]['date']} - {$min_nights[$i+1]['date']}: {$min_nights[$i+1]['min_nights']} days;</br>";
+                                    }
+                                }
                             } ?></td>
                         <td class='text-danger text-nowrap'><?php if (isset($row['res_bookable_change'])) {
                                 foreach ($row['res_bookable_change'] as $rp) {
