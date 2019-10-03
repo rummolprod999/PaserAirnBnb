@@ -1,5 +1,5 @@
 <?php require_once 'templates/navigation.php' ?>
-
+<?php require_once 'helpers/arraysHelpers.php' ?>
 <div><h1 class="text-center">Changes <?php if (isset($data['descr'])) {
             echo " <span class=\"text-secondary\">{$data['descr']['apartment_name']}</span>";
         } ?></h1></div>
@@ -29,9 +29,27 @@
         <div class="row">
             <div class="py-4 col-xs-12 col-sm-6">
                 <?php if (isset($data['bookable_changes']) && $data['bookable_changes'] !== null): ?>
-                    <?php foreach ($data['bookable_changes'] as $row): ?>
-                        <p class="text-danger"><?php echo "<span class=\"text-secondary\">{$row['date_parsing']}</span>  NEW BOOKING: {$row['date_cal']}" ?></p>
+                    <?php /*foreach ($data['bookable_changes'] as $row): */?><!--
+                        <p class="text-danger"><?php /*echo "<span class=\"text-secondary\">{$row['date_parsing']}</span>  NEW BOOKING: {$row['date_cal']}" */?></p>
+                    --><?php /*endforeach; */?>
+                    <?php $arr = group_array($data['bookable_changes']);
+                    foreach ($arr as $k_arr => $v_arr):?>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-8 border border-5 border-primary rounded mb-3 p-2"><?php foreach ($v_arr as $vv): ?>
+                                        <p class="text-danger"><?php echo "<span class=\"text-secondary\">{$k_arr}</span>  NEW BOOKING: {$vv}" ?></p>
+                                    <?php endforeach; ?></div>
+                                <div class="col-4 align-self-center mb-3 p-1"><?php $c = count($v_arr);
+                                    if ($c === 1) {
+                                        echo "<p class=\"font-weight-bold\">{$c} night</p>";
+                                    } elseif ($c > 1) {
+                                        echo "<p class=\"font-weight-bold\">{$c} nights</p>";
+                                    } ?></div>
+
+                            </div>
+                        </div>
                     <?php endforeach; ?>
+
                 <?php endif; ?>
             </div>
             <div class="py-4 col-xs-12 col-sm-6">
