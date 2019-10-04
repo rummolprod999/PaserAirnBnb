@@ -34,6 +34,11 @@
             </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="tabtable2">
+            <form class="form-inline">
+                <label class="sr-only" for="date_start"></label>
+                <input type="date" id="date_start" name="date_start" class="form-control" required/>
+                <button type="submit" class="btn btn-primary btn-md">Get Analitycs</button>
+            </form>
             <div id="table_div">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
@@ -45,15 +50,29 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($data['inter'] as $row): ?>
+                        <?php if (isset($data['inter'])): ?>
+                            <?php foreach ($data['inter'] as $row): ?>
+                                <tr>
+                                    <td><span class='text-success'><?php echo (string)($row['day_month']) ?></span></td>
+                                    <td><span class='text-primary'><?php echo $row['count'] ?></span></td>
+                                    <td><?php foreach ($row['intervals'] as $inter) {
+                                            echo "<span class = 'text-info'>{$inter['date_start']} - {$inter['date_end']}</span>, ";
+                                        } ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        <?php if (isset($data['inter_filter'])): ?>
+                            <?php $count_inter = count($data['inter_filter']); ?>
                             <tr>
-                                <td><span class='text-success'><?php echo (string)($row['day_month']) ?></span></td>
-                                <td><span class='text-primary'><?php echo $row['count'] ?></span></td>
-                                <td><?php foreach ($row['intervals'] as $inter) {
+                                <td>
+                                    <span class='text-success'><?php echo (string)($data['inter_filter'][0]['dd']) ?></span>
+                                </td>
+                                <td><span class='text-primary'><?php echo $count_inter ?></span></td>
+                                <td><?php foreach ($data['inter_filter'] as $inter) {
                                         echo "<span class = 'text-info'>{$inter['date_start']} - {$inter['date_end']}</span>, ";
                                     } ?></td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
