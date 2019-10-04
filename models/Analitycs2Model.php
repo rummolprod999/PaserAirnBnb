@@ -18,7 +18,7 @@ class Analitycs2Model extends Model
 
         $query = 'SELECT d.id, day_month, count FROM date_not_first_count d';
         if (isset($_GET['date_start'])){
-            $stmt = $this->conn->prepare('SELECT inter.date_start, inter.date_end, DAYOFMONTH(:dt) dd FROM intervals_count inter JOIN date_not_first_count dnf ON inter.id_count = dnf.id WHERE (STR_TO_DATE(:dt, \'%Y-%m-%d\') >= inter.date_start AND STR_TO_DATE(:dt, \'%Y-%m-%d\') <= inter.date_end)
+            $stmt = $this->conn->prepare('SELECT inter.date_start, inter.date_end, DAYOFMONTH(:dt) dd FROM intervals_count inter JOIN date_not_first_count dnf ON inter.id_count = dnf.id WHERE (STR_TO_DATE(:dt, \'%Y-%m-%d\') = inter.date_start OR STR_TO_DATE(:dt, \'%Y-%m-%d\') = inter.date_end)
 
   AND dnf.day_month = DAYOFMONTH(:dt)');
             $stmt->bindValue(':dt', (string)$_GET['date_start'], PDO::PARAM_STR);
