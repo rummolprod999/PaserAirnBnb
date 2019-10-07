@@ -4,12 +4,20 @@
     <div><h1 class="text-center">ANALITYCS 2</h1></div>
     <ul class="nav nav-pills nav-fill" role="tablist">
         <li role="presentation" class="nav-item"><a href="#tabtable1" role="tab"
-                                                    data-toggle="tab" class="nav-link active">Table 1</a></li>
+                                                    data-toggle="tab"
+                                                    class="nav-link <?php if (!isset($_GET['date_start'])) {
+                                                        echo 'active';
+                                                    } ?>">Table 1</a></li>
         <li role="presentation" class="nav-item"><a href="#tabtable2" role="tab"
-                                                    data-toggle="tab" class="nav-link">Table 2</a></li>
+                                                    data-toggle="tab"
+                                                    class="nav-link <?php if (isset($_GET['date_start'])) {
+                                                        echo 'active';
+                                                    } ?>">Table 2</a></li>
     </ul>
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="tabtable1">
+        <div role="tabpanel" class="tab-pane <?php if (!isset($_GET['date_start'])) {
+            echo 'active';
+        } ?>" id="tabtable1">
             <div id="table_div">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
@@ -33,10 +41,15 @@
                 </div>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane" id="tabtable2">
+        <div role="tabpanel" class="tab-pane <?php if (isset($_GET['date_start'])) {
+            echo 'active';
+        } ?>" id="tabtable2">
             <form class="form-inline">
                 <label class="sr-only" for="date_start"></label>
-                <input type="date" id="date_start" name="date_start" class="form-control" required/>
+                <input type="date" id="date_start" name="date_start"
+                       class="form-control" <?php if (isset($_GET['date_start'])) {
+                    echo "value=\"{$_GET['date_start']}\"";
+                } ?> required/>
                 <button type="submit" class="btn btn-primary btn-md">Get Analitycs</button>
             </form>
             <div id="table_div">
