@@ -18,7 +18,7 @@
                 $iMax = count($min_nights);
                 if ($iMax > 0) {
                     for ($i = 0; $i < $iMax; $i += 2) {
-                        echo "{$min_nights[$i]['date']} - {$min_nights[$i+1]['date']}: {$min_nights[$i+1]['min_nights']} days; ";
+                        echo "{$min_nights[$i]['date']} - {$min_nights[$i+1]['date']}: {$min_nights[$i+1]['min_nights']} nights; ";
                     }
                 }
             } ?></span></div>
