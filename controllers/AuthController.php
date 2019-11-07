@@ -33,6 +33,9 @@ class AuthController extends Controller
                     }
                     $_SESSION['id'] = $user['id'];
                     $this->uid = $_SESSION['id'];
+                    if ($user['is_admin'] === '1') {
+                        $this->is_admin = true;
+                    }
                 } else {
                     $error[] = "Wrong password";
                     return $error;
