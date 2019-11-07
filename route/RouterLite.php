@@ -7,6 +7,7 @@ require_once 'controllers/SettingsController.php';
 require_once 'controllers/ChangesController.php';
 require_once 'controllers/AnalitycsController.php';
 require_once 'controllers/Analitycs2Controller.php';
+require_once 'controllers/NotFoundController.php';
 
 final class RouterLite
 {
@@ -66,7 +67,7 @@ final class RouterLite
 
     public static function executeAction()
     {
-        $controller = isset(self::$params[0]) ? self::$params[0] : 'AuthController';
+        $controller = isset(self::$params[0]) ? self::$params[0] : 'NotFoundController';
         $action = isset(self::$params[1]) ? self::$params[1] : 'index_page';
         $params = array_slice(self::$params, 2);
         $controller = new $controller();
