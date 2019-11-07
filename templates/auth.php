@@ -1,6 +1,6 @@
 <div id="article">
     <div id="login_form_div">
-        <?php if (AuthController::$wrong_pass) { ?>
+        <?php if (AuthControllerOld::$wrong_pass) { ?>
             <div class="alert alert-danger" role="alert">Wrong login or password</div>
         <?php } ?>
         <form role="form" method="post">
