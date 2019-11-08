@@ -7,6 +7,8 @@ require_once 'controllers/SettingsController.php';
 require_once 'controllers/ChangesController.php';
 require_once 'controllers/AnalitycsController.php';
 require_once 'controllers/Analitycs2Controller.php';
+require_once 'controllers/AdminController.php';
+require_once 'controllers/AdminDefaultController.php';
 require_once 'controllers/NotFoundController.php';
 
 final class RouterLite

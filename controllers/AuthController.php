@@ -4,9 +4,10 @@ require_once 'models/AuthModel.php';
 
 class AuthController extends Controller
 {
-    public $uid = 0;
-    public $is_admin = false;
+    public static $uid = 0;
+    public static $is_admin = false;
     private $model = null;
+    public static $error = [];
 
     public function __construct()
     {
@@ -15,7 +16,6 @@ class AuthController extends Controller
 
     public function enter()
     {
-        $error = array();
         if (isset($_POST['login'], $_POST['password']) && $_POST['login'] !== '' && $_POST['password'] !== '') {
             $login = htmlentities(trim($_POST['login']));
             $password = htmlentities(trim($_POST['password']));
@@ -23,7 +23,7 @@ class AuthController extends Controller
             if ($user) {
                 $hash = password_hash($password, PASSWORD_DEFAULT);
 
-                if (password_verify($user['user_pass'], $hash)) {
+                if (password_verify($password, $hash)) {
                     if (isset($_POST['remember']) && $_POST['remember'] === 'on') {
                         setcookie('login', $user['user_name'], time() + (30 * 24 * 3600));
                         setcookie('password', md5($user['user_name'] . $user['user_pass']), time() + (30 * 24 * 3600));
@@ -32,21 +32,20 @@ class AuthController extends Controller
                         setcookie('password', md5($user['user_name'] . $user['user_pass']));
                     }
                     $_SESSION['id'] = $user['id'];
-                    $this->uid = $_SESSION['id'];
+                    self::$uid = $_SESSION['id'];
                 } else {
-                    $error[] = 'Wrong password';
-                    return $error;
+                    self::$error[] = 'Wrong password';
+                    return self::$error;
                 }
             } else {
-                $error[] = 'Wrong login or password';
-                return $error;
+                self::$error[] = 'Wrong login or password';
+                return self::$error;
             }
 
         } else {
-            $error[] = 'Empty fields';
-            return $error;
+            return self::$error;
         }
-        return $error;
+        return self::$error;
     }
 
     public function login()
@@ -59,14 +58,14 @@ class AuthController extends Controller
                 setcookie('password', '', time() - 1, '/');
                 setcookie('login', $_COOKIE['login'], time() + (30 * 24 * 3600), '/');
                 setcookie('password', $_COOKIE['password'], time() + (30 * 24 * 3600), '/');
-                $this->uid = $_SESSION['id'];
+                self::$uid = $_SESSION['id'];
                 return true;
             } else {
                 $user = $this->model->get_user_from_id($_SESSION['id']);
                 if ($user) {
                     setcookie('login', $user['user_name'], time() + (30 * 24 * 3600));
                     setcookie('password', md5($user['user_name'] . $user['user_pass']), time() + (30 * 24 * 3600));
-                    $this->uid = $_SESSION['id'];
+                    self::$uid = $_SESSION['id'];
                     return true;
                 } else {
                     return false;
@@ -77,7 +76,7 @@ class AuthController extends Controller
                 $user = $this->model->get_user($_COOKIE['login']);
                 if ($user && md5($user['user_name'] . $user['user_pass']) === $_COOKIE['password']) {
                     $_SESSION['id'] = $user['id'];
-                    $this->uid = $_SESSION['id'];
+                    self::$uid = $_SESSION['id'];
                     return true;
                 } else {
                     setcookie('login', '', time() - (30 * 24 * 3600), '/');

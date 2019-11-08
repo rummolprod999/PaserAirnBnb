@@ -1,7 +1,9 @@
 <div id="article">
     <div id="login_form_div">
-        <?php if (AuthControllerOld::$wrong_pass) { ?>
-            <div class="alert alert-danger" role="alert">Wrong login or password</div>
+        <?php if (count(AuthController::$error) > 0) { ?>
+            <?php foreach (AuthController::$error as $err): ?>
+            <div class="alert alert-danger" role="alert"><?php echo $err ?></div>
+            <?php endforeach; ?>
         <?php } ?>
         <form role="form" method="post">
             <fieldset>

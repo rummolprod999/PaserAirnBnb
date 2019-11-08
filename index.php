@@ -1,13 +1,13 @@
 <?php
 require_once 'controllers/AuthController.php';
 $auth = new AuthController();
-if ($auth->login()){
-    $auth->is_admin = $auth->check_is_admin($auth->uid);
-} else{
+if ($auth->login()) {
+    AuthController::$is_admin = $auth->check_is_admin(AuthController::$uid);
+} else {
     $error = $auth->enter();
-    if (count($error) === 0) //если ошибки отсутствуют, авторизируем пользователя
+    if (count($error) === 0)
     {
-        $auth->is_admin = $auth->check_is_admin($auth->uid);
+        AuthController::$is_admin = $auth->check_is_admin(AuthController::$uid);
     }
 }
 require_once 'route/route.php';
