@@ -10,7 +10,7 @@
     }
 
     ?>
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs justify-content-end">
         <li class="nav-item">
             <a class="nav-link <?php active('/?action=out'); ?>" href="/?action=out">Logout</a>
         </li>
