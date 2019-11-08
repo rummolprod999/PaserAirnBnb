@@ -25,6 +25,7 @@
                         <td><strong><?php echo $row['proxy_port'] ?></strong></td>
                         <td><strong><?php echo $row['proxy_user'] ?></strong></td>
                         <td><strong><?php echo $row['proxy_pass'] ?></strong></td>
+                        <td><strong><?php echo $row['last_date'] ?></strong></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
