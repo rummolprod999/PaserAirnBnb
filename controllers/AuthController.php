@@ -91,6 +91,14 @@ class AuthController extends Controller
     public function check_is_admin($user_id){
         return $this->model->is_admin($user_id);
     }
+    public function out(){
+        session_start();
+        $_SESSION = array();
+        setcookie('login', '', time() - (30 * 24 * 3600), '/');
+        setcookie('password', '', time() - (30 * 24 * 3600), '/');
+        session_destroy();
+        header('location:/');
+    }
     function index_page()
     {
         echo $this->template('templates/auth.php', ["title" => "Authentication"]);

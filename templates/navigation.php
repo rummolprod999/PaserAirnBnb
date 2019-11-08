@@ -1,13 +1,4 @@
 <div id="header">
-    <!--<div id="nav">
-        <ul>
-            <li><a href="/">Main</a></li>
-            <li><a href="/settings">Logs</a></li>
-            <li><a href="/analytics">Analytics</a></li>
-            <li><a href="/analytics2">Analytics2</a></li>
-            <li></li>
-        </ul>
-    </div>-->
     <?php
     function active($currect_page)
     {
@@ -31,6 +22,9 @@
         </li>
         <li class="nav-item">
             <a class="nav-link <?php active('analytics2'); ?>" href="/analytics2">Analytics2</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?php active('/?action=out'); ?>" href="/?action=out">Logout</a>
         </li>
     </ul>
 
