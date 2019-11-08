@@ -13,7 +13,8 @@
                     <th>Proxy Port</th>
                     <th>Proxy User</th>
                     <th>Proxy Pass</th>
-                    <th>Last activity</th>
+                    <th>Last Activity</th>
+                    <th>Change User</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,12 @@
                         <td><strong><?php echo $row['proxy_user'] ?></strong></td>
                         <td><strong><?php echo $row['proxy_pass'] ?></strong></td>
                         <td><strong><?php echo $row['last_date'] ?></strong></td>
+                        <td>
+                            <form class="form-inline" method="post" action="/change_user"><input type="hidden" name="change_user"
+                                                                           value='<?php echo $row['id'] ?>'>
+                                <button type="submit" class="btn btn-warning mb-2">Change</button>
+                            </form>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
