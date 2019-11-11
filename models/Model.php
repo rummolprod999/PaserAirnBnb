@@ -3,11 +3,11 @@
 
 class Model
 {
+    public $conn = null;
     private $host = 'localhost';
     private $db = 'anb';
     private $user_db = 'root';
     private $pass_db = '1234';
-    public $conn = null;
 
     public function __construct()
     {

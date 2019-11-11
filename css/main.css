@@ -1,42 +1,50 @@
 
-#header{
+#header {
     background-color: #f4f4f4;
     padding-top: 5px;
 }
+
 body {
     font-family: Verdana, Arial, sans-serif;
     background-color: #f7f7f7;
 }
-#footer{
+
+#footer {
     border-top: 1px solid #ccc;
     font-size: .8em;
     text-align: center;
     padding: 10px 10px 30px 10px;
     /*height: 50px;*/
 }
-#article{
+
+#article {
     /*background-color: #fafafa;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;*/
     padding: 15px;
     min-height: 700px;
 }
-#login_form_div{
+
+#login_form_div {
     width: 50%;
     margin: auto auto;
 }
-#table_div{
+
+#table_div {
     margin-top: 50px;
 }
+
 #nav {
     background-color: #eee;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
+
 #nav li {
     float: left;
     list-style: none;
 }
+
 #nav a {
     display: block;
     color: black;
@@ -44,21 +52,25 @@ body {
     text-decoration: none;
     border-right: 1px solid #ccc;
 }
+
 #nav li:last-child a {
     border-right: none;
 }
+
 #nav a:hover {
     font-weight: bold;
 }
+
 #nav:after {
     content: " ";
     display: table;
     clear: both;
 }
+
 .border-5 {
-    border-width:5px !important;
+    border-width: 5px !important;
 }
 
 .border-2 {
-    border-width:2px !important;
+    border-width: 2px !important;
 }

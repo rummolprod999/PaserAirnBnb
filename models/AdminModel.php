@@ -8,6 +8,7 @@ class AdminModel extends Model
         parent::__construct();
         $this->create_connection();
     }
+
     public function get_data()
     {
         $data = [];

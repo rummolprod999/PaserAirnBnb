@@ -13,48 +13,6 @@ class StatModel extends Model
     {
     }
 
-    private function suspend($id_url)
-    {
-        $message = '';
-        if (isset($_POST['suspend']) && !empty($_POST['suspend']) && $_POST['suspend'] === 'true') {
-            $stmt = $this->conn->prepare('UPDATE anb_url SET  suspend = 1 WHERE id = :id_url');
-            $stmt->bindValue(':id_url', (int)$id_url, PDO::PARAM_INT);
-            $stmt->execute();
-            $message = '<div class="alert alert-warning" role="alert">Apartment have been suspend</div>';
-
-        }
-        return $message;
-    }
-
-    private function unsuspend($id_url)
-    {
-        $message = '';
-        if (isset($_POST['unsuspend']) && !empty($_POST['unsuspend']) && $_POST['unsuspend'] === 'true') {
-            $stmt = $this->conn->prepare('UPDATE anb_url SET  suspend = 0 WHERE id = :id_url');
-            $stmt->bindValue(':id_url', (int)$id_url, PDO::PARAM_INT);
-            $stmt->execute();
-            $message = '<div class="alert alert-warning" role="alert">Apartment have been unsuspend</div>';
-            return $message;
-
-        }
-        return $message;
-    }
-
-    private function bookable_seen($id_url)
-    {
-        $message = '';
-        if (isset($_POST['remove_bookable']) && !empty($_POST['remove_bookable']) && $_POST['remove_bookable'] === 'remove') {
-            $stmt = $this->conn->prepare('UPDATE bookable_changes SET  seen = 1 WHERE id_url = :id_url');
-            $stmt->bindValue(':id_url', (int)$id_url, PDO::PARAM_INT);
-            $stmt->execute();
-            if ($stmt->rowCount() > 0) {
-                $message = '<div class="alert alert-warning" role="alert">Booking have been cleaned</div>';
-                return $message;
-            }
-        }
-        return $message;
-    }
-
     public function get_info_url($id_url)
     {
         $data = [];
@@ -154,24 +112,67 @@ class StatModel extends Model
         return $data;
     }
 
-    function get_min_nights($id){
+    private function bookable_seen($id_url)
+    {
+        $message = '';
+        if (isset($_POST['remove_bookable']) && !empty($_POST['remove_bookable']) && $_POST['remove_bookable'] === 'remove') {
+            $stmt = $this->conn->prepare('UPDATE bookable_changes SET  seen = 1 WHERE id_url = :id_url');
+            $stmt->bindValue(':id_url', (int)$id_url, PDO::PARAM_INT);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                $message = '<div class="alert alert-warning" role="alert">Booking have been cleaned</div>';
+                return $message;
+            }
+        }
+        return $message;
+    }
+
+    private function suspend($id_url)
+    {
+        $message = '';
+        if (isset($_POST['suspend']) && !empty($_POST['suspend']) && $_POST['suspend'] === 'true') {
+            $stmt = $this->conn->prepare('UPDATE anb_url SET  suspend = 1 WHERE id = :id_url');
+            $stmt->bindValue(':id_url', (int)$id_url, PDO::PARAM_INT);
+            $stmt->execute();
+            $message = '<div class="alert alert-warning" role="alert">Apartment have been suspend</div>';
+
+        }
+        return $message;
+    }
+
+    private function unsuspend($id_url)
+    {
+        $message = '';
+        if (isset($_POST['unsuspend']) && !empty($_POST['unsuspend']) && $_POST['unsuspend'] === 'true') {
+            $stmt = $this->conn->prepare('UPDATE anb_url SET  suspend = 0 WHERE id = :id_url');
+            $stmt->bindValue(':id_url', (int)$id_url, PDO::PARAM_INT);
+            $stmt->execute();
+            $message = '<div class="alert alert-warning" role="alert">Apartment have been unsuspend</div>';
+            return $message;
+
+        }
+        return $message;
+    }
+
+    function get_min_nights($id)
+    {
         $stmt = $this->conn->prepare('SELECT d.min_nights, d.date FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id ORDER BY d.date');
         $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
         $stmt->execute();
         $buffer = [];
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if(count($result) > 0){
+        if (count($result) > 0) {
             $buffer[] = $result[0];
             $count_res = count($result);
-            for($i = 0; $i < $count_res; $i++){
-                if(end($buffer)['min_nights'] !== $result[$i]['min_nights']){
-                    $buffer[] = $result[$i-1];
+            for ($i = 0; $i < $count_res; $i++) {
+                if (end($buffer)['min_nights'] !== $result[$i]['min_nights']) {
+                    $buffer[] = $result[$i - 1];
                     $buffer[] = $result[$i];
                 }
             }
             $buffer[] = end($result);
         }
-        return  $buffer;
+        return $buffer;
 
     }
 }

@@ -4,7 +4,7 @@ require_once 'helpers/navHelpers.php';
 $auth = new AuthController();
 if (isset($_GET['action']) && $_GET['action'] === 'out') {
     $auth->out();
-} else{
+} else {
     if ($auth->login()) {
         AuthController::$is_admin = $auth->check_is_admin(AuthController::$uid);
     } else {

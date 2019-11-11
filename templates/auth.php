@@ -2,7 +2,7 @@
     <div id="login_form_div">
         <?php if (count(AuthController::$error) > 0) { ?>
             <?php foreach (AuthController::$error as $err): ?>
-            <div class="alert alert-danger" role="alert"><?php echo $err ?></div>
+                <div class="alert alert-danger" role="alert"><?php echo $err ?></div>
             <?php endforeach; ?>
         <?php } ?>
         <form role="form" method="post">

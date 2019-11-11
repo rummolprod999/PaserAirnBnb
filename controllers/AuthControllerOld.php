@@ -4,10 +4,10 @@ require_once 'models/AuthModel.php';
 
 class AuthControllerOld extends Controller
 {
-    private static $user;
-    private static $password;
     public static $is_login = false;
     public static $wrong_pass = false;
+    private static $user;
+    private static $password;
     private $model;
 
     public function __construct()
@@ -15,11 +15,6 @@ class AuthControllerOld extends Controller
         $this->model = new AuthModelOld();
         self::$user = $this->model->user;
         self::$password = $this->model->password;
-    }
-
-    function index_page()
-    {
-        echo $this->template('templates/auth.php', ["title" => "Authentication"]);
     }
 
     static function check_auth()
@@ -30,5 +25,10 @@ class AuthControllerOld extends Controller
     static function check_login_pass($pass, $login)
     {
         return md5(self::$password . self::$user) === md5(trim($pass) . trim($login));
+    }
+
+    function index_page()
+    {
+        echo $this->template('templates/auth.php', ["title" => "Authentication"]);
     }
 }

@@ -28,14 +28,6 @@ class ChangeUserModel extends Model
         return $data;
     }
 
-    private function get_user_from_id($user_id)
-    {
-        $stmt = $this->conn->prepare('SELECT u.id, user_name, user_pass, proxy_address, proxy_port, proxy_user, proxy_pass FROM users u LEFT JOIN  proxy p on u.id = p.id_user WHERE u.id = :user_id');
-        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
     private function change_proxy($user_id)
     {
         if (isset($_POST['proxy_address'], $_POST['proxy_port'], $_POST['proxy_user'], $_POST['proxy_pass'])) {
@@ -70,5 +62,13 @@ class ChangeUserModel extends Model
             }
         }
         return null;
+    }
+
+    private function get_user_from_id($user_id)
+    {
+        $stmt = $this->conn->prepare('SELECT u.id, user_name, user_pass, proxy_address, proxy_port, proxy_user, proxy_pass FROM users u LEFT JOIN  proxy p on u.id = p.id_user WHERE u.id = :user_id');
+        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

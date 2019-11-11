@@ -9,6 +9,24 @@ class ChangesModel extends Model
         $this->create_connection();
     }
 
+    public function get_info_url($id_url)
+    {
+        $data = [];
+        $data['descr'] = $this->get_description($id_url);
+        $data['bookable_changes'] = $this->get_changes_bookable($id_url);
+        $data['price_changes'] = $this->get_changes_price($id_url);
+        return $data;
+    }
+
+    private function get_description($id_url)
+    {
+        $stmt = $this->conn->prepare('SELECT a.apartment_name FROM anb_url a WHERE a.id = :id');
+        $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
+        $stmt->execute();
+        $dt = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $dt;
+    }
+
     private function get_changes_bookable($id_url)
     {
         if (isset($_GET['date_start'], $_GET['date_end'])) {
@@ -44,23 +62,5 @@ class ChangesModel extends Model
         $stmt->execute();
         $dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $dates;
-    }
-
-    private function get_description($id_url)
-    {
-        $stmt = $this->conn->prepare('SELECT a.apartment_name FROM anb_url a WHERE a.id = :id');
-        $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
-        $stmt->execute();
-        $dt = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $dt;
-    }
-
-    public function get_info_url($id_url)
-    {
-        $data = [];
-        $data['descr'] = $this->get_description($id_url);
-        $data['bookable_changes'] = $this->get_changes_bookable($id_url);
-        $data['price_changes'] = $this->get_changes_price($id_url);
-        return $data;
     }
 }

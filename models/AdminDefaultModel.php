@@ -17,19 +17,15 @@ class AdminDefaultModel extends Model
             header("Location: {$_SERVER['REQUEST_URI']}");
             exit();
         }
+        $remove_user = $this->remove_user();
+        if ($remove_user !== null) {
+            $_SESSION['remove_user'] = $remove_user;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
+        }
         $data = [];
         $data['users_list'] = $this->get_users_list();
         return $data;
-    }
-
-    private function get_users_list()
-    {
-        $query = 'SELECT u.id, user_name, proxy_address, proxy_port, proxy_user, proxy_pass, (SELECT c.date_last FROM anb_url a LEFT JOIN checkup c on a.id = c.iid_anb WHERE c.date_last IS NOT NULL AND a.id_user = u.id ORDER BY c.date_last DESC LIMIT 1) last_date FROM users u LEFT JOIN proxy p on u.id = p.id_user ORDER BY u.id';
-        $res = $this->conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
-        if ($res) {
-            return $res;
-        }
-        return [];
     }
 
     private function add_new_user()
@@ -61,5 +57,30 @@ class AdminDefaultModel extends Model
             }
         }
         return null;
+    }
+
+    private function remove_user()
+    {
+        if (isset($_POST['remove_user']) && !empty($_POST['remove_user'])) {
+            $stmt = $this->conn->prepare('DELETE FROM users WHERE id = :id');
+            $stmt->bindValue(':id', (int)$_POST['remove_user'], PDO::PARAM_INT);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                return 'the user has been removed';
+            } else {
+                return 'the user has not been removed';
+            }
+        }
+        return null;
+    }
+
+    private function get_users_list()
+    {
+        $query = 'SELECT u.id, user_name, proxy_address, proxy_port, proxy_user, proxy_pass, u.is_admin, (SELECT c.date_last FROM anb_url a LEFT JOIN checkup c on a.id = c.iid_anb WHERE c.date_last IS NOT NULL AND a.id_user = u.id ORDER BY c.date_last DESC LIMIT 1) last_date FROM users u LEFT JOIN proxy p on u.id = p.id_user ORDER BY u.id';
+        $res = $this->conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
+        if ($res) {
+            return $res;
+        }
+        return [];
     }
 }

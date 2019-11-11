@@ -6,8 +6,8 @@ class AuthController extends Controller
 {
     public static $uid = 0;
     public static $is_admin = false;
-    private $model = null;
     public static $error = [];
+    private $model = null;
 
     public function __construct()
     {
@@ -92,10 +92,14 @@ class AuthController extends Controller
             }
         }
     }
-    public function check_is_admin($user_id){
+
+    public function check_is_admin($user_id)
+    {
         return $this->model->is_admin($user_id);
     }
-    public function out(){
+
+    public function out()
+    {
         session_start();
         $_SESSION = array();
         setcookie('login', '', time() - (30 * 24 * 3600), '/');
@@ -103,6 +107,7 @@ class AuthController extends Controller
         session_destroy();
         header('location:/');
     }
+
     function index_page()
     {
         echo $this->template('templates/auth.php', ["title" => "Authentication"]);

@@ -4,6 +4,10 @@
     <?php if (isset($_SESSION['add_user'])) {
         echo "<div class='alert alert-success' role='alert'>{$_SESSION['add_user']}</div>";
         unset($_SESSION['add_user']);
+    }
+    if (isset($_SESSION['remove_user'])) {
+        echo "<div class='alert alert-danger' role='alert'>{$_SESSION['remove_user']}</div>";
+        unset($_SESSION['remove_user']);
     } ?>
     <div id="table_div">
         <div class="table-responsive">
@@ -18,6 +22,7 @@
                     <th>Proxy Pass</th>
                     <th>Last Activity</th>
                     <th>Change User</th>
+                    <th>Remove User</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -36,6 +41,14 @@
                                                                                                 value='<?php echo $row['id'] ?>'>
                                 <button type="submit" class="btn btn-warning mb-2">Change</button>
                             </form>
+                        </td>
+                        <td>
+                            <?php if ($row['is_admin'] !== '1'): ?>
+                                <form class="form-inline" method="post"><input type="hidden" name="remove_user"
+                                                                               value='<?php echo $row['id'] ?>'>
+                                    <button type="submit" class="btn btn-danger mb-2">Remove</button>
+                                </form>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

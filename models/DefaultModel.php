@@ -28,23 +28,6 @@ class DefaultModel extends Model
         return $data;
     }
 
-    function launch_parser()
-    {
-        $message = '';
-        if (isset($_POST['launch']) && !empty($_POST['launch']) && $_POST['launch'] === 'true') {
-            try {
-                $locale = 'ru_RU.UTF-8';
-                setlocale(LC_ALL, $locale);
-                putenv('LC_ALL=' . $locale);
-                exec('java -jar ./anb-1.0-jar-with-dependencies.jar anb > /dev/null &');
-                $message = '<div class="alert alert-success" role="alert">The parser is running, to view the results, go to "View Logs"</div>';
-            } catch (Exception $e) {
-                $message = $e->getMessage();
-            }
-        }
-        return $message;
-    }
-
     function add_url()
     {
         $message = '';
@@ -82,6 +65,23 @@ class DefaultModel extends Model
             if ($stmt->rowCount() > 0) {
                 $message = '<div class="alert alert-warning" role="alert">Page deleted successfully</div>';
                 return $message;
+            }
+        }
+        return $message;
+    }
+
+    function launch_parser()
+    {
+        $message = '';
+        if (isset($_POST['launch']) && !empty($_POST['launch']) && $_POST['launch'] === 'true') {
+            try {
+                $locale = 'ru_RU.UTF-8';
+                setlocale(LC_ALL, $locale);
+                putenv('LC_ALL=' . $locale);
+                exec('java -jar ./anb-1.0-jar-with-dependencies.jar anb > /dev/null &');
+                $message = '<div class="alert alert-success" role="alert">The parser is running, to view the results, go to "View Logs"</div>';
+            } catch (Exception $e) {
+                $message = $e->getMessage();
             }
         }
         return $message;
@@ -128,24 +128,25 @@ class DefaultModel extends Model
         return $data;
     }
 
-    function get_min_nights($id){
+    function get_min_nights($id)
+    {
         $stmt = $this->conn->prepare('SELECT d.min_nights, d.date FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id ORDER BY d.date');
         $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
         $stmt->execute();
         $buffer = [];
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if(count($result) > 0){
+        if (count($result) > 0) {
             $buffer[] = $result[0];
             $count_res = count($result);
-            for($i = 0; $i < $count_res; $i++){
-                if(end($buffer)['min_nights'] !== $result[$i]['min_nights']){
-                    $buffer[] = $result[$i-1];
+            for ($i = 0; $i < $count_res; $i++) {
+                if (end($buffer)['min_nights'] !== $result[$i]['min_nights']) {
+                    $buffer[] = $result[$i - 1];
                     $buffer[] = $result[$i];
                 }
             }
             $buffer[] = end($result);
         }
-        return  $buffer;
+        return $buffer;
 
     }
 }

@@ -1,9 +1,10 @@
 <?php
 
 
-function group_array($arr){
+function group_array($arr)
+{
     $group = [];
-    foreach ($arr as $item)  {
+    foreach ($arr as $item) {
         if (!isset($group[$item['date_parsing']])) {
             $group[$item['date_parsing']] = [];
         }

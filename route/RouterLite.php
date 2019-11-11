@@ -15,8 +15,8 @@ require_once 'controllers/NotFoundController.php';
 final class RouterLite
 {
     public static $routes = array();
-    private static $params = array();
     public static $requestedUrl = '';
+    private static $params = array();
 
     public static function addRoute($route, $destination = null)
     {
@@ -26,16 +26,10 @@ final class RouterLite
         self::$routes = array_merge(self::$routes, $route);
     }
 
-    public static function splitUrl($url)
-    {
-        return preg_split('/\//', $url, -1, PREG_SPLIT_NO_EMPTY);
-    }
-
     public static function getCurrentUrl()
     {
         return (self::$requestedUrl ?: '/');
     }
-
 
     public static function dispatch($requestedUrl = null)
     {
@@ -66,6 +60,11 @@ final class RouterLite
             }
         }
         return self::executeAction();
+    }
+
+    public static function splitUrl($url)
+    {
+        return preg_split('/\//', $url, -1, PREG_SPLIT_NO_EMPTY);
     }
 
     public static function executeAction()
