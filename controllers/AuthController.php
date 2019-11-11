@@ -21,9 +21,8 @@ class AuthController extends Controller
             $password = htmlentities(trim($_POST['password']));
             $user = $this->model->get_user($login);
             if ($user) {
-                $hash = password_hash($password, PASSWORD_DEFAULT);
 
-                if (password_verify($password, $hash)) {
+                if (password_verify($password, $user['user_pass'])) {
                     if (isset($_POST['remember']) && $_POST['remember'] === 'on') {
                         setcookie('login', $user['user_name'], time() + (30 * 24 * 3600));
                         setcookie('password', md5($user['user_name'] . $user['user_pass']), time() + (30 * 24 * 3600));
