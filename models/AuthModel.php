@@ -20,7 +20,7 @@ class AuthModel extends Model
     public function get_user_from_id($user_id)
     {
         $stmt = $this->conn->prepare('SELECT * FROM users WHERE id = :user_id');
-        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindValue(':user_id', (int)$user_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -28,7 +28,7 @@ class AuthModel extends Model
     public function is_admin($user_id)
     {
         $stmt = $this->conn->prepare('SELECT is_admin FROM users WHERE id = :user_id');
-        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindValue(':user_id', (int)$user_id, PDO::PARAM_INT);
         $stmt->execute();
         $res = $stmt->fetch(PDO::FETCH_ASSOC);
         return $res && $res['is_admin'] === '1';

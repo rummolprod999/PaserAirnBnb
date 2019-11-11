@@ -6,7 +6,7 @@
             <form class="form-inline" method="post">
                 <label class="sr-only" for="inlineFormInputName2">URL:</label>
                 <input type="text" class="form-control mb-2 mr-sm-2 w-25" id="inlineFormInputName2" name="add_url"
-                       placeholder="https://www.airbnb.ru/rooms/XXXXXXX" required>
+                       placeholder="https://www.airbnb.ru/rooms/XXXXXXX" required pattern="https://.+">
                 <label for="inlineFormInputName2">Owner:</label>
                 <input class="form-check-input" type="checkbox" value="true" id="inlineFormInputName2" name="own">
                 <button type="submit" class="btn btn-primary mb-2">Add</button>

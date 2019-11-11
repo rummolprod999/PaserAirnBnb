@@ -31,7 +31,7 @@ class AuthController extends Controller
                         setcookie('password', md5($user['user_name'] . $user['user_pass']));
                     }
                     $_SESSION['id'] = $user['id'];
-                    self::$uid = $_SESSION['id'];
+                    self::$uid = (int)$_SESSION['id'];
                 } else {
                     self::$error[] = 'Wrong password';
                     return self::$error;
@@ -63,13 +63,13 @@ class AuthController extends Controller
                 setcookie('password', '', time() - 1, '/');
                 setcookie('login', $_COOKIE['login'], time() + (30 * 24 * 3600), '/');
                 setcookie('password', $_COOKIE['password'], time() + (30 * 24 * 3600), '/');
-                self::$uid = $_SESSION['id'];
+                self::$uid = (int)$_SESSION['id'];
                 return true;
             } else {
                 if ($user) {
                     setcookie('login', $user['user_name'], time() + (30 * 24 * 3600));
                     setcookie('password', md5($user['user_name'] . $user['user_pass']), time() + (30 * 24 * 3600));
-                    self::$uid = $_SESSION['id'];
+                    self::$uid = (int)$_SESSION['id'];
                     return true;
                 } else {
                     return false;
@@ -80,7 +80,7 @@ class AuthController extends Controller
                 $user = $this->model->get_user($_COOKIE['login']);
                 if ($user && md5($user['user_name'] . $user['user_pass']) === $_COOKIE['password']) {
                     $_SESSION['id'] = $user['id'];
-                    self::$uid = $_SESSION['id'];
+                    self::$uid = (int)$_SESSION['id'];
                     return true;
                 } else {
                     setcookie('login', '', time() - (30 * 24 * 3600), '/');

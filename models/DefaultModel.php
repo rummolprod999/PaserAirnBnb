@@ -36,15 +36,17 @@ class DefaultModel extends Model
             $own = 1;
         }
         if (isset($_POST['add_url']) && !empty($_POST['add_url'])) {
-            $stmt = $this->conn->prepare('SELECT id FROM anb_url WHERE url = :url');
+            $stmt = $this->conn->prepare('SELECT id FROM anb_url WHERE url = :url AND id_user = :id_user');
             $stmt->bindValue(':url', trim($_POST['add_url']), PDO::PARAM_STR);
+            $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 $message = 'false';
                 return $message;
             }
-            $stmt = $this->conn->prepare('INSERT INTO anb_url SET url = :url, own = :own');
+            $stmt = $this->conn->prepare('INSERT INTO anb_url SET url = :url, own = :own, id_user = :id_user');
             $stmt->bindValue(':url', trim($_POST['add_url']), PDO::PARAM_STR);
+            $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
             $stmt->bindValue(':own', $own, PDO::PARAM_INT);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
@@ -59,8 +61,9 @@ class DefaultModel extends Model
     {
         $message = '';
         if (isset($_POST['remove_url']) && !empty($_POST['remove_url'])) {
-            $stmt = $this->conn->prepare('DELETE FROM anb_url WHERE id = :id');
+            $stmt = $this->conn->prepare('DELETE FROM anb_url WHERE id = :id AND id_user = :id_user');
             $stmt->bindValue(':id', (int)$_POST['remove_url'], PDO::PARAM_INT);
+            $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 $message = '<div class="alert alert-warning" role="alert">Page deleted successfully</div>';
@@ -89,11 +92,13 @@ class DefaultModel extends Model
 
     public function get_list_url()
     {
-        /*$query = 'SELECT id, url, owner, changes, change_price, own, num_parsing FROM anb_url'; ;*/
         $data = [];
-        $query = 'SELECT id, url, owner, own, num_parsing, suspend FROM anb_url ORDER BY own DESC';
+        $query = 'SELECT id, url, owner, own, num_parsing, suspend FROM anb_url WHERE anb_url.id_user = :id_user ORDER BY own DESC';
         $data_new = [];
-        $res = $this->conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
+        $stmt->execute();
+        $res =  $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($res as $r) {
             $stmt = $this->conn->prepare('SELECT price_was, price, date_cal, date_parsing, num_parsing, seen FROM price_changes WHERE seen = 0 AND num_parsing = :num_parsing AND id_url = :id_url');
             $stmt->bindValue(':id_url', (int)$r['id'], PDO::PARAM_INT);
@@ -103,7 +108,6 @@ class DefaultModel extends Model
 
             $stmt = $this->conn->prepare('SELECT date_cal, date_parsing, num_parsing, seen FROM bookable_changes WHERE seen = 0 AND id_url = :id_url');
             $stmt->bindValue(':id_url', (int)$r['id'], PDO::PARAM_INT);
-            //$stmt->bindValue(':num_parsing', (int)$r['num_parsing'], PDO::PARAM_INT);
             $stmt->execute();
             $res_bookable_change = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -115,11 +119,6 @@ class DefaultModel extends Model
             $stmt->bindValue(':id', (int)$r['id'], PDO::PARAM_INT);
             $stmt->execute();
             $r['discounts'] = $stmt->fetchAll(PDO::FETCH_COLUMN);
-
-            /*$stmt = $this->conn->prepare('SELECT d.min_nights FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id AND d.date = CURDATE() LIMIT 1');
-            $stmt->bindValue(':id', (int)$r['id'], PDO::PARAM_INT);
-            $stmt->execute();
-            $r['min_nights'] = $stmt->fetch(PDO::FETCH_ASSOC);*/
             $r['min_nights'] = $this->get_min_nights($r['id']);
             $data_new[] = $r;
 
