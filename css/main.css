@@ -58,3 +58,7 @@ body {
 .border-5 {
     border-width:5px !important;
 }
+
+.border-2 {
+    border-width:2px !important;
+}

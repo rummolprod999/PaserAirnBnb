@@ -28,7 +28,7 @@
                         <td><strong><?php echo $row['proxy_pass'] ?></strong></td>
                         <td><strong><?php echo $row['last_date'] ?></strong></td>
                         <td>
-                            <form class="form-inline" method="post" action="/change_user"><input type="hidden" name="change_user"
+                            <form class="form-inline" method="get" action="/change_user"><input type="hidden" name="user_id"
                                                                            value='<?php echo $row['id'] ?>'>
                                 <button type="submit" class="btn btn-warning mb-2">Change</button>
                             </form>

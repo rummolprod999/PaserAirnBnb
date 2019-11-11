@@ -1,5 +1,6 @@
 <?php
 require_once 'controllers/AuthController.php';
+require_once 'helpers/navHelpers.php';
 $auth = new AuthController();
 if (isset($_GET['action']) && $_GET['action'] === 'out') {
     $auth->out();

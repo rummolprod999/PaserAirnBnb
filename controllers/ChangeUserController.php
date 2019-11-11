@@ -13,6 +13,9 @@ class ChangeUserController extends Controller
     function index_page()
     {
         $data = $this->model->get_data();
+        if(!$data['user']){
+            header('location:/404');
+        }
         echo $this->template('templates/change_user.php', ["title" => "Change User", "data" => $data]);
     }
 }
