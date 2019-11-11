@@ -52,6 +52,12 @@ class AuthController extends Controller
         ini_set('session.use_trans_sid', '1');
         session_start();
         if (isset($_SESSION['id'])) {
+            $user = $this->model->get_user_from_id($_SESSION['id']);
+            if (!($user && isset($_COOKIE['password']) && md5($user['user_name'] . $user['user_pass']) === $_COOKIE['password'])) {
+                setcookie('login', '', time() - 1, '/');
+                setcookie('password', '', time() - 1, '/');
+                return false;
+            }
             if (isset($_COOKIE['login'], $_COOKIE['password'])) {
                 setcookie('login', '', time() - 1, '/');
                 setcookie('password', '', time() - 1, '/');
@@ -60,7 +66,6 @@ class AuthController extends Controller
                 self::$uid = $_SESSION['id'];
                 return true;
             } else {
-                $user = $this->model->get_user_from_id($_SESSION['id']);
                 if ($user) {
                     setcookie('login', $user['user_name'], time() + (30 * 24 * 3600));
                     setcookie('password', md5($user['user_name'] . $user['user_pass']), time() + (30 * 24 * 3600));

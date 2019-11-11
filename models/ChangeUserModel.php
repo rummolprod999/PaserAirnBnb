@@ -17,6 +17,12 @@ class ChangeUserModel extends Model
             header("Location: {$_SERVER['REQUEST_URI']}");
             exit();
         }
+        $change_pass = $this->change_password((int)$_GET['user_id']);
+        if ($change_pass !== null) {
+            $_SESSION['update_password'] = $change_pass;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
+        }
         $data = [];
         $data['user'] = $this->get_user_from_id((int)$_GET['user_id']);
         return $data;
@@ -44,6 +50,23 @@ class ChangeUserModel extends Model
                 return "user proxy has been updated";
             } else {
                 return "user proxy has not been updated";
+            }
+        }
+        return null;
+    }
+
+    private function change_password($user_id)
+    {
+        if (isset($_POST['pass'], $_POST['confirm_pass']) && $_POST['pass'] === $_POST['confirm_pass']) {
+            $hash = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+            $stmt = $this->conn->prepare('UPDATE users SET user_pass = :user_pass WHERE id = :id');
+            $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
+            $stmt->bindValue(':user_pass', $hash, PDO::PARAM_STR);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                return "user password has been updated";
+            } else {
+                return "user password has not been updated";
             }
         }
         return null;
