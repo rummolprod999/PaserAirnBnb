@@ -20,11 +20,15 @@ class StatModel extends Model
         $data['bookable_clean'] = $bookable_clean;
         $suspend = $this->suspend($id_url);
         if ($suspend !== '') {
-            $data['suspend'] = $suspend;
+            $_SESSION['suspend'] = $suspend;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
         }
         $unsuspend = $this->unsuspend($id_url);
         if ($unsuspend !== '') {
-            $data['unsuspend'] = $unsuspend;
+            $_SESSION['unsuspend'] = $unsuspend;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
         }
         $stmt = $this->conn->prepare('SELECT id, url, owner, apartment_name FROM anb_url WHERE id = :id');
         $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);

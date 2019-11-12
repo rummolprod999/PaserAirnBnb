@@ -17,13 +17,19 @@ class DefaultModel extends Model
         $launch_mess = $this->launch_parser();
         $data = $this->get_list_url();
         if ($launch_mess !== '') {
-            $data['launch_mess'] = $launch_mess;
+            $_SESSION['launch_mess'] = $launch_mess;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
         }
         if ($add_mess !== '') {
-            $data['add_mess'] = $add_mess;
+            $_SESSION['add_mess'] = $add_mess;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
         }
         if ($rem_mess !== '') {
-            $data['rem_mess'] = $rem_mess;
+            $_SESSION['rem_mess'] = $rem_mess;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
         }
         return $data;
     }
@@ -41,7 +47,7 @@ class DefaultModel extends Model
             $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
-                $message = 'false';
+                $message = '<div class="alert alert-danger" role="alert">This page is already in the database</div>';
                 return $message;
             }
             $stmt = $this->conn->prepare('SELECT COUNT(id) cn FROM anb_url WHERE  id_user = :id_user');
@@ -49,7 +55,7 @@ class DefaultModel extends Model
             $stmt->execute();
             $res =  $stmt->fetch(PDO::FETCH_ASSOC);
             if ((int)$res['cn'] > 25) {
-                $message = 'max';
+                $message = '<div class="alert alert-danger" role="alert">You have a maximum of tracking apartments</div>';
                 return $message;
             }
             $stmt = $this->conn->prepare('INSERT INTO anb_url SET url = :url, own = :own, id_user = :id_user');
@@ -58,7 +64,7 @@ class DefaultModel extends Model
             $stmt->bindValue(':own', $own, PDO::PARAM_INT);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
-                $message = 'true';
+                $message = '<div class="alert alert-success" role="alert">Page added successfully</div>';
                 return $message;
             }
         }

@@ -36,13 +36,13 @@
         echo $data['bookable_clean'];
         //header('location:/?clean=true');
     } ?>
-    <?php if (isset($data['suspend'])) {
-        echo $data['suspend'];
-        header("location:?suspend=true");
+    <?php if (isset($_SESSION['suspend'])) {
+        echo $_SESSION['suspend'];
+        unset($_SESSION['suspend']);
     } ?>
-    <?php if (isset($data['unsuspend'])) {
-        echo $data['unsuspend'];
-        header("location:?unsuspend=true");
+    <?php if (isset($_SESSION['unsuspend'])) {
+        echo $_SESSION['unsuspend'];
+        unset($_SESSION['unsuspend']);
     } ?>
     <?php if (isset($_GET['clean']) && $_GET['clean'] === 'true') {
         echo '<div class="alert alert-warning" role="alert">Booking have been cleaned</div>';
@@ -73,35 +73,35 @@
             <div class="py-4 col-xs-12 col-md-8">
                 <div><p><strong>Availability</strong></p></div>
                 <?php
-                if (isset($data['days'])) {
+                if (isset($data['days']) && count($data['days']) > 0) {
                     echo print_calendar($data['days'], $data['res_bookable_change']);
                 } ?>
                 <?php
-                if (isset($data['days2'])) {
+                if (isset($data['days2']) && count($data['days2']) > 0) {
                     echo print_calendar($data['days2'], $data['res_bookable_change']);
                 } ?>
                 <?php
-                if (isset($data['days3'])) {
+                if (isset($data['days3']) && count($data['days3']) > 0) {
                     echo print_calendar($data['days3'], $data['res_bookable_change']);
                 } ?>
                 <?php
-                if (isset($data['days4'])) {
+                if (isset($data['days4']) && count($data['days4']) > 0) {
                     echo print_calendar($data['days4'], $data['res_bookable_change']);
                 } ?>
                 <?php
-                if (isset($data['days5'])) {
+                if (isset($data['days5']) && count($data['days5']) > 0) {
                     echo print_calendar($data['days5'], $data['res_bookable_change']);
                 } ?>
                 <?php
-                if (isset($data['days6'])) {
+                if (isset($data['days6']) && count($data['days6']) > 0) {
                     echo print_calendar($data['days6'], $data['res_bookable_change']);
                 } ?>
                 <?php
-                if (isset($data['days7'])) {
+                if (isset($data['days7'])&& count($data['days7']) > 0) {
                     echo print_calendar($data['days7'], $data['res_bookable_change']);
                 } ?>
                 <?php
-                if (isset($data['days8'])) {
+                if (isset($data['days8']) && count($data['days8']) > 0) {
                     echo print_calendar($data['days8'], $data['res_bookable_change']);
                 } ?>
             </div>

@@ -11,38 +11,17 @@
                 <input class="form-check-input" type="checkbox" value="true" id="inlineFormInputName2" name="own">
                 <button type="submit" class="btn btn-primary mb-2">Add</button>
             </form>
-            <?php if (isset($data['add_mess'])) {
-                echo $data['add_mess'];
-                if ($data['add_mess'] === 'true') {
-                    header('location:/?add=true');
-                } elseif ($data['add_mess'] === 'false') {
-                    header('location:/?add=false');
-                } elseif ($data['add_mess'] === 'max') {
-                    header('location:/?add=max');
-                }
-            } ?>
-            <?php if (isset($data['rem_mess'])) {
-                echo $data['rem_mess'];
-                header('location:/?rem=true');
-            } ?>
-            <?php if (isset($data['launch_mess'])) {
-                echo $data['launch_mess'];
-                header('location:/?pars=true');
-            } ?>
-            <?php if (isset($_GET['pars']) && $_GET['pars'] === 'true') {
-                echo '<div class="alert alert-success" role="alert">The parser is running, to view the results, go to "View Logs"</div>';
-            } ?>
-            <?php if (isset($_GET['add']) && $_GET['add'] === 'true') {
-                echo '<div class="alert alert-success" role="alert">Page added successfully</div>';
-            } ?>
-            <?php if (isset($_GET['add']) && $_GET['add'] === 'false') {
-                echo '<div class="alert alert-danger" role="alert">This page is already in the database</div>';
-            } ?>
-            <?php if (isset($_GET['add']) && $_GET['add'] === 'max') {
-                echo '<div class="alert alert-danger" role="alert">You have a maximum of tracking apartments</div>';
-            } ?>
-            <?php if (isset($_GET['rem']) && $_GET['rem'] === 'true') {
-                echo '<div class="alert alert-warning" role="alert">Page deleted successfully</div>';
+            <?php if (isset($_SESSION['add_mess'])) {
+                echo $_SESSION['add_mess'];
+                unset($_SESSION['add_mess']);
+            }
+            if (isset($_SESSION['rem_mess'])) {
+                echo $_SESSION['rem_mess'];
+                unset($_SESSION['rem_mess']);
+            }
+            if (isset($_SESSION['launch_mess'])) {
+                echo $_SESSION['launch_mess'];
+                unset($_SESSION['launch_mess']);
             } ?>
         </div>
         <div class="table-responsive">
