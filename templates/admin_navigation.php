@@ -4,7 +4,10 @@
             <a class="nav-link <?php active('admin'); ?>" href="/">Main</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link <?php active('/?action=out'); ?>" href="/?action=out">Logout</a>
+            <a class="nav-link <?php active('/?action=out'); ?>"
+               href="/?action=out">Logout <?php if (isset($_SESSION['user_name'])) {
+                    echo " {$_SESSION['user_name']}";
+                } ?></a>
         </li>
     </ul>
 </div>

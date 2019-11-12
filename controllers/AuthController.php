@@ -31,6 +31,7 @@ class AuthController extends Controller
                         setcookie('password', md5($user['user_name'] . $user['user_pass']));
                     }
                     $_SESSION['id'] = $user['id'];
+                    $_SESSION['user_name'] = $user['user_name'];
                     self::$uid = (int)$_SESSION['id'];
                 } else {
                     self::$error[] = 'Wrong password';
@@ -80,6 +81,7 @@ class AuthController extends Controller
                 $user = $this->model->get_user($_COOKIE['login']);
                 if ($user && md5($user['user_name'] . $user['user_pass']) === $_COOKIE['password']) {
                     $_SESSION['id'] = $user['id'];
+                    $_SESSION['user_name'] = $user['user_name'];
                     self::$uid = (int)$_SESSION['id'];
                     return true;
                 } else {
