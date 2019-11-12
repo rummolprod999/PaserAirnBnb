@@ -77,8 +77,8 @@ class AdminDefaultModel extends Model
 
     private function remove_dirs()
     {
-        $dir_log = '/parser/logdir_anb_' . AuthController::$uid;
-        $temp_log = '/parser/logdir_anb_' . AuthController::$uid;
+        $dir_log = 'parser/logdir_anb_' . AuthController::$uid;
+        $temp_log = 'parser/logdir_anb_' . AuthController::$uid;
         if (file_exists($dir_log)) {
             $this->recursive_remove_dir($dir_log);
         }

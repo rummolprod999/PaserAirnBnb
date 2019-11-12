@@ -5,11 +5,12 @@ require_once 'models/SettingsModel.php';
 class SettingsController extends Controller
 {
     private $model = null;
-    private $log_file = 'logdir_tenders_anb/log_parsing_ANB.log';
+    private $log_file;
 
     public function __construct()
     {
         $this->model = new SettingsModel();
+        $this->log_file = 'parser/logdir_anb_' . AuthController::$uid . '/log_parsing_ANB.log';
     }
 
     function index_page()
