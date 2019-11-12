@@ -17,6 +17,8 @@
                     header('location:/?add=true');
                 } elseif ($data['add_mess'] === 'false') {
                     header('location:/?add=false');
+                } elseif ($data['add_mess'] === 'max') {
+                    header('location:/?add=max');
                 }
             } ?>
             <?php if (isset($data['rem_mess'])) {
@@ -35,6 +37,9 @@
             } ?>
             <?php if (isset($_GET['add']) && $_GET['add'] === 'false') {
                 echo '<div class="alert alert-danger" role="alert">This page is already in the database</div>';
+            } ?>
+            <?php if (isset($_GET['add']) && $_GET['add'] === 'max') {
+                echo '<div class="alert alert-danger" role="alert">You have a maximum of tracking apartments</div>';
             } ?>
             <?php if (isset($_GET['rem']) && $_GET['rem'] === 'true') {
                 echo '<div class="alert alert-warning" role="alert">Page deleted successfully</div>';

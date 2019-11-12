@@ -44,6 +44,14 @@ class DefaultModel extends Model
                 $message = 'false';
                 return $message;
             }
+            $stmt = $this->conn->prepare('SELECT COUNT(id) cn FROM anb_url WHERE  id_user = :id_user');
+            $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
+            $stmt->execute();
+            $res =  $stmt->fetch(PDO::FETCH_ASSOC);
+            if ((int)$res['cn'] > 25) {
+                $message = 'max';
+                return $message;
+            }
             $stmt = $this->conn->prepare('INSERT INTO anb_url SET url = :url, own = :own, id_user = :id_user');
             $stmt->bindValue(':url', trim($_POST['add_url']), PDO::PARAM_STR);
             $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
