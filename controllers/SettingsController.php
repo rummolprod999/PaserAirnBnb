@@ -22,7 +22,7 @@ class SettingsController extends Controller
 
     private function read_log()
     {
-        $message = '';
+        $message = [];
         if (file_exists($this->log_file)) {
             $file = file($this->log_file);
             $message = array_reverse($file);
