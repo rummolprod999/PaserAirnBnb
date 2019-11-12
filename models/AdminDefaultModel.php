@@ -77,8 +77,8 @@ class AdminDefaultModel extends Model
 
     private function remove_dirs()
     {
-        $dir_log = getcwd() . '/parser/logdir_anb_' . $_POST['remove_user'];
-        $dir_temp = getcwd() . '/parser/tempdir_anb_' . $_POST['remove_user'];
+        $dir_log = getcwd() . '/parser/logdir_anb_' . (int)$_POST['remove_user'];
+        $dir_temp = getcwd() . '/parser/tempdir_anb_' . (int)$_POST['remove_user'];
         if (file_exists($dir_log)) {
             $this->recursive_remove_dir($dir_log);
         }
