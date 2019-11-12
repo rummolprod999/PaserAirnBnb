@@ -62,6 +62,7 @@ class AdminDefaultModel extends Model
     private function remove_user()
     {
         if (isset($_POST['remove_user']) && !empty($_POST['remove_user'])) {
+            $this->remove_dirs();
             $stmt = $this->conn->prepare('DELETE FROM users WHERE id = :id');
             $stmt->bindValue(':id', (int)$_POST['remove_user'], PDO::PARAM_INT);
             $stmt->execute();
@@ -72,6 +73,31 @@ class AdminDefaultModel extends Model
             }
         }
         return null;
+    }
+
+    private function remove_dirs()
+    {
+        $dir_log = '/parser/logdir_anb_' . AuthController::$uid;
+        $temp_log = '/parser/logdir_anb_' . AuthController::$uid;
+        if (file_exists($dir_log)) {
+            $this->recursive_remove_dir($dir_log);
+        }
+        if (file_exists($temp_log)) {
+            $this->recursive_remove_dir($temp_log);
+        }
+    }
+
+    private function recursive_remove_dir($dir)
+    {
+        $includes = glob($dir . '/*');
+        foreach ($includes as $include) {
+            if (is_dir($include)) {
+                $this->recursive_remove_dir($include);
+            } else {
+                unlink($include);
+            }
+        }
+        rmdir($dir);
     }
 
     private function get_users_list()
