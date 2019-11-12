@@ -89,7 +89,8 @@ class DefaultModel extends Model
                 $locale = 'ru_RU.UTF-8';
                 setlocale(LC_ALL, $locale);
                 putenv('LC_ALL=' . $locale);
-                exec('java -jar ./anb-1.0-jar-with-dependencies.jar anb > /dev/null &');
+                $exec_command = 'cd parser/ && java -jar ./anb-1.0-jar-with-dependencies.jar anb ' . AuthController::$uid . ' > /dev/null &';
+                exec($exec_command);
                 $message = '<div class="alert alert-success" role="alert">The parser is running, to view the results, go to "View Logs"</div>';
             } catch (Exception $e) {
                 $message = $e->getMessage();
