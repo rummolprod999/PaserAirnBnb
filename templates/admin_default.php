@@ -31,7 +31,7 @@
                     <th>Proxy User</th>
                     <th>Proxy Pass</th>
                     <th>Last Activity</th>
-                    <th>User Report</th>
+                    <th>Report User</th>
                     <th>Change User</th>
                     <th>Remove User</th>
                 </tr>
