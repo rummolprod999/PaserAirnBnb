@@ -16,6 +16,7 @@
                 <tr>
                     <th>ID</th>
                     <th>User name</th>
+                    <th>User email</th>
                     <th>Proxy address</th>
                     <th>Proxy Port</th>
                     <th>Proxy User</th>
@@ -30,6 +31,7 @@
                     <tr>
                         <td><strong><?php echo $row['id'] ?></strong></td>
                         <td><strong><?php echo $row['user_name'] ?></strong></td>
+                        <td><strong><?php echo $row['user_email'] ?></strong></td>
                         <td><strong><?php echo $row['proxy_address'] ?></strong></td>
                         <td><strong><?php echo $row['proxy_port'] ?></strong></td>
                         <td><strong><?php echo $row['proxy_user'] ?></strong></td>
@@ -69,6 +71,12 @@
                                value="" name="name_user" required>
                     </div>
                     <div class="form-group">
+                        <label for="email_user">Email</label>
+                        <input type="email" class="form-control" id="email_user"
+                               placeholder=""
+                               value="" name="email_user" required>
+                    </div>
+                    <div class="form-group">
                         <label for="pass">Password</label>
                         <input type="password" class="form-control" id="pass"
                                placeholder=""
@@ -103,6 +111,10 @@
                         <input type="text" class="form-control" id="proxyPass"
                                placeholder="" pattern=".+"
                                value="" name="proxy_pass" required>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="ReportAllow" name="report_user" value="Yes">
+                        <label class="form-check-label" for="ReportAllow">Report enable</label>
                     </div>
                     <button type="submit" class="btn btn-success mb-2">Add new user</button>
                 </form>

@@ -30,17 +30,24 @@ class AdminDefaultModel extends Model
 
     private function add_new_user()
     {
-        if (isset($_POST['name_user'], $_POST['pass'], $_POST['confirm_pass'], $_POST['proxy_address'], $_POST['proxy_port'], $_POST['proxy_user'], $_POST['proxy_pass']) && $_POST['pass'] === $_POST['confirm_pass']) {
+        if (isset($_POST['name_user'], $_POST['pass'], $_POST['confirm_pass'], $_POST['proxy_address'], $_POST['proxy_port'], $_POST['proxy_user'], $_POST['proxy_pass'], $_POST['email_user']) && $_POST['pass'] === $_POST['confirm_pass']) {
             $stmt = $this->conn->prepare('SELECT id FROM users WHERE user_name = :user_name');
             $stmt->bindValue(':user_name', trim($_POST['name_user']), PDO::PARAM_STR);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 return "a user with that name exists";
             }
+            $report_allow = 0;
+            if (isset($_POST['report_user']) &&
+                $_POST['report_user'] === 'Yes') {
+                $report_allow = 1;
+            }
             $hash = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-            $stmt = $this->conn->prepare('INSERT INTO users SET user_name = :user_name, user_pass = :user_pass');
+            $stmt = $this->conn->prepare('INSERT INTO users SET user_name = :user_name, user_pass = :user_pass, user_email = :user_email, is_report = :is_report');
             $stmt->bindValue(':user_pass', $hash, PDO::PARAM_STR);
             $stmt->bindValue(':user_name', $_POST['name_user'], PDO::PARAM_STR);
+            $stmt->bindValue(':user_email', $_POST['email_user'], PDO::PARAM_STR);
+            $stmt->bindValue(':is_report', $report_allow, PDO::PARAM_INT);
             $stmt->execute();
             $user_id = $this->conn->lastInsertId();
             $stmt = $this->conn->prepare('INSERT INTO proxy SET proxy_address = :proxy_address, proxy_port = :proxy_port, proxy_user = :proxy_user, proxy_pass = :proxy_pass, id_user = :user_id');
@@ -102,7 +109,7 @@ class AdminDefaultModel extends Model
 
     private function get_users_list()
     {
-        $query = 'SELECT u.id, user_name, proxy_address, proxy_port, proxy_user, proxy_pass, u.is_admin, (SELECT c.date_last FROM anb_url a LEFT JOIN checkup c on a.id = c.iid_anb WHERE c.date_last IS NOT NULL AND a.id_user = u.id ORDER BY c.date_last DESC LIMIT 1) last_date FROM users u LEFT JOIN proxy p on u.id = p.id_user ORDER BY u.id';
+        $query = 'SELECT u.id, user_name, proxy_address, proxy_port, proxy_user, proxy_pass, u.is_admin, u.user_email, (SELECT c.date_last FROM anb_url a LEFT JOIN checkup c on a.id = c.iid_anb WHERE c.date_last IS NOT NULL AND a.id_user = u.id ORDER BY c.date_last DESC LIMIT 1) last_date FROM users u LEFT JOIN proxy p on u.id = p.id_user ORDER BY u.id';
         $res = $this->conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
         if ($res) {
             return $res;
