@@ -23,6 +23,12 @@ class ChangeUserModel extends Model
             header("Location: {$_SERVER['REQUEST_URI']}");
             exit();
         }
+        $change_email = $this->change_email((int)$_GET['user_id']);
+        if ($change_email !== null) {
+            $_SESSION['update_email'] = $change_email;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
+        }
         $data = [];
         $data['user'] = $this->get_user_from_id((int)$_GET['user_id']);
         return $data;
@@ -64,9 +70,25 @@ class ChangeUserModel extends Model
         return null;
     }
 
+    private function change_email($user_id)
+    {
+        if (isset($_POST['email'], $_POST['confirm_email']) && $_POST['email'] === $_POST['confirm_email']) {
+            $stmt = $this->conn->prepare('UPDATE users SET user_email = :user_email WHERE id = :id');
+            $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
+            $stmt->bindValue(':user_email', $_POST['email'], PDO::PARAM_STR);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                return "user email has been updated";
+            } else {
+                return "user email has not been updated";
+            }
+        }
+        return null;
+    }
+
     private function get_user_from_id($user_id)
     {
-        $stmt = $this->conn->prepare('SELECT u.id, user_name, user_pass, proxy_address, proxy_port, proxy_user, proxy_pass FROM users u LEFT JOIN  proxy p on u.id = p.id_user WHERE u.id = :user_id');
+        $stmt = $this->conn->prepare('SELECT u.id, user_name, user_pass, proxy_address, proxy_port, proxy_user, proxy_pass, u.user_email, u.is_report FROM users u LEFT JOIN  proxy p on u.id = p.id_user WHERE u.id = :user_id');
         $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);

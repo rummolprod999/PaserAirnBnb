@@ -71,4 +71,31 @@ require_once 'templates/admin_navigation.php'; ?>
             </div>
         </div>
     </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 border border-2 border-secondary rounded mb-3 p-2">
+                <div><p><strong>Change Email for user <?php echo $data['user']['user_name'] ?></strong></p></div>
+                <?php if (isset($_SESSION['update_email'])) {
+                    echo "<div class='alert alert-warning' role='alert'>{$_SESSION['update_email']}</div>";
+                    unset($_SESSION['update_email']);
+                } ?>
+                <form class="form" method="post"
+                      oninput='email.setCustomValidity(email.value != confirm_email.value ? "Email do not match." : "")'>
+                    <div class="form-group">
+                        <label for="email">New email</label>
+                        <input type="email" class="form-control" id="email"
+                               placeholder="<?php echo $data['user']['user_email'] ?>"
+                               value="<?php echo $data['user']['user_email'] ?>" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmEmail">Confirm email</label>
+                        <input type="email" class="form-control" id="confirmEmail"
+                               placeholder="<?php echo $data['user']['user_email'] ?>"
+                               value="<?php echo $data['user']['user_email'] ?>" name="confirm_email" required>
+                    </div>
+                    <button type="submit" class="btn btn-success mb-2">Update Email</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
