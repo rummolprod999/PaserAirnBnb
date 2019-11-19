@@ -8,7 +8,16 @@
     if (isset($_SESSION['remove_user'])) {
         echo "<div class='alert alert-danger' role='alert'>{$_SESSION['remove_user']}</div>";
         unset($_SESSION['remove_user']);
+    }
+    if (isset($_SESSION['disable_report'])) {
+        echo "<div class='alert alert-danger' role='alert'>{$_SESSION['disable_report']}</div>";
+        unset($_SESSION['disable_report']);
+    }
+    if (isset($_SESSION['enable_report'])) {
+        echo "<div class='alert alert-success' role='alert'>{$_SESSION['enable_report']}</div>";
+        unset($_SESSION['enable_report']);
     } ?>
+
     <div id="table_div">
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
@@ -22,6 +31,7 @@
                     <th>Proxy User</th>
                     <th>Proxy Pass</th>
                     <th>Last Activity</th>
+                    <th>User Report</th>
                     <th>Change User</th>
                     <th>Remove User</th>
                 </tr>
@@ -37,6 +47,20 @@
                         <td><strong><?php echo $row['proxy_user'] ?></strong></td>
                         <td><strong><?php echo $row['proxy_pass'] ?></strong></td>
                         <td><strong><?php echo $row['last_date'] ?></strong></td>
+                        <td>
+                            <?php if ($row['is_admin'] !== '1'): ?>
+                                <?php if ($row['is_report'] === '1'): ?>
+                                    <form class="form-inline" method="post"><input type="hidden" name="disable_report"
+                                                                                   value='<?php echo $row['id'] ?>'>
+                                        <button type="submit" class="btn btn-outline-danger mb-2">Disable</button>
+                                    </form>
+                                <?php else: ?>
+                                    <form class="form-inline" method="post"><input type="hidden" name="enable_report"
+                                                                                   value='<?php echo $row['id'] ?>'>
+                                        <button type="submit" class="btn btn-outline-success mb-2">Enable</button>
+                                    </form>
+                                <?php endif; ?>
+                            <?php endif; ?></td>
                         <td>
                             <form class="form-inline" method="get" action="/change_user"><input type="hidden"
                                                                                                 name="user_id"

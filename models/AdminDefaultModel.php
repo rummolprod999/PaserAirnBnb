@@ -23,6 +23,18 @@ class AdminDefaultModel extends Model
             header("Location: {$_SERVER['REQUEST_URI']}");
             exit();
         }
+        $disable_report = $this->disable_report();
+        if ($disable_report !== null) {
+            $_SESSION['disable_report'] = $disable_report;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
+        }
+        $enable_report = $this->enable_report();
+        if ($enable_report !== null) {
+            $_SESSION['enable_report'] = $enable_report;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
+        }
         $data = [];
         $data['users_list'] = $this->get_users_list();
         return $data;
@@ -77,6 +89,36 @@ class AdminDefaultModel extends Model
                 return 'the user has been removed';
             } else {
                 return 'the user has not been removed';
+            }
+        }
+        return null;
+    }
+
+    private function disable_report()
+    {
+        if (isset($_POST['disable_report']) && !empty($_POST['disable_report'])) {
+            $stmt = $this->conn->prepare('UPDATE users SET users.is_report = 0 WHERE id = :id');
+            $stmt->bindValue(':id', (int)$_POST['disable_report'], PDO::PARAM_INT);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                return 'the user report has been disabled';
+            } else {
+                return 'the user report has not been disabled';
+            }
+        }
+        return null;
+    }
+
+    private function enable_report()
+    {
+        if (isset($_POST['enable_report']) && !empty($_POST['enable_report'])) {
+            $stmt = $this->conn->prepare('UPDATE users SET users.is_report = 1 WHERE id = :id');
+            $stmt->bindValue(':id', (int)$_POST['enable_report'], PDO::PARAM_INT);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                return 'the user report has been enabled';
+            } else {
+                return 'the user report has not been enabled';
             }
         }
         return null;
