@@ -9,10 +9,10 @@ function group_array($arr)
             $group[$item['date_parsing']] = [];
         }
         foreach ($item as $key => $value) {
-            if ($key === 'date_parsing') {
+            if ($key === 'date_parsing' || $key === 'price') {
                 continue;
             }
-            $group[$item['date_parsing']][] = $value;
+            $group[$item['date_parsing']][] = [$value, $item['price']];
         }
     }
     return $group;

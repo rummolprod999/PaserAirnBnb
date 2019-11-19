@@ -30,7 +30,7 @@ class ChangesModel extends Model
     private function get_changes_bookable($id_url)
     {
         if (isset($_GET['date_start'], $_GET['date_end'])) {
-            $stmt = $this->conn->prepare("SELECT b.date_parsing, b.date_cal FROM bookable_changes b WHERE b.date_parsing BETWEEN STR_TO_DATE(:st, '%Y-%m-%d') AND STR_TO_DATE(:en, '%Y-%m-%d') AND b.id_url = :id ORDER BY b.date_parsing");
+            $stmt = $this->conn->prepare("SELECT b.date_parsing, b.date_cal, b.price FROM bookable_changes b WHERE b.date_parsing BETWEEN STR_TO_DATE(:st, '%Y-%m-%d') AND STR_TO_DATE(:en, '%Y-%m-%d') AND b.id_url = :id ORDER BY b.date_parsing");
             $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
             $stmt->bindValue(':st', $_GET['date_start'], PDO::PARAM_STR);
             $stmt->bindValue(':en', $_GET['date_end'], PDO::PARAM_STR);
@@ -38,7 +38,7 @@ class ChangesModel extends Model
             $dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $dates;
         }
-        $stmt = $this->conn->prepare('SELECT b.date_parsing, b.date_cal FROM bookable_changes b WHERE (b.date_parsing BETWEEN DATE_SUB(CURDATE(), INTERVAL 2 MONTH) AND DATE_ADD(CURDATE(), INTERVAL 1 DAY)) AND b.id_url = :id ORDER BY b.date_parsing');
+        $stmt = $this->conn->prepare('SELECT b.date_parsing, b.date_cal, b.price FROM bookable_changes b WHERE (b.date_parsing BETWEEN DATE_SUB(CURDATE(), INTERVAL 2 MONTH) AND DATE_ADD(CURDATE(), INTERVAL 1 DAY)) AND b.id_url = :id ORDER BY b.date_parsing');
         $stmt->bindValue(':id', (int)$id_url, PDO::PARAM_INT);
         $stmt->execute();
         $dates = $stmt->fetchAll(PDO::FETCH_ASSOC);

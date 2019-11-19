@@ -45,7 +45,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-auto col-8 border border-5 border-primary rounded mb-3 p-2"><?php foreach ($v_arr as $vv): ?>
-                                                <p class="text-danger"><?php echo "<span class=\"text-secondary\">{$k_arr}</span>  NEW BOOKING: {$vv}" ?></p>
+                                                <p class="text-danger"><?php echo "<span class=\"text-secondary\">{$k_arr}</span>  NEW BOOKING: {$vv[0]}<span class=\"text-secondary\"> \${$vv[1]}</span>" ?></p>
                                             <?php endforeach; ?></div>
                                         <div class="col-md-auto col-4 align-self-center mb-3 p-1"><?php $c = count($v_arr) - 1;
                                             if ($c === 1) {
