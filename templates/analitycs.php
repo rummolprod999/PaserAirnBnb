@@ -47,11 +47,11 @@ $divs = 0;
                                         <td><?php echo "<span class = 'text-info'>{$d[0]['start_date']} - {$d[0]['end_date']}</span>" ?></td>
                                         <td><?php foreach ($d as $p) {
                                                 if ($p['own'] === '1') {
-                                                    echo "<a href='/stat/{$p['id']}' target='_blank'><span class='text-success'>\${$p['price']}</span></a>, ";
+                                                    echo "<a href='/stat/{$p['id']}' data-toggle=\"tooltip\" data-placement=\"top\" title='{$p['owner']}' target='_blank'><span class='text-success'>\${$p['price']}</span></a>, ";
                                                 } elseif ($p['id'] === '38') {
-                                                    echo "<a href='/stat/{$p['id']}' target='_blank'><span class='text-danger'>\${$p['price']}</span></a>, ";
+                                                    echo "<a href='/stat/{$p['id']}' data-toggle=\"tooltip\" data-placement=\"top\" title='{$p['owner']}' target='_blank'><span class='text-danger'>\${$p['price']}</span></a>, ";
                                                 } else {
-                                                    echo "<a href='/stat/{$p['id']}' target='_blank'>\${$p['price']}</a>, ";
+                                                    echo "<a href='/stat/{$p['id']}' data-toggle=\"tooltip\" data-placement=\"top\" title='{$p['owner']}' target='_blank'>\${$p['price']}</a>, ";
                                                 }
                                             } ?></td>
                                     </tr>

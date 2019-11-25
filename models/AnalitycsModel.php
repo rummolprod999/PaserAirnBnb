@@ -20,7 +20,7 @@ class AnalitycsModel extends Model
             $stmt->execute();
             $res =  $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach ($res as $r) {
-                $stmt = $this->conn->prepare('SELECT a.start_date, a.end_date, a.price, au.id, au.own  FROM analitic a JOIN anb_url au on a.id_url = au.id WHERE a.start_date = STR_TO_DATE(:st, \'%Y-%m-%d\') AND a.end_date = STR_TO_DATE(:en, \'%Y-%m-%d\') AND a.id_user = :id_user ORDER BY  a.price ASC');
+                $stmt = $this->conn->prepare('SELECT a.start_date, a.end_date, a.price, au.id, au.own, au.owner  FROM analitic a JOIN anb_url au on a.id_url = au.id WHERE a.start_date = STR_TO_DATE(:st, \'%Y-%m-%d\') AND a.end_date = STR_TO_DATE(:en, \'%Y-%m-%d\') AND a.id_user = :id_user ORDER BY  a.price ASC');
                 $stmt->bindValue(':st', $r['start_date'], PDO::PARAM_STR);
                 $stmt->bindValue(':en', $r['end_date'], PDO::PARAM_STR);
                 $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
