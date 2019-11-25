@@ -36,14 +36,13 @@
                     <th>Min nights</th>
                     <th>Changes</th>
                     <th>Long terms</th>
+                    <th>Url Status</th>
                     <th>Remove</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($data['url_arr'] as $row): ?>
-                    <tr <?php if ($row['suspend'] === '1') {
-                        echo 'class="table-secondary"';
-                    } elseif ($row['own'] === '1') {
+                    <tr <?php if ($row['own'] === '1') {
                         echo 'class="table-warning"';
                     } elseif ($row['id'] === '38') {
                         echo 'class="table-danger"';
@@ -76,6 +75,9 @@
                                     echo "{$rd}</br>";
                                 }
                             } ?></td>
+                        <td>
+                            <?php echo $row['status_parsing'] ?>
+                        </td>
                         <td>
                             <form class="form-inline" method="post"><input type="hidden" name="remove_url"
                                                                            value='<?php echo $row['id'] ?>'>

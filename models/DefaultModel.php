@@ -135,6 +135,7 @@ class DefaultModel extends Model
             $stmt->execute();
             $r['discounts'] = $stmt->fetchAll(PDO::FETCH_COLUMN);
             $r['min_nights'] = $this->get_min_nights($r['id']);
+            $r['status_parsing'] = $this->status_url($r['suspend']);
             $data_new[] = $r;
 
         }
@@ -142,6 +143,18 @@ class DefaultModel extends Model
         return $data;
     }
 
+    private function status_url($susp){
+        switch ((int)$susp){
+            case 0:
+                return '<span class="text-success">OK</span>';
+            case 1:
+                return '<span class="text-warning">Unsuccessful parsing</span>';
+            case 2:
+                return '<span class="text-danger">Parsing is suspended</span>';
+            default:
+                return '';
+        }
+    }
     function get_min_nights($id)
     {
         $stmt = $this->conn->prepare('SELECT d.min_nights, d.date FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id ORDER BY d.date');

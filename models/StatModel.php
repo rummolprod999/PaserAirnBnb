@@ -135,7 +135,7 @@ class StatModel extends Model
     {
         $message = '';
         if (isset($_POST['suspend']) && !empty($_POST['suspend']) && $_POST['suspend'] === 'true') {
-            $stmt = $this->conn->prepare('UPDATE anb_url SET  suspend = 1 WHERE id = :id_url');
+            $stmt = $this->conn->prepare('UPDATE anb_url SET  suspend = 2 WHERE id = :id_url');
             $stmt->bindValue(':id_url', (int)$id_url, PDO::PARAM_INT);
             $stmt->execute();
             $message = '<div class="alert alert-warning" role="alert">Apartment have been suspend</div>';
