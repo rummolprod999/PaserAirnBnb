@@ -31,7 +31,7 @@
                     <th>ID</th>
                     <th>Statistics</th>
                     <th>Changes</th>
-                    <th>Url</th>
+                    <th>Name</th>
                     <th>Owner</th>
                     <th>Min nights</th>
                     <th>Changes</th>
@@ -50,7 +50,7 @@
                         <td><strong><?php echo $row['id'] ?></strong></td>
                         <td><a href="<?php echo "/stat/{$row['id']}" ?>"><?php echo 'Statistics' ?></a></td>
                         <td><a href="<?php echo "/changes/{$row['id']}" ?>"><?php echo 'Changes' ?></a></td>
-                        <td><a target="_blank" href="<?php echo $row['url'] ?>"><?php echo $row['url'] ?></a></td>
+                        <td><a title="<?php echo $row['url'] ?>" target="_blank" href="<?php echo $row['url'] ?>"><?php echo $row['apartment_name'] ?></a></td>
                         <td><?php echo $row['owner'] ?></td>
                         <td class='text-info text-nowrap'><?php if (isset($row['min_nights'])) {
                                 $min_nights = $row['min_nights'];
