@@ -12,7 +12,7 @@ class AnalitycsModel extends Model
     public function get_data()
     {
         $data = [];
-        for ($i = 6; $i <= 31; $i++) {
+        for ($i = 2; $i <= 31; $i++) {
             $query = "SELECT a.start_date, a.end_date FROM analitic a WHERE a.perid_nights = {$i} AND a.id_user = :id_user GROUP BY a.start_date, a.end_date ORDER BY a.start_date";
             $period = [];
             $stmt = $this->conn->prepare($query);
