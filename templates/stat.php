@@ -32,9 +32,9 @@
             }
             echo trim($discounts, ', ');
         } ?></div>
-    <?php if (isset($data['bookable_clean'])) {
-        echo $data['bookable_clean'];
-        //header('location:/?clean=true');
+    <?php if (isset($_SESSION['bookable_clean'])) {
+        echo $_SESSION['bookable_clean'];
+        unset($_SESSION['bookable_clean']);
     } ?>
     <?php if (isset($_SESSION['suspend'])) {
         echo $_SESSION['suspend'];
@@ -44,18 +44,9 @@
         echo $_SESSION['unsuspend'];
         unset($_SESSION['unsuspend']);
     } ?>
-    <?php if (isset($_GET['clean']) && $_GET['clean'] === 'true') {
-        echo '<div class="alert alert-warning" role="alert">Booking have been cleaned</div>';
-    } ?>
-    <?php if (isset($_GET['suspend']) && $_GET['suspend'] === 'true') {
-        echo '<div class="alert alert-warning" role="alert">Apartment have been suspend</div>';
-    } ?>
-    <?php if (isset($_GET['unsuspend']) && $_GET['unsuspend'] === 'true') {
-        echo '<div class="alert alert-warning" role="alert">Apartment have been unsuspend</div>';
-    } ?>
     <form class="form-inline" method="post"><input type="hidden" name="remove_bookable"
                                                    value='remove'>
-        <button type="submit" class="btn btn-danger mb-2">I have seen booking changes</button>
+        <button type="submit" class="btn btn-danger mb-2">I have seen these changes</button>
     </form>
 
     <div class="btn-group-vertical" role="group" aria-label="Button group">
@@ -97,7 +88,7 @@
                     echo print_calendar($data['days6'], $data['res_bookable_change']);
                 } ?>
                 <?php
-                if (isset($data['days7'])&& count($data['days7']) > 0) {
+                if (isset($data['days7']) && count($data['days7']) > 0) {
                     echo print_calendar($data['days7'], $data['res_bookable_change']);
                 } ?>
                 <?php

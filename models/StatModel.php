@@ -17,7 +17,11 @@ class StatModel extends Model
     {
         $data = [];
         $bookable_clean = $this->bookable_seen($id_url);
-        $data['bookable_clean'] = $bookable_clean;
+        if ($bookable_clean !== '') {
+            $_SESSION['bookable_clean'] = $bookable_clean;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
+        }
         $suspend = $this->suspend($id_url);
         if ($suspend !== '') {
             $_SESSION['suspend'] = $suspend;
@@ -123,8 +127,14 @@ class StatModel extends Model
             $stmt = $this->conn->prepare('UPDATE bookable_changes SET  seen = 1 WHERE id_url = :id_url');
             $stmt->bindValue(':id_url', (int)$id_url, PDO::PARAM_INT);
             $stmt->execute();
-            if ($stmt->rowCount() > 0) {
-                $message = '<div class="alert alert-warning" role="alert">Booking have been cleaned</div>';
+            $clean_book = $stmt->rowCount();
+
+            $stmt = $this->conn->prepare('UPDATE price_changes SET  seen = 1 WHERE id_url = :id_url');
+            $stmt->bindValue(':id_url', (int)$id_url, PDO::PARAM_INT);
+            $stmt->execute();
+            $clean_price = $stmt->rowCount();
+            if ($clean_book > 0 || $clean_price > 0) {
+                $message = '<div class="alert alert-warning" role="alert">Changes have been cleaned</div>';
                 return $message;
             }
         }
@@ -151,7 +161,7 @@ class StatModel extends Model
             $stmt = $this->conn->prepare('UPDATE anb_url SET  suspend = 0 WHERE id = :id_url');
             $stmt->bindValue(':id_url', (int)$id_url, PDO::PARAM_INT);
             $stmt->execute();
-            $message = '<div class="alert alert-warning" role="alert">Apartment have been unsuspend</div>';
+            $message = '<div class="alert alert-success" role="alert">Apartment have been unsuspend</div>';
             return $message;
 
         }
