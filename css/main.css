@@ -74,3 +74,7 @@ body {
 .border-2 {
     border-width: 2px !important;
 }
+textarea:disabled{
+    background-color: #f7f7f7;
+    border-width: 0;
+}

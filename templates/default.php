@@ -22,6 +22,10 @@
             if (isset($_SESSION['launch_mess'])) {
                 echo $_SESSION['launch_mess'];
                 unset($_SESSION['launch_mess']);
+            }
+            if (isset($_SESSION['change_notes'])) {
+                echo $_SESSION['change_notes'];
+                unset($_SESSION['change_notes']);
             } ?>
         </div>
         <div class="table-responsive">
@@ -33,6 +37,7 @@
                     <th>Changes</th>
                     <th>Name</th>
                     <th>Owner</th>
+                    <th>Notes</th>
                     <th>Min nights</th>
                     <th>Changes</th>
                     <th>Long terms</th>
@@ -50,8 +55,16 @@
                         <td><strong><?php echo $row['id'] ?></strong></td>
                         <td><a href="<?php echo "/stat/{$row['id']}" ?>"><?php echo 'Statistics' ?></a></td>
                         <td><a href="<?php echo "/changes/{$row['id']}" ?>"><?php echo 'Changes' ?></a></td>
-                        <td><a title="<?php echo $row['url'] ?>" target="_blank" href="<?php echo $row['url'] ?>"><?php echo $row['apartment_name'] ?></a></td>
+                        <td><a title="<?php echo $row['url'] ?>" target="_blank"
+                               href="<?php echo $row['url'] ?>"><?php echo $row['apartment_name'] ?></a></td>
                         <td><?php echo $row['owner'] ?></td>
+                        <td>
+                            <?php if($row['notes'] !== ''):?>
+                                <form><textarea rows="3" cols="20" disabled><?php echo $row['notes'] ?></textarea></form>
+                            <?php endif;?>
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+                                    data-target="#Modal<?php echo $row['id'] ?>">change</button>
+                        </td>
                         <td class='text-info text-nowrap'><?php if (isset($row['min_nights'])) {
                                 $min_nights = $row['min_nights'];
                                 $iMax = count($min_nights);
@@ -93,6 +106,42 @@
             <form class="form-inline" method="post"><input type="hidden" name="launch"
                                                            value='true'>
                 <button type="submit" class="btn btn-success btn-lg">Launch parser</button>
+            </form>
         </div>
+        <?php foreach ($data['url_arr'] as $row): ?>
+            <div class="modal fade" id="Modal<?php echo $row['id'] ?>" tabindex="-1" role="dialog"
+                 aria-labelledby="ModalLabel<?php echo $row['id'] ?>" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabel<?php echo $row['id'] ?>">Notes for <span
+                                        class="text-secondary"><?php echo $row['apartment_name'] ?><p
+                                            class="text-secondary"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <form method="post" id="notes_form<?php echo $row['id'] ?>">
+                                <div class="form-group">
+                                    <label for="notes<?php echo $row['id'] ?>"></label>
+                                    <textarea class="form-control" id="notes<?php echo $row['id'] ?>" rows="3"
+                                              maxlength="2000" name="notes"><?php echo $row['notes'] ?></textarea>
+                                    <input type="hidden" name="id_notes"
+                                           value='<?php echo $row['id'] ?>'>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" form="notes_form<?php echo $row['id'] ?>">
+                                Save changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
 </div>

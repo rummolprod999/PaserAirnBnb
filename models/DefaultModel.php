@@ -16,8 +16,14 @@ class DefaultModel extends Model
         $rem_mess = $this->remove_url();
         $launch_mess = $this->launch_parser();
         $data = $this->get_list_url();
+        $change_notes = $this->change_notes();
         if ($launch_mess !== '') {
             $_SESSION['launch_mess'] = $launch_mess;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
+        }
+        if ($change_notes !== '') {
+            $_SESSION['change_notes'] = $change_notes;
             header("Location: {$_SERVER['REQUEST_URI']}");
             exit();
         }
@@ -53,7 +59,7 @@ class DefaultModel extends Model
             $stmt = $this->conn->prepare('SELECT COUNT(id) cn FROM anb_url WHERE  id_user = :id_user');
             $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
             $stmt->execute();
-            $res =  $stmt->fetch(PDO::FETCH_ASSOC);
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
             if ((int)$res['cn'] > 25) {
                 $message = '<div class="alert alert-danger" role="alert">You have a maximum of tracking apartments</div>';
                 return $message;
@@ -105,15 +111,32 @@ class DefaultModel extends Model
         return $message;
     }
 
+    function change_notes()
+    {
+        $message = '';
+        if (isset($_POST['notes'], $_POST['id_notes'])) {
+            $stmt = $this->conn->prepare('UPDATE anb_url SEt notes = :notes WHERE id = :id AND id_user = :id_user');
+            $stmt->bindValue(':id', (int)$_POST['id_notes'], PDO::PARAM_INT);
+            $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
+            $stmt->bindValue(':notes', $_POST['notes']);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                $message = '<div class="alert alert-success" role="alert">Notes has been updated successfully</div>';
+                return $message;
+            }
+        }
+        return $message;
+    }
+
     public function get_list_url()
     {
         $data = [];
-        $query = 'SELECT id, url, owner, own, num_parsing, suspend, apartment_name FROM anb_url WHERE anb_url.id_user = :id_user ORDER BY own DESC';
+        $query = 'SELECT id, url, owner, own, num_parsing, suspend, apartment_name, notes FROM anb_url WHERE anb_url.id_user = :id_user ORDER BY own DESC';
         $data_new = [];
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
         $stmt->execute();
-        $res =  $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($res as $r) {
             $stmt = $this->conn->prepare('SELECT price_was, price, date_cal, date_parsing, num_parsing, seen FROM price_changes WHERE seen = 0 AND id_url = :id_url');
             $stmt->bindValue(':id_url', (int)$r['id'], PDO::PARAM_INT);
@@ -142,8 +165,9 @@ class DefaultModel extends Model
         return $data;
     }
 
-    private function status_url($susp){
-        switch ((int)$susp){
+    private function status_url($susp)
+    {
+        switch ((int)$susp) {
             case 0:
                 return '<span class="text-success">OK</span>';
             case 1:
@@ -154,6 +178,7 @@ class DefaultModel extends Model
                 return '';
         }
     }
+
     function get_min_nights($id)
     {
         $stmt = $this->conn->prepare('SELECT d.min_nights, d.date FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id = :id ORDER BY d.date');
