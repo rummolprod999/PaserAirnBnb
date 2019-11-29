@@ -41,7 +41,7 @@
                     <th>Min nights</th>
                     <th>Changes</th>
                     <th>Long terms</th>
-                    <th>Url status</th>
+                    <th>Status</th>
                     <th>Remove</th>
                 </tr>
                 </thead>
