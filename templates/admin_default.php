@@ -49,7 +49,7 @@
                         <td><strong><?php echo $row['proxy_user'] ?></strong></td>
                         <td><strong><?php echo $row['proxy_pass'] ?></strong></td>
                         <td><strong><?php echo $row['count_url'] ?></strong></td>
-                        <td><strong><?php echo $row['last_date'] ?></strong></td>
+                        <td><small><?php echo $row['last_date'] ?></small></td>
                         <td><?php foreach ($row['last_activity'] as $activity): ?>
                                 <a href="#" data-toggle="tooltip" data-placement="top"
                                    title="<?php echo "Logon: {$activity['last_logon']}</br>IP: {$activity['ip_address']}</br>Request page: {$activity['request_page']}</br>" ?>"><span class="text-nowrap"><small><?php echo $activity['last_logon'] ?></small></span></a>
