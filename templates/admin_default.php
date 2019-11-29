@@ -27,14 +27,15 @@
                     <th>User name</th>
                     <th>User email</th>
                     <th>Proxy address</th>
-                    <th>Proxy Port</th>
-                    <th>Proxy User</th>
-                    <th>Proxy Pass</th>
+                    <th>Proxy port</th>
+                    <th>Proxy user</th>
+                    <th>Proxy pass</th>
                     <th>Number of apartments</th>
-                    <th>Last Activity</th>
-                    <th>Report User</th>
-                    <th>Change User</th>
-                    <th>Remove User</th>
+                    <th>Last activity</th>
+                    <th>Last logon</th>
+                    <th>Report user</th>
+                    <th>Change user</th>
+                    <th>Remove user</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -49,6 +50,11 @@
                         <td><strong><?php echo $row['proxy_pass'] ?></strong></td>
                         <td><strong><?php echo $row['count_url'] ?></strong></td>
                         <td><strong><?php echo $row['last_date'] ?></strong></td>
+                        <td><?php foreach ($row['last_activity'] as $activity): ?>
+                                <a href="#" data-toggle="tooltip" data-placement="top"
+                                   title="<?php echo "Logon: {$activity['last_logon']}</br>IP: {$activity['ip_address']}</br>Request page: {$activity['request_page']}</br>" ?>"><span class="text-nowrap"><small><?php echo $activity['last_logon'] ?></small></span></a>
+                            <?php endforeach; ?>
+                        </td>
                         <td>
                             <?php if ($row['is_admin'] !== '1'): ?>
                                 <?php if ($row['is_report'] === '1'): ?>
@@ -147,5 +153,14 @@
             </div>
         </div>
     </div>
+    <script>
+        $('[data-toggle="tooltip"]').hover(function () {
+            $(this).tooltip({
+                trigger: "hover",
+                html: true,
+                animation: false,
+                content: $(this).prop("title").text
+            }).tooltip('show');
+        })</script>
 </div>
 

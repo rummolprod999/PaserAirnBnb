@@ -78,3 +78,7 @@ textarea:disabled{
     background-color: #f7f7f7;
     border-width: 0;
 }
+* {
+    font-size: 14px;
+    line-height: 2;
+}

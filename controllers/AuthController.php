@@ -33,6 +33,7 @@ class AuthController extends Controller
                     $_SESSION['id'] = $user['id'];
                     $_SESSION['user_name'] = $user['user_name'];
                     self::$uid = (int)$_SESSION['id'];
+                    $this->write_last_activity(self::$uid);
                 } else {
                     self::$error[] = 'Wrong password';
                     return self::$error;
@@ -98,6 +99,11 @@ class AuthController extends Controller
     public function check_is_admin($user_id)
     {
         return $this->model->is_admin($user_id);
+    }
+
+    private function write_last_activity($user_id)
+    {
+        $this->model->write_last_activity($user_id);
     }
 
     public function out()

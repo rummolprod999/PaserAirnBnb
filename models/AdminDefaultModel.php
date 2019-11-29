@@ -153,6 +153,14 @@ class AdminDefaultModel extends Model
     {
         $query = 'SELECT u.id, user_name, proxy_address, proxy_port, proxy_user, proxy_pass, u.is_admin, u.user_email, u.is_report, (SELECT c.date_last FROM anb_url a LEFT JOIN checkup c on a.id = c.iid_anb WHERE c.date_last IS NOT NULL AND a.id_user = u.id ORDER BY c.date_last DESC LIMIT 1) last_date, (SELECT COUNT(id) FROM anb_url WHERE id_user = u.id) count_url FROM users u LEFT JOIN proxy p on u.id = p.id_user ORDER BY u.id';
         $res = $this->conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($res as &$user){
+            $id_user = $user['id'];
+            $stmt = $this->conn->prepare('SELECT last_logon, ip_address, request_page FROM users_activity WHERE id_user = :id_user ORDER BY last_logon DESC LIMIT 10');
+            $stmt->bindValue(':id_user', (int)$id_user, PDO::PARAM_INT);
+            $stmt->execute();
+            $user['last_activity'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        unset($user);
         if ($res) {
             return $res;
         }

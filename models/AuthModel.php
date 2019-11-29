@@ -33,4 +33,17 @@ class AuthModel extends Model
         $res = $stmt->fetch(PDO::FETCH_ASSOC);
         return $res && $res['is_admin'] === '1';
     }
+
+    public function write_last_activity($user_id)
+    {
+        $curr_time = date('Y-m-d H:i:s');
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $request_page = $_SERVER['REQUEST_URI'];
+        $stmt = $this->conn->prepare('INSERT INTO users_activity SET id_user = :id_user, last_logon = :last_logon, ip_address = :ip_address, request_page = :request_page');
+        $stmt->bindValue(':id_user', $user_id, PDO::PARAM_INT);
+        $stmt->bindValue(':last_logon', $curr_time, PDO::PARAM_STR);
+        $stmt->bindValue(':ip_address', $ip, PDO::PARAM_STR);
+        $stmt->bindValue(':request_page', $request_page, PDO::PARAM_STR);
+        $stmt->execute();
+    }
 }
