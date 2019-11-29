@@ -43,11 +43,11 @@
                     <tr>
                         <td><strong><?php echo $row['id'] ?></strong></td>
                         <td><strong><?php echo $row['user_name'] ?></strong></td>
-                        <td><strong><?php echo $row['user_email'] ?></strong></td>
-                        <td><strong><?php echo $row['proxy_address'] ?></strong></td>
-                        <td><strong><?php echo $row['proxy_port'] ?></strong></td>
-                        <td><strong><?php echo $row['proxy_user'] ?></strong></td>
-                        <td><strong><?php echo $row['proxy_pass'] ?></strong></td>
+                        <td><a href="mailto:<?php echo $row['user_email'] ?>"><?php echo $row['user_email'] ?></a></td>
+                        <td><?php echo $row['proxy_address'] ?></td>
+                        <td><?php echo $row['proxy_port'] ?></td>
+                        <td><?php echo $row['proxy_user'] ?></td>
+                        <td><?php echo $row['proxy_pass'] ?></td>
                         <td><strong><?php echo $row['count_url'] ?></strong></td>
                         <td><small><?php echo $row['last_date'] ?></small></td>
                         <td><?php foreach ($row['last_activity'] as $activity): ?>
