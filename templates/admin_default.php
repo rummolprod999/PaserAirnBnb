@@ -30,6 +30,7 @@
                     <th>Proxy Port</th>
                     <th>Proxy User</th>
                     <th>Proxy Pass</th>
+                    <th>Number of apartments</th>
                     <th>Last Activity</th>
                     <th>Report User</th>
                     <th>Change User</th>
@@ -46,6 +47,7 @@
                         <td><strong><?php echo $row['proxy_port'] ?></strong></td>
                         <td><strong><?php echo $row['proxy_user'] ?></strong></td>
                         <td><strong><?php echo $row['proxy_pass'] ?></strong></td>
+                        <td><strong><?php echo $row['count_url'] ?></strong></td>
                         <td><strong><?php echo $row['last_date'] ?></strong></td>
                         <td>
                             <?php if ($row['is_admin'] !== '1'): ?>
