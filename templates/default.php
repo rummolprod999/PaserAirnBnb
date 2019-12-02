@@ -1,4 +1,5 @@
 <?php require_once 'templates/navigation.php' ?>
+<?php require_once 'helpers/otherHelpers.php'?>
 <div id="article">
     <div><h1 class="text-center">APARTMENTS LIST</h1></div>
     <div id="table_div">
@@ -59,20 +60,17 @@
                                href="<?php echo $row['url'] ?>"><?php echo $row['apartment_name'] ?></a></td>
                         <td><?php echo $row['owner'] ?></td>
                         <td>
-                            <?php if($row['notes'] !== ''):?>
-                                <form><textarea rows="3" cols="20" disabled><?php echo $row['notes'] ?></textarea></form>
-                            <?php endif;?>
+                            <?php if ($row['notes'] !== ''): ?>
+                                <form><textarea rows="3" cols="20" disabled><?php echo $row['notes'] ?></textarea>
+                                </form>
+                            <?php endif; ?>
                             <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
-                                    data-target="#Modal<?php echo $row['id'] ?>">change</button>
+                                    data-target="#Modal<?php echo $row['id'] ?>">change
+                            </button>
                         </td>
                         <td class='text-info text-nowrap'><?php if (isset($row['min_nights'])) {
                                 $min_nights = $row['min_nights'];
-                                $iMax = count($min_nights);
-                                if ($iMax > 0) {
-                                    for ($i = 0; $i < $iMax; $i += 2) {
-                                        echo "{$min_nights[$i]['date']} - {$min_nights[$i+1]['date']}: {$min_nights[$i+1]['min_nights']} nights;</br>";
-                                    }
-                                }
+                                echo print_collapse_min_nights($row['min_nights'], $row['id']);
                             } ?></td>
                         <td class='text-danger text-nowrap'><?php if (isset($row['res_bookable_change'])) {
                                 foreach ($row['res_bookable_change'] as $rp) {
