@@ -155,7 +155,7 @@ class AdminDefaultModel extends Model
         $res = $this->conn->query($query)->fetchAll(PDO::FETCH_ASSOC);
         foreach ($res as &$user){
             $id_user = $user['id'];
-            $stmt = $this->conn->prepare('SELECT last_logon, ip_address, request_page FROM users_activity WHERE id_user = :id_user ORDER BY last_logon DESC LIMIT 10');
+            $stmt = $this->conn->prepare('SELECT DATE(last_logon) last_l, ip_address, request_page  FROM users_activity WHERE id_user = :id_user GROUP BY last_l ORDER BY last_logon DESC LIMIT 10');
             $stmt->bindValue(':id_user', (int)$id_user, PDO::PARAM_INT);
             $stmt->execute();
             $user['last_activity'] = $stmt->fetchAll(PDO::FETCH_ASSOC);

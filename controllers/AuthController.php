@@ -66,12 +66,14 @@ class AuthController extends Controller
                 setcookie('login', $_COOKIE['login'], time() + (30 * 24 * 3600), '/');
                 setcookie('password', $_COOKIE['password'], time() + (30 * 24 * 3600), '/');
                 self::$uid = (int)$_SESSION['id'];
+                $this->write_last_activity(self::$uid);
                 return true;
             } else {
                 if ($user) {
                     setcookie('login', $user['user_name'], time() + (30 * 24 * 3600));
                     setcookie('password', md5($user['user_name'] . $user['user_pass']), time() + (30 * 24 * 3600));
                     self::$uid = (int)$_SESSION['id'];
+                    $this->write_last_activity(self::$uid);
                     return true;
                 } else {
                     return false;
@@ -84,6 +86,7 @@ class AuthController extends Controller
                     $_SESSION['id'] = $user['id'];
                     $_SESSION['user_name'] = $user['user_name'];
                     self::$uid = (int)$_SESSION['id'];
+                    $this->write_last_activity(self::$uid);
                     return true;
                 } else {
                     setcookie('login', '', time() - (30 * 24 * 3600), '/');
