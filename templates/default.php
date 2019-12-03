@@ -1,5 +1,5 @@
 <?php require_once 'templates/navigation.php' ?>
-<?php require_once 'helpers/otherHelpers.php'?>
+<?php require_once 'helpers/otherHelpers.php' ?>
 <div id="article">
     <div><h1 class="text-center">APARTMENTS LIST</h1></div>
     <div id="table_div">
@@ -47,13 +47,14 @@
                 </tr>
                 </thead>
                 <tbody>
+                <?php $count_app = 0; ?>
                 <?php foreach ($data['url_arr'] as $row): ?>
                     <tr <?php if ($row['own'] === '1') {
                         echo 'class="table-warning"';
                     } elseif ($row['id'] === '38') {
                         echo 'class="table-danger"';
                     } ?>>
-                        <td><strong><?php echo $row['id'] ?></strong></td>
+                        <td><strong><?php echo ++$count_app ?></strong></td>
                         <td><a href="<?php echo "/stat/{$row['id']}" ?>"><?php echo 'Statistics' ?></a></td>
                         <td><a href="<?php echo "/changes/{$row['id']}" ?>"><?php echo 'Changes' ?></a></td>
                         <td><a title="<?php echo $row['url'] ?>" target="_blank"

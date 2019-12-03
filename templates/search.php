@@ -1,6 +1,6 @@
 <?php require_once 'templates/navigation.php' ?>
 <?php require_once 'helpers/calendar.php' ?>
-<div><h1 class="text-center">Search free periods</h1></div>
+<div><h1 class="text-center">Search for available apartments</h1></div>
 <div id="article">
     <div class="container-fluid">
         <form>
@@ -18,7 +18,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-xs-3">
-                    <button type="submit" class="btn btn-primary btn-lg">Get free periods</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Search</button>
                 </div>
             </div>
         </form>
