@@ -11,6 +11,7 @@ require_once 'controllers/AdminController.php';
 require_once 'controllers/AdminDefaultController.php';
 require_once 'controllers/ChangeUserController.php';
 require_once 'controllers/NotFoundController.php';
+require_once 'controllers/SearchController.php';
 
 final class RouterLite
 {
