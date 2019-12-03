@@ -60,7 +60,7 @@ class DefaultModel extends Model
             $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
             $stmt->execute();
             $res = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ((int)$res['cn'] >= 25) {
+            if ((int)$res['cn'] >= 27) {
                 $message = '<div class="alert alert-danger" role="alert">You have a maximum of tracking apartments</div>';
                 return $message;
             }
