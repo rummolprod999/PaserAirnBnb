@@ -74,19 +74,39 @@ body {
 .border-2 {
     border-width: 2px !important;
 }
-textarea:disabled{
+
+textarea:disabled {
     background-color: #f7f7f7;
     border-width: 0;
 }
+
 * {
     font-size: 14px;
     line-height: 2;
 }
 
-.form-check-rel{
+.form-check-rel {
     position: relative;
     flex-shrink: 0;
     margin-top: 0;
     margin-right: .25rem;
     margin-left: 0;
+}
+
+.results tr[visible='false'],
+.no-result {
+    display: none;
+}
+
+.results tr[visible='true'] {
+    display: table-row;
+}
+
+.counter {
+    padding: 8px;
+    color: #ccc;
+}
+
+.pull-right {
+    float: right !important
 }

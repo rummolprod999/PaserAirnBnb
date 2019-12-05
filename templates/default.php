@@ -29,9 +29,16 @@
                 echo $_SESSION['change_notes'];
                 unset($_SESSION['change_notes']);
             } ?>
+            <div class="float-right">
+                <div class="form-group pull-right">
+                    <input type="text" class="search form-control" placeholder="What you looking for?">
+                </div>
+                <span class="counter pull-right"></span>
+            </div>
         </div>
+
         <div class="table-responsive">
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover results">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -48,6 +55,9 @@
                 </tr>
                 </thead>
                 <tbody>
+                <tr class="warning no-result">
+                    <td colspan="11"><i class="fa fa-warning"></i> No result</td>
+                </tr>
                 <?php $count_app = 0; ?>
                 <?php foreach ($data['url_arr'] as $row): ?>
                     <tr <?php if ($row['own'] === '1') {
@@ -55,7 +65,7 @@
                     } elseif ($row['id'] === '38') {
                         echo 'class="table-danger"';
                     } ?>>
-                        <td><strong><?php echo ++$count_app ?></strong></td>
+                        <th><strong><?php echo ++$count_app ?></strong></th>
                         <td><a href="<?php echo "/stat/{$row['id']}" ?>"><?php echo 'Statistics' ?></a></td>
                         <td><a href="<?php echo "/changes/{$row['id']}" ?>"><?php echo 'Changes' ?></a></td>
                         <td><a title="<?php echo $row['url'] ?>" target="_blank"
@@ -143,5 +153,6 @@
                 </div>
             </div>
         <?php endforeach; ?>
+        <script src="/js/search_in_table.js" async></script>
     </div>
 </div>
