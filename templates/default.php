@@ -8,8 +8,9 @@
                 <label class="sr-only" for="inlineFormInputName2">URL:</label>
                 <input type="text" class="form-control mb-2 mr-sm-2 w-25" id="inlineFormInputName2" name="add_url"
                        placeholder="https://www.airbnb.ru/rooms/XXXXXXX" required pattern="https://.+">
-                <label for="inlineFormInputName2">Owner:</label>
-                <input class="form-check-input" type="checkbox" value="true" id="inlineFormInputName2" name="own">
+                <label for="inlineFormInputName3">Owner:</label>
+                <input class="form-check-input form-check-rel" type="checkbox" value="true" id="inlineFormInputName3"
+                       name="own">
                 <button type="submit" class="btn btn-primary mb-2">Add</button>
             </form>
             <?php if (isset($_SESSION['add_mess'])) {

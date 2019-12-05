@@ -82,3 +82,11 @@ textarea:disabled{
     font-size: 14px;
     line-height: 2;
 }
+
+.form-check-rel{
+    position: relative;
+    flex-shrink: 0;
+    margin-top: 0;
+    margin-right: .25rem;
+    margin-left: 0;
+}
