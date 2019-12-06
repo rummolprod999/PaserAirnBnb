@@ -64,11 +64,11 @@ function print_calendar($data, $book_changes)
 
             if (!empty($iValue[$j])) {
                 if (in_array($data[$c]['date'], $book_changes, true)) {
-                    echo "<td class=\"table-danger\"><font color=black>{$iValue[$j]}</font></br><font color=green>\${$data[$c]['price_day']}</font></td>";
+                    echo "<td class=\"table-danger\"><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$data[$c]['price_day']}</span></td>";
                 } elseif ($data[$c]['available'] === '1' && $data[$c]['bookable'] === '1' /* && $data[$c]['available_for_checkin'] == '1'  */) {
-                    echo "<td class=\"table-success\"><font color=black>{$iValue[$j]}</font></br><font color=green>\${$data[$c]['price_day']}</font></td>";
+                    echo "<td class=\"table-success\"><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$data[$c]['price_day']}</span></td>";
                 } else {
-                    echo "<td>{$iValue[$j]}</br><font color=green>\${$data[$c]['price_day']}</font></td>";
+                    echo "<td>{$iValue[$j]}</br><span class=\"text-success\">\${$data[$c]['price_day']}</span></td>";
                 }
                 $c++;
             } else {
@@ -194,10 +194,11 @@ function get_perid($dt, $periods)
     return null;
 }
 
-function get_sum($periods){
+function get_sum($periods)
+{
     $sum = 0;
-    foreach ($periods as $p){
-        $sum += (int) $p['price_day'];
+    foreach ($periods as $p) {
+        $sum += (int)$p['price_day'];
     }
     return $sum;
 }

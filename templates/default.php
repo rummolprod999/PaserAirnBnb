@@ -5,11 +5,11 @@
     <div id="table_div">
         <div>
             <form class="form-inline" method="post">
-                <label class="sr-only" for="inlineFormInputName2">URL:</label>
-                <input type="text" class="form-control mb-2 mr-sm-2 w-25" id="inlineFormInputName2" name="add_url"
+                <label class="sr-only" for="inlineFormInputUrl">URL:</label>
+                <input type="text" class="form-control mb-2 mr-sm-2 w-25" id="inlineFormInputUrl" name="add_url"
                        placeholder="https://www.airbnb.ru/rooms/XXXXXXX" required pattern="https://.+">
-                <label for="inlineFormInputName3">Owner:</label>
-                <input class="form-check-input form-check-rel" type="checkbox" value="true" id="inlineFormInputName3"
+                <label for="inlineFormInputOwner">Owner:</label>
+                <input class="form-check-input form-check-rel" type="checkbox" value="true" id="inlineFormInputOwner"
                        name="own">
                 <button type="submit" class="btn btn-primary mb-2">Add</button>
             </form>
@@ -71,7 +71,8 @@
                         echo 'class="table-danger"';
                     } ?>>
                         <th><strong><?php echo ++$count_app ?></strong></th>
-                        <td><input class="w-100" min="0" max="100" type="number" form="reorder_table"
+                        <td><input class="w-100" min="0" max="999" type="number" title="from 0 to 999"
+                                   form="reorder_table"
                                    value="<?php echo $row['order_main'] ?>" name="<?php echo $row['id'] ?>"></td>
                         <td><a href="<?php echo "/stat/{$row['id']}" ?>"><?php echo 'Statistics' ?></a></td>
                         <td><a href="<?php echo "/changes/{$row['id']}" ?>"><?php echo 'Changes' ?></a></td>
