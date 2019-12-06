@@ -52,7 +52,9 @@
                         <td><small><?php echo $row['last_date'] ?></small></td>
                         <td><?php foreach ($row['last_activity'] as $activity): ?>
                                 <a href="#" data-toggle="tooltip" data-placement="top"
-                                   title="<?php echo "Logon: {$activity['last_l']}</br>IP: {$activity['ip_address']}</br>Request page: {$activity['request_page']}</br>" ?>"><span class="text-nowrap"><small><?php echo $activity['last_l'] ?></small></span></a>
+                                   title="<?php echo "Logon: {$activity['last_l']}</br>IP: {$activity['ip_address']}</br>Request page: {$activity['request_page']}</br>" ?>"><span
+                                            class="text-nowrap"><small><?php echo $activity['last_l'] ?></small></span></a>
+                                </br>
                             <?php endforeach; ?>
                         </td>
                         <td>
