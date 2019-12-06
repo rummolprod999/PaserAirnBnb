@@ -28,6 +28,10 @@
             if (isset($_SESSION['change_notes'])) {
                 echo $_SESSION['change_notes'];
                 unset($_SESSION['change_notes']);
+            }
+            if (isset($_SESSION['reorder'])) {
+                echo $_SESSION['reorder'];
+                unset($_SESSION['reorder']);
             } ?>
             <div class="float-right">
                 <div class="form-group pull-right">
@@ -42,6 +46,7 @@
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Order</th>
                     <th>Statistics</th>
                     <th>Changes</th>
                     <th>Name</th>
@@ -56,7 +61,7 @@
                 </thead>
                 <tbody>
                 <tr class="warning no-result">
-                    <td colspan="11"><i class="fa fa-warning"></i> No result</td>
+                    <td colspan="12"><i class="fa fa-warning"></i> No result</td>
                 </tr>
                 <?php $count_app = 0; ?>
                 <?php foreach ($data['url_arr'] as $row): ?>
@@ -66,6 +71,8 @@
                         echo 'class="table-danger"';
                     } ?>>
                         <th><strong><?php echo ++$count_app ?></strong></th>
+                        <td><input class="w-100" min="0" max="100" type="number" form="reorder_table"
+                                   value="<?php echo $row['order_main'] ?>" name="<?php echo $row['id'] ?>"></td>
                         <td><a href="<?php echo "/stat/{$row['id']}" ?>"><?php echo 'Statistics' ?></a></td>
                         <td><a href="<?php echo "/changes/{$row['id']}" ?>"><?php echo 'Changes' ?></a></td>
                         <td><a title="<?php echo $row['url'] ?>" target="_blank"
@@ -113,10 +120,18 @@
             </table>
         </div>
         <div>
-            <form class="form-inline" method="post"><input type="hidden" name="launch"
-                                                           value='true'>
-                <button type="submit" class="btn btn-success btn-lg">Launch parser</button>
-            </form>
+            <div class="p-2">
+                <form id="reorder_table" class="form-inline" method="post"><input type="hidden" name="reorder"
+                                                                                  value='true'>
+                    <button type="submit" class="btn btn-outline-dark btn-lg">Reorder table</button>
+                </form>
+            </div>
+            <div class="p-2">
+                <form class="form-inline" method="post"><input type="hidden" name="launch"
+                                                               value='true'>
+                    <button type="submit" class="btn btn-success btn-lg">Launch parser</button>
+                </form>
+            </div>
         </div>
         <?php foreach ($data['url_arr'] as $row): ?>
             <div class="modal fade" id="Modal<?php echo $row['id'] ?>" tabindex="-1" role="dialog"

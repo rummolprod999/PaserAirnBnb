@@ -17,6 +17,7 @@ class DefaultModel extends Model
         $launch_mess = $this->launch_parser();
         $data = $this->get_list_url();
         $change_notes = $this->change_notes();
+        $reorders = $this->reorder_table();
         if ($launch_mess !== '') {
             $_SESSION['launch_mess'] = $launch_mess;
             header("Location: {$_SERVER['REQUEST_URI']}");
@@ -37,7 +38,33 @@ class DefaultModel extends Model
             header("Location: {$_SERVER['REQUEST_URI']}");
             exit();
         }
+        if ($reorders !== '') {
+            $_SESSION['reorder'] = $reorders;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
+        }
         return $data;
+    }
+
+    function reorder_table()
+    {
+        if (isset($_REQUEST['reorder']) && $_REQUEST['reorder'] === 'true') {
+            $stmt = $this->conn->prepare('SELECT id FROM anb_url WHERE id_user = :id_user');
+            $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
+            $stmt->execute();
+            $res = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            $stmt_upd = $this->conn->prepare('UPDATE anb_url SET order_main = :order_main WHERE id = :id AND id_user = :id_user');
+            foreach ($res as $v) {
+                if (isset($_REQUEST[$v])) {
+                    $stmt_upd->bindValue(':id', (int)$v, PDO::PARAM_INT);
+                    $stmt_upd->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
+                    $stmt_upd->bindValue(':order_main', (int)$_REQUEST[$v], PDO::PARAM_STR);
+                    $stmt_upd->execute();
+                }
+            }
+            return '<div class="alert alert-success" role="alert">Rows has been reordered</div>';
+        }
+        return '';
     }
 
     function add_url()
@@ -131,7 +158,7 @@ class DefaultModel extends Model
     public function get_list_url()
     {
         $data = [];
-        $query = 'SELECT id, url, owner, own, num_parsing, suspend, apartment_name, notes FROM anb_url WHERE anb_url.id_user = :id_user ORDER BY own DESC';
+        $query = 'SELECT id, url, owner, own, num_parsing, suspend, apartment_name, notes, order_main FROM anb_url WHERE anb_url.id_user = :id_user ORDER BY order_main DESC';
         $data_new = [];
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
