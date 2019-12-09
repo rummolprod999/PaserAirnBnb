@@ -63,6 +63,15 @@
         <div class="row">
             <div class="py-4 col-xs-12 col-md-8">
                 <div><p><strong>Availability</strong></p></div>
+                <div class='my-legend'>
+                    <div class='legend-scale'>
+                        <ul class='legend-labels'>
+                            <li><span class = "table-danger"></span>Bookable changes</li>
+                            <li><span class = "table-secondary"></span>Only available</li>
+                            <li><span class = "table-success"></span>Bookable & available</li>
+                        </ul>
+                    </div>
+                </div>
                 <?php
                 if (isset($data['days']) && count($data['days']) > 0) {
                     echo print_calendar($data['days'], $data['res_bookable_change']);
