@@ -1,0 +1,12 @@
+{
+  "database": "anb",
+  "prefix": "",
+  "userdb": "root",
+  "passdb": "1234",
+  "server": "localhost",
+  "port": "3306",
+  "user_email": "faridgazizov@outlook.com",
+  "pass_email": "Nikolai2019!",
+  "smtp_server": "smtp-mail.outlook.com",
+  "smtp_port": "587"
+}
