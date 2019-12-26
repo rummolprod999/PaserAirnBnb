@@ -200,7 +200,7 @@ class DefaultModel extends Model
             case 1:
                 return '<span class="text-warning">Unsuccessful parsing</span>';
             case 2:
-                return '<span class="text-danger">Parsing is suspended</span>';
+                return '<span class="text-danger">is suspended</span>';
             default:
                 return '';
         }

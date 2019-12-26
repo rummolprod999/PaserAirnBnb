@@ -1,86 +1,189 @@
 <?php require_once 'templates/navigation.php' ?>
 <?php require_once 'helpers/arraysHelpers.php' ?>
-<div><h1 class="text-center">Changes <?php if (isset($data['descr'])) {
-            echo " <span class=\"text-secondary\">{$data['descr']['apartment_name']}</span>";
-        } ?></h1></div>
+
+
 <div id="article">
-    <div class="container-fluid">
-        <form>
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-lg-12">-->
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="not_full_width"><h1 class="changes__title text-left">CHANGES <?php if (isset($data['descr'])) {
+                            echo " <span class=\"under-text text-secondary\">{$data['descr']['apartment_name']} </span>";
+//                            {$data['descr']['apartment_name']}
+                        } ?></h1></div>
+        <form class="not_full_width changes__form_dates">
             <div class="form-group row">
-                <label for="date_start" class="col-sm-1 col-form-label">Start date:</label>
+                <label for="date_start" class="changes__start_title col-sm-1 col-form-label">Start date:</label>
                 <div class="col-xs-5 col-sm-2">
-                    <input type="date" id="date_start" name="date_start" class="form-control" required/>
+                    <input type="date" id="date_start" name="date_start" class="changes__dates_fields form-control" required/>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label for="date_end" class="col-sm-1 col-form-label">End date:</label>
+                <label for="date_end" class="changes__end_date col-sm-1 col-form-label">End date:</label>
                 <div class="col-xs-5 col-sm-2">
-                    <input type="date" id="date_end" name="date_end" class="form-control" required/>
+                    <input type="date" id="date_end" name="date_end" class="changes__dates_fields form-control" required/>
                 </div>
-            </div>
-            <div class="form-group row">
                 <div class="col-xs-3">
-                    <button type="submit" class="btn btn-primary btn-lg">Get changes</button>
+                    <button type="submit" class="changes__dates_search btn btn-primary btn-lg">Get changes</button>
                 </div>
             </div>
         </form>
+        </div>
+        </div>
     </div>
-    <ul class="nav nav-pills nav-fill" role="tablist">
-        <li role="presentation" class="nav-item"><a href="#tabbook" role="tab"
-                                                    data-toggle="tab" class="nav-link active">Bookable changes</a></li>
-        <li role="presentation" class="nav-item"><a href="#tabprice" role="tab"
-                                                    data-toggle="tab" class="nav-link">Price changes</a></li>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+    <ul class="not_full_width changes__nav nav nav-pills nav-fill" role="tablist">
+        <li role="presentation" class="changes__sybmenu nav-item"><a href="#tabbook" role="tab"
+                                                    data-toggle="tab" class="changes__submenu-link nav-link active">Bookable changes</a></li>
+        <li role="presentation" class="changes__sybmenu nav-item"><a href="#tabprice" role="tab"
+                                                    data-toggle="tab" class="changes__submenu-link nav-link">Price changes</a></li>
     </ul>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="tabbook">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="py-4 col-12">
+<!--        сделать таблицу элементами -->
+<!--        <div role="tabpanel" class="tab-pane active" id="tabbook">-->
+<!--            <div class="container-fluid">-->
+<!--                <div class="row">-->
+<!--                    <div class="py-4 col-12">-->
+        <div id="tabbook" role="tabpanel" class="tab-pane active">
+        <div class="container">
+            <div class="row">
+
+
                         <?php if (isset($data['bookable_changes']) && $data['bookable_changes'] !== null): ?>
                             <?php /*foreach ($data['bookable_changes'] as $row): */ ?><!--
                         <p class="text-danger"><?php /*echo "<span class=\"text-secondary\">{$row['date_parsing']}</span>  NEW BOOKING: {$row['date_cal']}" */ ?></p>
                     --><?php /*endforeach; */ ?>
                             <?php $arr = group_array($data['bookable_changes']);
-                            foreach ($arr as $k_arr => $v_arr):?>
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-auto col-8 border border-5 border-primary rounded mb-3 p-2"><?php foreach ($v_arr as $vv): ?>
-                                                <p class="text-danger"><?php echo "<span class=\"text-secondary\">{$k_arr}</span>  NEW BOOKING: {$vv[0]}<span class=\"text-secondary\"> \${$vv[1]}</span>" ?></p>
-                                            <?php endforeach; ?></div>
-                                        <div class="col-md-auto col-4 align-self-center mb-3 p-1"><?php $c = count($v_arr) - 1;
-                                            if ($c === 1) {
-                                                echo "<p class=\"font-weight-bold\">{$c} night</p>";
-                                            } elseif ($c > 1) {
-                                                echo "<p class=\"font-weight-bold\">{$c} nights</p>";
-                                            } ?></div>
 
+                            foreach ($arr as $k_arr => $v_arr):?>
+                                <div class="col-lg-10">
+                                <table class="change__table">
+                                <tbody>
+                                        <?php
+                                        $quant = count($v_arr);
+                                        $manyNight = false;
+                                        if($quant > 5){
+                                            $manyNight = true;
+                                        }
+                                        if(!$manyNight){
+                                        foreach ($v_arr as $vv):?>
+
+                                            <?php echo "<tr class='changes__row-default'><td class=\"changes__col-default\">{$k_arr}</td> <td class='changes__col-default'> NEW BOOKING: <span class='changes__col-date'>{$vv[0]}</span></td><td class='changes__col-default'><span class=\"\"> \${$vv[1]}</span></td></tr>" ?>
+
+                                        <?php endforeach;
+                                        } else{
+                                            for($i = 0; $i < 5; $i++){ ?>
+                                                <?php echo "<tr class='changes__row-default'><td class=\"changes__col-default\">{$k_arr}</td> <td class='changes__col-default'> NEW BOOKING: <span class='changes__col-date'>{$v_arr[$i][0]}</span></td><td class='changes__col-default'><span class=\"\"> \${$v_arr[$i][1]}</span></td></tr>" ?>
+                                            <?php }
+                                        }
+                                        ?>
+
+                                </tbody>
+                                </table>
+                                    <?php if($manyNight){ ?>
+                                        <button id="full" class="changes__btn-showAll btn btn-primary">See all</button>
+                                    <?php } ?>
+                                </div>
+
+                                            <?php
+                                                $c = count($v_arr) - 1;
+                                            ?>
+                                <div class="col-lg-2">
+                                    <div class="changes__nights">
+                                        <div class="changes__text">
+                                            <?php
+                                            if ($c === 1) {
+                                                echo "{$c} night";
+                                            } elseif ($c > 1) {
+                                                echo "{$c} nights";
+                                            } ?>
+
+                                        </div>
                                     </div>
                                 </div>
+
+                                <div class="changes__margin-top"></div>
+
+<!--                                        <div class="col-md-auto col-4 align-self-center mb-3 p-1">--><?php //$c = count($v_arr) - 1;
+//                                            if ($c === 1) {
+//                                                echo "<p class=\"font-weight-bold\">{$c} night</p>";
+//                                            } elseif ($c > 1) {
+//                                                echo "<p class=\"font-weight-bold\">{$c} nights</p>";
+//                                            } ?><!--</div>-->
+
+
                             <?php endforeach; ?>
 
                         <?php endif; ?>
-                    </div>
+
                 </div>
+<!--                <div class="col-lg-2">-->
+<!--                    <div class="changes__nights">-->
+<!--                        <div class="changes__text">-->
+<!--                            --><?php
+//                            if ($c === 1) {
+//                                echo "{$c} night";
+//                            } elseif ($c > 1) {
+//                                echo "{$c} nights";
+//                            } ?>
+<!---->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane" id="tabprice">
-            <div class="container-fluid">
+
+        <div id="tabprice" role="tabpanel" class="tab-pane">
+            <div class="container">
                 <div class="row">
-                    <div class="py-4 col-12">
+                    <div class="col-lg-10">
+        <table class="change__table">
+            <tbody>
+
                         <?php if (isset($data['price_changes']) && $data['price_changes'] !== null): ?>
+<!--                            <br><br>-->
+
                             <?php foreach ($data['price_changes'] as $row): ?>
-                                <p class="text-danger"><?php echo "<span class=\"text-secondary\">{$row['date_parsing']}</span>  PRICE CHANGE: {$row['date_cal']}   \${$row['price_was']} -> \${$row['price']}" ?></p>
+                                <tr class="changes__row-default"><?php echo "<td class='changes__col-default'>{$row['date_parsing']}</td> <td class='changes__col-default'> PRICE CHANGE: <span class='changes__col-date'>{$row['date_cal']}</span></td> <td class='changes__col-default'>   \${$row['price_was']} -> \${$row['price']}</td>" ?></tr>
                             <?php endforeach; ?>
+            </tbody>
+        </table>
                         <?php endif; ?>
-                    </div>
-                </div>
+
+
+
             </div>
-        </div>
+            </div>
+            <div class="col-lg-2">
+<!--                <div class="changes__nights">-->
+<!--                    <div class="changes__text">-->
+<!--                        87 nights-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
     </div>
+</div>
+</div>
     <!--<div class="container-fluid">
         <div class="row">
 
 
         </div>
     </div>-->
-</div>
+
+
+<?php require_once 'templates/footer.php' ?>
+

@@ -4,7 +4,7 @@ function print_calendar($data, $book_changes)
 {
     ob_start();
     $currs = strtotime($data[0]['date']);
-    echo '<div>' . date('F', $currs) . '</div>';
+    echo '<div class="cal__titleMonth">' . date('F', $currs) . '</div>';
     $dayofmonth = date('t', $currs);
 
     $day_count = 1;
@@ -54,10 +54,9 @@ function print_calendar($data, $book_changes)
 
     }
 
-    echo '<div class="table-responsive"><table class="table table-bordered">';
+    echo '<div class="table-responsive"><table class="table__calendar table table-bordered">';
     $c = 0;
     foreach ($week as $iValue) {
-
         echo '<tr>';
 
         for ($j = 0; $j < 7; $j++) {
@@ -70,11 +69,11 @@ function print_calendar($data, $book_changes)
                 } elseif ($data[$c]['available'] === '1' /* && $data[$c]['bookable'] === '1'  && $data[$c]['available_for_checkin'] == '1'  */) {
                     echo "<td class=\"table-secondary\"><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$data[$c]['price_day']}</span></td>";
                 } else {
-                    echo "<td>{$iValue[$j]}</br><span class=\"text-success\">\${$data[$c]['price_day']}</span></td>";
+                    echo "<td class='table-cal-default'>{$iValue[$j]}</br><span class=\"text-success\">\${$data[$c]['price_day']}</span></td>";
                 }
                 $c++;
             } else {
-                echo '<td>&nbsp;</td>';
+                echo '<td class="table-spaced">&nbsp;</td>';
             }
 
         }
@@ -173,7 +172,7 @@ function return_moths_calendar($date, $period)
                 }
                 $c++;
             } else {
-                echo '<td>&nbsp;</td>';
+                echo "<td class='table-spaced'>&nbsp;</td>";
             }
 
         }
