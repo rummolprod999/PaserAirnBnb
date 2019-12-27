@@ -22,6 +22,25 @@
                     } ?> required/>
                 </div>
             </div>
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bookopt" id="bookopt1"
+                           value="book" <?php if (!isset($_GET['bookopt']) || $_GET['bookopt'] === 'book') {
+                        echo 'checked';
+                    } ?>>
+                    <label class="form-check-label" for="bookopt1">
+                        Only bookable
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bookopt" id="bookopt2" value="book_or_avail" <?php if (isset($_GET['bookopt']) && $_GET['bookopt'] === 'book_or_avail') {
+                        echo 'checked';
+                    } ?>>
+                    <label class="form-check-label" for="bookopt2">
+                        Bookable or available
+                    </label>
+                </div>
+            </div>
             <div class="form-group row">
                 <div class="col-xs-3">
                     <button type="submit" class="btn btn-primary btn-lg">Search</button>
