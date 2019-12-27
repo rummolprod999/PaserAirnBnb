@@ -183,6 +183,10 @@ class DefaultModel extends Model
             $stmt->bindValue(':id', (int)$r['id'], PDO::PARAM_INT);
             $stmt->execute();
             $r['discounts'] = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            foreach ($r['discounts'] as &$disc){
+                $disc = str_replace(' price', '', $disc);
+            }
+            unset($disc);
             $r['min_nights'] = $this->get_min_nights($r['id']);
             $r['status_parsing'] = $this->status_url($r['suspend']);
             $data_new[] = $r;

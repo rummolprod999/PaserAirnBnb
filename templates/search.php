@@ -7,13 +7,19 @@
             <div class="form-group row">
                 <label for="date_start" class="col-sm-1 col-form-label">Start date:</label>
                 <div class="col-xs-5 col-sm-2">
-                    <input type="date" id="date_start" name="date_start" class="form-control" required/>
+                    <input type="date" id="date_start" name="date_start"
+                           class="form-control" <?php if (isset($_GET['date_start'])) {
+                        echo "value='{$_GET['date_start']}'";
+                    } ?> required/>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="date_end" class="col-sm-1 col-form-label">End date:</label>
                 <div class="col-xs-5 col-sm-2">
-                    <input type="date" id="date_end" name="date_end" class="form-control" required/>
+                    <input type="date" id="date_end" name="date_end"
+                           class="form-control" <?php if (isset($_GET['date_start'])) {
+                        echo "value='{$_GET['date_end']}'";
+                    } ?> required/>
                 </div>
             </div>
             <div class="form-group row">
