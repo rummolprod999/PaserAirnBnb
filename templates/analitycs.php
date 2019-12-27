@@ -19,11 +19,28 @@ $divs = 0;
                 <div class="not_full_width"><h1 class="analitycs__title text-left">ANALITYCS</h1></div>
 
                 <div class="analitycs__setNights not_full_width d-flex">
+                    <form class="d-flex form__nights" method="get">
                     <div class="nights d-flex">
                         <span class="night__text">
                             Night:
                         </span>
-                        <input value="<?php echo (int)(array_key_first($data[0])) ?>" type="number" class="night__field">
+                        <?php $selectedData = (int)(array_key_first($data[0])) ?>
+
+
+                            <input value="<?php echo $selectedData ?>" min="<?php echo $selectedData ?>" max="<?php echo count($data); ?>" type="number" class="night__field">
+
+                        <script>
+                            $(document).ready(function(){
+                                $('.form__nights').submit(function(event){
+                                    event.preventDefault();
+                                    let value = $('.night__field').val();
+                                    $('.tab-pane').removeClass('active');
+                                    $('.days__quant').html(parseInt(value) + 1);
+                                    $('.js_link' + value).trigger('click');
+
+                                });
+                            });
+                        </script>
                         <div class="buttons__selector">
                             <img class="btn_up" src="/img/ic-arrow-up-18px.png" aria-hidden="true" >
                             <img class="btn_down" src="/img/ic-arrow-down-18px.png" aria-hidden="true" >
@@ -37,6 +54,8 @@ $divs = 0;
                             <?php echo (int)(array_key_first($data[0]) + 1) ?>
                         </span>
                     </div>
+                    <button type="submit" class="btn btn-primary anal__accept">Accept</button>
+                    </form>
                 </div>
 
 <!--                <ul class="nav nav-pills nav-fill" role="tablist">-->
@@ -49,8 +68,17 @@ $divs = 0;
 <!--                    --><?php //endforeach; ?>
 <!--                </ul>-->
                 <div class="tab-content">
+                    <?php $divs = $selectedData ?>
                     <?php foreach ($data as $m): ?>
-                        <div role="tabpanel" class="tab-pane <?php if ($divs === 0) {
+
+                        <a href="#tab<?php echo array_key_first($m) ?>" role="tab"
+                           data-toggle="tab" class="js_link<?= array_key_first($m); ?> d-none nav-link<?php if ($tabs === 0) {
+                            echo ' active';
+                        } ?>"><?php $tabs++;
+                            echo array_key_first($m);
+                            ?></a>
+
+                        <div role="tabpanel" class="tab-pane <?php if ($divs == $selectedData) {
                             echo 'active';
                         } ?>" id="tab<?php $divs++;
                         echo array_key_first($m) ?>">

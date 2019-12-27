@@ -780,6 +780,11 @@ textarea:disabled {
 .my-legend a {
     color: #777;
 }
+.anal__accept{
+    background-color: #4d88d8;
+    margin-left: 30px;
+    padding: 0px 40px;
+}
 
 @media (max-width: 1500px) {
     .main_table{
