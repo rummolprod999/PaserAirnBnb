@@ -86,7 +86,7 @@ function print_calendar($data, $book_changes)
     return ob_get_clean();
 }
 
-function print_calendar_free($period)
+function print_calendar_free($period, $case_bookable)
 {
     ob_start();
     $start = (new DateTime($period[0]['date']))->modify('first day of this month');
@@ -95,12 +95,12 @@ function print_calendar_free($period)
     $per = new DatePeriod($start, $interval, $end);
 
     foreach ($per as $dt) {
-        echo return_moths_calendar($dt, $period);
+        echo return_moths_calendar($dt, $period, $case_bookable);
     }
     return ob_get_clean();
 }
 
-function return_moths_calendar($date, $period)
+function return_moths_calendar($date, $period, $case_bookable)
 {
     ob_start();
     $currs = $date->getTimestamp();
@@ -166,7 +166,18 @@ function return_moths_calendar($date, $period)
                 $currday = $date->modify('first day of this month')->modify("{$c} day")->format('Y-m-d');
                 $per = get_perid($currday, $period);
                 if ($per !== null) {
-                    echo "<td class=\"table-success\"><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$per['price_day']}</span></td>";
+                    if ($case_bookable === 'all') {
+                        if ($per['available'] === '1' && $per['bookable'] === '1'  /* && $data[$c]['available_for_checkin'] == '1'  */) {
+                            echo "<td class=\"table-success\"><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$per['price_day']}</span></td>";
+                        } elseif ($per['available'] === '1' /* && $data[$c]['bookable'] === '1'  && $data[$c]['available_for_checkin'] == '1'  */) {
+                            echo "<td class=\"table-secondary\"><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$per['price_day']}</span></td>";
+                        } else {
+                            echo "<td><span class=\"text - dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$per['price_day']}</span></td>";
+                        }
+                    } else {
+                        echo "<td class=\"table-success\"><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$per['price_day']}</span></td>";
+                    }
+
                 } else {
                     echo "<td>{$iValue[$j]}</br></br></td>";
                 }

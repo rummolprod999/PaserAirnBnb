@@ -40,6 +40,14 @@
                         Bookable or available
                     </label>
                 </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bookopt" id="bookopt3" value="all" <?php if (isset($_GET['bookopt']) && $_GET['bookopt'] === 'all') {
+                        echo 'checked';
+                    } ?>>
+                    <label class="form-check-label" for="bookopt3">
+                        All
+                    </label>
+                </div>
             </div>
             <div class="form-group row">
                 <div class="col-xs-3">
@@ -54,7 +62,7 @@
                 <div class="row border border-2 border-secondary rounded mb-3 p-2">
                     <div class="py-4 col-12 col-md-6">
                         <div><?php echo "<a target='_blank' href='/stat/{$d['id']}'><h3>{$d['owner']} (min stay this {$d['period'][0]['min_nights']})</h3></a> " ?></div>
-                        <div><?php echo print_calendar_free($d['period']) ?></div>
+                        <div><?php echo print_calendar_free($d['period'], $case_bookable) ?></div>
                     </div>
                     <div class="py-4 col-xs-6 col-md-4">
                         <div class="alert alert-warning  mt-md-5">

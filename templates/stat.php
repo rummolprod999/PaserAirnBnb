@@ -87,7 +87,7 @@
                 </div>
 
                 <?php
-                    $len = count($data['prices']['check_in_first_15']);
+                    $len = 8;
                     for($i = 0; $i < $len; $i++){
 
                 ?>

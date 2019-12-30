@@ -13,6 +13,6 @@ class SearchController extends Controller
     function index_page()
     {
         $data = $this->model->get_data();
-        echo $this->template('templates/search.php', ["title" => "Search for available apartments", "data" => $data]);
+        echo $this->template('templates/search.php', ["title" => "Search for available apartments", "data" => $data, "case_bookable" => $_GET['bookopt']]);
     }
 }
