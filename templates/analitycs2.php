@@ -1,7 +1,17 @@
 <?php require_once 'templates/navigation.php' ?>
-
+<?php //$loader = 1; ?>
 <div id="article">
-    <div><h1 class="text-center">ANALITYCS 2</h1></div>
+
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <div>
+        <h1 class="text-center">ANALITYCS 2</h1>
+        <a style="display: block; text-align: right !important;" target="_blank" href="<?= $data['video_url'] ?>" class="text-center main_tutorial tutorial__text">Watch tutorial</a>
+    </div>
+    </div>
+    </div>
+</div>
     <ul class="nav nav-pills nav-fill" role="tablist">
         <li role="presentation" class="nav-item"><a href="#tabtable1" role="tab"
                                                     data-toggle="tab"
@@ -14,13 +24,14 @@
                                                         echo 'active';
                                                     } ?>">Table 2</a></li>
     </ul>
-    <div class="tab-content">
+    <div class="loader"></div>
+    <div class="tab-content hidden">
         <div role="tabpanel" class="tab-pane <?php if (!isset($_GET['date_start'])) {
             echo 'active';
         } ?>" id="tabtable1">
             <div id="table_div">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="anal2_table table table-bordered table-hover">
                         <thead>
                         <tr>
                             <th>Period</th>
@@ -36,11 +47,26 @@
                                 <td><span class='text-primary'><?php echo $row['days'] ?></span></td>
                             </tr>
                         <?php endforeach; ?>
+                        <?php //$loader = 0; ?>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
+        <?php
+            //if(!$loader){ ?>
+                <script>
+                    $(document).ready(function(){
+                        $('.loader').addClass('hidden');
+                        $('.tab-content').removeClass('hidden');
+                    });
+                </script>
+
+                <?php
+           // }
+        ?>
+
         <div role="tabpanel" class="tab-pane <?php if (isset($_GET['date_start'])) {
             echo 'active';
         } ?>" id="tabtable2">

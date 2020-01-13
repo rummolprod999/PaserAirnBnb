@@ -37,6 +37,18 @@ class AnalitycsModel extends Model
             }
         }
 
+        $data['video_url'] = $this->get_URL(2);
+
         return $data;
+    }
+
+    private function get_URL($id)
+    {
+        $stmt = $this->conn->prepare('SELECT page_url_video FROM pages WHERE page_id = :id');
+        $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result[0]['page_url_video'];
     }
 }

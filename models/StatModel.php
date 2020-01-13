@@ -120,6 +120,8 @@ class StatModel extends Model
         $stmt->execute();
         $res_bookable_change = $stmt->fetchAll(PDO::FETCH_COLUMN);
         $data['res_bookable_change'] = $res_bookable_change;
+        $data['video_url'] = $this->get_URL(4);
+
         return $data;
     }
 
@@ -142,6 +144,16 @@ class StatModel extends Model
             }
         }
         return $message;
+    }
+
+    private function get_URL($id)
+    {
+        $stmt = $this->conn->prepare('SELECT page_url_video FROM pages WHERE page_id = :id');
+        $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result[0]['page_url_video'];
     }
 
     private function suspend($id_url)

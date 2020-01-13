@@ -1,6 +1,26 @@
 <?php require_once 'templates/navigation.php' ?>
 <?php require_once 'helpers/calendar.php' ?>
-<div><h1 class="text-center">Search for available apartments</h1></div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+<div>
+    <h1 class="text-center">Search for available apartments</h1>
+    <?php
+    if(count($data) == 1){
+        if(!empty($data['video_url'])){
+            $url1 = $data['video_url'];
+        } else{
+            $url1 = $data;
+        }
+    } else if(count($data) > 1){
+        $url1 = $data['video_url'];
+    }
+    ?>
+    <a style="display: block; text-align: right !important; margin-bottom: 0;" target="_blank" href="<?= $url1 ?>" class="text-center main_tutorial tutorial__text">Watch tutorial</a>
+</div>
+        </div>
+    </div>
+</div>
 <div id="article">
     <div class="container-fluid">
         <form>
@@ -57,7 +77,7 @@
         </form>
     </div>
     <div class="container-fluid">
-        <?php if (isset($data) && count($data) > 0): ?>
+        <?php if (isset($data) && count($data) > 1): ?>
             <?php foreach ($data as $d): ?>
                 <div class="row border border-2 border-secondary rounded mb-3 p-2">
                     <div class="py-4 col-12 col-md-6">

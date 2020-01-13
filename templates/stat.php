@@ -9,7 +9,10 @@
 
 
 
-                <div><h1 class="stat__title text-left">Statistics</h1></div>
+                <div class="title_margin">
+                    <h1 class="stat__title text-left">Statistics</h1>
+                    <a target="_blank" href="<?= $data['video_url'] ?>" class="float-right main_tutorial tutorial__text">Watch tutorial</a>
+                </div>
                 <div class="stat__apart stat__char"><strong>Apartment Name: </strong><?php if (isset($data['info_url']['apartment_name'])) {
                         ?> <span> <?php echo $data['info_url']['apartment_name']; ?> </span> <?php
                     } ?></div>

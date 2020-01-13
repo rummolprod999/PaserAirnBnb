@@ -16,9 +16,12 @@ $divs = 0;
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="not_full_width"><h1 class="analitycs__title text-left">ANALITYCS</h1></div>
+                <div class="not_full_width title_margin">
+                    <h1 class="analitycs__title text-left">ANALITYCS</h1>
+                    <a target="_blank" href="<?= $data['video_url'] ?>" class="float-right main_tutorial tutorial__text">Watch tutorial</a>
+                </div>
 
-                <div class="analitycs__setNights not_full_width d-flex">
+                 <div class="analitycs__setNights not_full_width d-flex">
                     <form class="d-flex form__nights" method="get">
                     <div class="nights d-flex">
                         <span class="night__text">
@@ -38,6 +41,37 @@ $divs = 0;
                                     $('.days__quant').html(parseInt(value) + 1);
                                     $('.js_link' + value).trigger('click');
 
+                                });
+
+                                $('.nights').each(function() {
+                                    var spinner = jQuery(this),
+                                        input = spinner.find('input[type="number"]'),
+                                        btnUp = spinner.find('.btn_up'),
+                                        btnDown = spinner.find('.btn_down');
+                                    btnUp.click(function() {
+                                        var oldValue = parseFloat(input.val());
+                                        var newVal = oldValue + 1;
+                                        spinner.find("input").val(newVal);
+                                        $(".days__quant").text(newVal + 1);
+                                        spinner.find("input").trigger("change");
+                                    });
+
+                                    btnDown.click(function() {
+                                        var oldValue = parseFloat(input.val());
+                                        var newVal = oldValue - 1;
+                                        spinner.find("input").val(newVal);
+                                        $(".days__quant").text(newVal + 1);
+                                        spinner.find("input").trigger("change");
+                                    });
+
+                                });
+                                $('[data-toggle="tooltip"]').hover(function() {
+                                    $(this).tooltip({
+                                        trigger: "hover",
+                                        html: true,
+                                        animation: false,
+                                        content: $(this).prop("title").text
+                                    }).tooltip('show');
                                 });
                             });
                         </script>
@@ -123,37 +157,4 @@ $divs = 0;
         </div>
     </div>
 
-        <script>
-            jQuery('.nights').each(function() {
-                var spinner = jQuery(this),
-                    input = spinner.find('input[type="number"]'),
-                    btnUp = spinner.find('.btn_up'),
-                    btnDown = spinner.find('.btn_down');
-
-                btnUp.click(function() {
-                    var oldValue = parseFloat(input.val());
-                    var newVal = oldValue + 1;
-                    spinner.find("input").val(newVal);
-                    spinner.find("input").trigger("change");
-                });
-
-                btnDown.click(function() {
-                    var oldValue = parseFloat(input.val());
-                    var newVal = oldValue - 1;
-                    spinner.find("input").val(newVal);
-                    spinner.find("input").trigger("change");
-                });
-
-            });
-
-
-
-            $('[data-toggle="tooltip"]').hover(function() {
-                $(this).tooltip({
-                    trigger: "hover",
-                    html: true,
-                    animation: false,
-                    content: $(this).prop("title").text
-                }).tooltip('show');
-            })</script>
     </div>

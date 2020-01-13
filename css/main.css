@@ -18,6 +18,10 @@
     position: relative;
 }
 
+.hidden{
+    display: none !important;
+}
+
 nav.navbar{
     padding-bottom: 0px;
     margin-bottom: -0.4rem;
@@ -68,8 +72,58 @@ body {
     line-height: 19px;
 }
 .main__btn_change{
+    padding-left: 30px;
+    padding-right: 30px;
+    height: 34px;
+    margin: auto 0;
     background-color: #4d88d8;
+    margin-left: 20px;
 }
+.notes_title{
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 0px;
+    margin-right: 20px;
+}
+.anal2_table tr th:nth-child(1), .anal2_table tr td:nth-child(1){
+    width: 300px;
+    min-width: 300px;
+    max-width: 300px;
+}
+
+.grayBC{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.2);
+    z-index: 10;
+}
+.loader {
+    margin-left: calc(50% - 60px);
+    margin-top: 50px;
+    z-index: 11;
+    border: 16px solid #7a7a7a;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 .thead__title{
     width: max-content;
     border-left: solid 2px #bcbcbc;
@@ -115,7 +169,7 @@ tbody th{
 
 .mainTitle{
     text-align: left;
-    margin: 45px 0 45px 10px;
+    margin-top: 50px;
 }
 .under-text{
     margin-left: 15px;
@@ -153,6 +207,23 @@ tbody th{
 }
 .changes__title{
     margin: 45px 0 37px 0;
+}
+.all_pages{
+    flex-wrap: wrap;
+    width: 100%;
+}
+.url_sbm{
+    margin: auto;
+    height: 34px;
+}
+.url_area{
+    width: 80%;
+    height: 50px;
+}
+.all_pages div{
+    width: 250px;
+    margin-left: 50px;
+    margin-bottom: 30px;
 }
 .changes__sybmenu, .changes__submenu-link{
     width: 216px;
@@ -323,7 +394,7 @@ tbody th{
     background-color: #ffffff;
     font-size: 14px;
 }
-.main_table tr{
+.main_table tr:nth-child(3n+2){
     border-bottom: 2px solid rgba(0, 0, 0, .1);
 }
 .main_table td, .main_table th{
@@ -392,6 +463,11 @@ svg .active{
     color: #181818;
     cursor: pointer;
 }
+.notes_area{
+    width: 100%;
+    overflow: hidden;
+    height: 50px;
+}
 .notes_textarea{
     color: #707070;
     padding: 10px 15px;
@@ -401,7 +477,7 @@ svg .active{
 }
 .nightes_dates{
     color: #181818;
-    /*line-height: 14px;*/
+    line-height: 14px;
     margin-bottom: 0px;
 }
 .price_date{
@@ -419,7 +495,7 @@ svg .active{
     /*box-shadow: 0px -30px 20px 1px rgba(255,255,255,1) !important;*/
 }
 .price_height{
-    max-height: 105px;
+    max-height: 90px;
     overflow: hidden;
     transition: .2s easy;
 }
@@ -470,6 +546,83 @@ svg .active{
     font-size: 16px;
     line-height: 50px;
 }
+.tutorial__text{
+    font-size: 14px;
+}
+.main_tutorial{
+    margin-bottom: 40px;
+}
+.mailModal__close{
+    position: absolute;
+    top: 25px;
+    right: 25px;
+}
+.result__form{
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+}
+.result__form.success{
+    color: green;
+}
+.result__form.error{
+    color: red;
+}
+.mailModal__close:hover{
+    cursor: pointer;
+}
+.free__btn{
+    width: 100%;
+    background-color: #4d88d8;
+    padding: 15px 0;
+    margin-top: 40px;
+}
+.darkSide{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: block;
+    z-index: 10;
+    background-color: rgba(0,0,0,.2);
+    width: 100vw;
+    height: 100vh;
+}
+.mailModal{
+    display: block;
+    z-index: 11;
+    position: absolute;
+    top: 0;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: #fff;
+    width: 600px;
+    height: 300px;
+    margin: auto;
+}
+.mailModal form{
+    position: relative;
+}
+.mailModal__label{
+    font-size: 20px ;
+    margin-top: 70px;
+    width: 100%;
+    text-align: center;
+}
+.mailModal__field{
+    width: 75%;
+    font-size: 18px;
+    padding-left: 15px;
+}
+.mailModal__send{
+    width: 150px;
+    text-align: center;
+    padding: 7px 0;
+    font-size: 18px;
+    background-color: #4d88d8;
+    display: block;
+    margin: 15px auto 0 auto;
+}
 .analitycs__setNights .days{
     margin-left: 45px;
 }
@@ -495,12 +648,14 @@ svg .active{
 }
 
 
-
+.title_margin{
+    margin-top: 45px;
+    margin-bottom: 30px;
+}
 .analitycs__title{
     color: #181818;
     font-size: 34px;
     line-height: 46px;
-    margin: 45px 0 30px 0;
     font-weight: 500;
 }
 
@@ -568,7 +723,6 @@ svg .active{
 
 .stat__title{
     text-transform: uppercase;
-    margin: 45px 0;
     font-size: 34px;
     color: #181818;
     line-height: 46px;

@@ -35,8 +35,15 @@ class AdminDefaultModel extends Model
             header("Location: {$_SERVER['REQUEST_URI']}");
             exit();
         }
+        $change_url = $this->set_url();
+        if ($change_url !== '') {
+            $_SESSION['change_url'] = $change_url;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
+        }
         $data = [];
         $data['users_list'] = $this->get_users_list();
+        $data['pages'] = $this->get_url_list();
         return $data;
     }
 
@@ -147,6 +154,31 @@ class AdminDefaultModel extends Model
             }
         }
         rmdir($dir);
+    }
+
+    private function get_url_list()
+    {
+        $stmt = $this->conn->prepare('SELECT * FROM pages WHERE 1');
+        $stmt->execute();
+
+        $url = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $url;
+    }
+
+    private function set_url()
+    {
+        $message = '';
+        if (isset($_POST['url'], $_POST['id_url'])) {
+            $stmt = $this->conn->prepare('UPDATE pages SET page_url_video = :url WHERE page_id = :id');
+            $stmt->bindValue(':id', (int)$_POST['id_url'], PDO::PARAM_INT);
+            $stmt->bindValue(':url', $_POST['url']);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                $message = '<div class="alert alert-success" role="alert">Url has been updated successfully</div>';
+                return $message;
+            }
+        }
+        return $message;
     }
 
     private function get_users_list()

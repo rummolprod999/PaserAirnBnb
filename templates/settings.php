@@ -1,5 +1,14 @@
 <?php require_once 'templates/navigation.php' ?>
-<div><h1 class="text-center">Log</h1></div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+<div>
+    <h1 class="text-center">Log</h1>
+    <a style="display: block; text-align: right !important; margin-bottom: 0px;" target="_blank" href="<?= $data['video_url'] ?>" class="text-center main_tutorial tutorial__text">Watch tutorial</a>
+</div>
+</div>
+    </div>
+</div>
 <div id="article">
     <?php if (isset($data['date_last'])) {
         echo "<div><strong>Last run time: </strong>{$data['date_last']['date_last']}</div>";

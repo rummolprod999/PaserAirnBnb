@@ -4,8 +4,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-
-                <div class="not_full_width"><h1 class="mainTitle">APARTMENTS LIST</h1></div>
+                <div class="main_tutorial not_full_width">
+                    <h1  class="mainTitle">APARTMENTS LIST</h1>
+                    <a target="_blank" href="<?= $data['video_url'] ?>" class="float-right tutorial__text">Watch tutorial</a>
+                </div>
                 <div id="table_div">
                     <div class="not_full_width">
                         <div >
@@ -71,7 +73,6 @@
 <!--                                <th>Changes</th>-->
                                 <th><div class="thead__title">Property Name</div></th>
                                 <th><div class="thead__title">Owner</div></th>
-                                <th><div class="thead__title">Notes</div></th>
                                 <th><div class="thead__title">Min nights</div></th>
                                 <th><div class="thead__title">Changes</div></th>
                                 <th><div class="thead__title">Long terms</div></th>
@@ -91,6 +92,7 @@
                                 } elseif ($row['id'] === '38') {
                                     echo 'class="table-danger"';
                                 } ?>>
+                                    <tr>
                                     <th><?php echo ++$count_app ?></th>
                                     <td><input class="order__field w-100" min="0" max="999" type="number" title="from 0 to 999"
                                                form="reorder_table"
@@ -100,23 +102,7 @@
                                     <td><a class="table_name_link" title="<?php echo $row['url'] ?>" target="_blank"
                                            href="<?php echo $row['url'] ?>"><?php echo $row['apartment_name'] ?></a></td>
                                     <td><?php echo $row['owner'] ?></td>
-                                    <td>
-                                        <?php //if ($row['notes'] !== ''): ?>
-                                            <form method="post" id="notes_form<?php echo $row['id'] ?>">
-                                                <input type="hidden" name="id_notes"
-                                                       value='<?php echo $row['id'] ?>'>
-                                                <textarea id="notes<?php echo $row['id'] ?>" name="notes" class="notes_textarea" placeholder="Enter your notes here..." rows="3" cols="20"><?php echo $row['notes'] ?></textarea>
-                                                <?php //if($row['notes'] != ''){ ?>
-                                                <button type="submit" class="main__btn_change btn btn-primary d-none" form="notes_form<?php echo $row['id'] ?>">
-                                                    Save changes
-                                                </button>
-                                                <?php //} ?>
-                                            </form>
-                                        <?php //endif; ?>
-<!--                                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal"-->
-<!--                                                data-target="#Modal--><?php //echo $row['id'] ?><!--">change-->
-<!--                                        </button>-->
-                                    </td>
+
                                     <td class='text-info text-nowrap'><?php if (isset($row['min_nights'])) {
                                             $min_nights = $row['min_nights'];
                                             echo print_collapse_min_nights($row['min_nights'], $row['id']);
@@ -209,6 +195,27 @@
 <!--                                            <button type="submit" class="btn btn-danger mb-2">Remove</button>-->
 <!--                                        </form>-->
 <!--                                    </td>-->
+                                </tr>
+                            <tr>
+                                <td colspan="8">
+                                    <?php //if ($row['notes'] !== ''): ?>
+                                    <form method="post" class=" d-flex" id="notes_form<?php echo $row['id'] ?>">
+                                        <input type="hidden" name="id_notes"
+                                               value='<?php echo $row['id'] ?>'>
+                                        <p class="notes_title">Notes:</p>
+                                        <textarea id="notes<?php echo $row['id'] ?>" name="notes" class="notes_area notes_textarea" rows="1" placeholder="Enter your notes here..." ><?php echo $row['notes'] ?></textarea>
+                                        <?php //if($row['notes'] != ''){ ?>
+                                        <button type="submit" class="main__btn_change btn btn-primary d-none" form="notes_form<?php echo $row['id'] ?>">
+                                            Save
+                                        </button>
+                                        <?php //} ?>
+                                    </form>
+                                    <?php //endif; ?>
+                                    <!--                                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal"-->
+                                    <!--                                                data-target="#Modal--><?php //echo $row['id'] ?><!--">change-->
+                                    <!--                                        </button>-->
+                                </td>
+                            </tr>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

@@ -13,13 +13,26 @@ class SearchModel extends Model
     {
         $data = [];
         if (!isset($_GET['date_start'], $_GET['date_end'], $_GET['bookopt'])) {
-            return [];
+            $url = $this->get_URL(6);
+            return $url;
         }
         $start_date = $_GET['date_start'];
         $end_date = $_GET['date_end'];
         $case_bookable = $_GET['bookopt'];
         $data = $this->get_free($start_date, $end_date, $case_bookable);
+
+        $data['video_url'] = $this->get_URL(6);
         return $data;
+    }
+
+    private function get_URL($id)
+    {
+        $stmt = $this->conn->prepare('SELECT page_url_video FROM pages WHERE page_id = :id');
+        $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result[0]['page_url_video'];
     }
 
     private function get_free($start_date, $end_date, $case_bookable)

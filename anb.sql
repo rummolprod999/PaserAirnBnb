@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.9.4
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Дек 04 2019 г., 13:56
--- Версия сервера: 10.4.10-MariaDB-1:10.4.10+maria~eoan-log
--- Версия PHP: 7.2.25-1+ubuntu19.10.1+deb.sury.org+1
+-- Время создания: Янв 13 2020 г., 09:31
+-- Версия сервера: 10.4.11-MariaDB-1:10.4.11+maria~eoan-log
+-- Версия PHP: 7.2.26-1+ubuntu19.10.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -54,7 +54,8 @@ CREATE TABLE `anb_url` (
   `suspend` tinyint(4) NOT NULL DEFAULT 0,
   `id_user` int(11) NOT NULL,
   `last_parsing` date NOT NULL DEFAULT '2019-01-01',
-  `notes` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL
+  `notes` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_main` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -168,6 +169,18 @@ CREATE TABLE `intervals_count` (
   `id_count` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `pages`
+--
+
+CREATE TABLE `pages` (
+  `page_id` int(11) UNSIGNED ZEROFILL NOT NULL DEFAULT 00000000000,
+  `pages_name` varchar(255) NOT NULL,
+  `page_url_video` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 

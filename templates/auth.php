@@ -1,4 +1,27 @@
-<div id="article">
+
+
+<div style="position: relative" id="article">
+
+    <div class="darkSide hidden"></div>
+    <div class="mailModal hidden">
+        <form action="" id="form" class="mail__write" name="mail__write">
+            <div class="mailModal__close">
+                <i class="fas fa-times fa-2x"></i>
+            </div>
+        <label class="mailModal__label">
+            Enter email address where access information will be sent to
+            <br>
+            <input type="email" name="mail_modal" class="mailModal__field" id="">
+        </label>
+
+            <p class="result__form">
+
+            </p>
+
+        <button type="submit" class="mailModal__send btn btn-primary">Send</button>
+        </form>
+    </div>
+
     <div class="conteiner">
         <div class="row">
             <div class="col-lg-3">
@@ -14,7 +37,7 @@
         <?php } ?>
         <form role="form" method="post">
             <fieldset>
-                <legend class="auth__legend">ENTER</legend>
+                <legend class="auth__legend">LOGIN</legend>
                 <div class="auth__full-form">
                 <div class="form-group">
 <!--                    <label for="inputLogin">Login</label>-->
@@ -34,7 +57,11 @@
                 </div>
             </fieldset>
         </form>
+
+        <button  class="free__btn btn btn-primary">Request free access now</button>
+        <div class="d-none">
         <?php require_once 'templates/footer.php'?>
+        </div>
     </div>
 
 </div>
@@ -43,4 +70,6 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js">
 <script src="/js/chackbox_switcher.js"></script>
+<script src="/js/modalEmail.js"></script>

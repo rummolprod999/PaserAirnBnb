@@ -16,6 +16,7 @@ class DefaultModel extends Model
         $rem_mess = $this->remove_url();
         $launch_mess = $this->launch_parser();
         $data = $this->get_list_url();
+        $data['video_url'] = $this->get_URL(1);
         $change_notes = $this->change_notes();
         $reorders = $this->reorder_table();
         if ($launch_mess !== '') {
@@ -194,6 +195,16 @@ class DefaultModel extends Model
         }
         $data['url_arr'] = $data_new;
         return $data;
+    }
+
+    private function get_URL($id)
+    {
+        $stmt = $this->conn->prepare('SELECT page_url_video FROM pages WHERE page_id = :id');
+        $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result[0]['page_url_video'];
     }
 
     private function status_url($susp)

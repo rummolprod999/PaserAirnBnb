@@ -16,7 +16,12 @@
     if (isset($_SESSION['enable_report'])) {
         echo "<div class='alert alert-success' role='alert'>{$_SESSION['enable_report']}</div>";
         unset($_SESSION['enable_report']);
-    } ?>
+    }
+    if (isset($_SESSION['change_url'])) {
+        echo $_SESSION['change_url'];
+        unset($_SESSION['change_url']);
+    }
+    ?>
 
     <div id="table_div">
         <div class="table-responsive">
@@ -92,6 +97,10 @@
             </table>
         </div>
     </div>
+    <br>
+
+
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4 border border-2 border-secondary rounded mb-3 p-2">
@@ -152,6 +161,33 @@
                     </div>
                     <button type="submit" class="btn btn-success mb-2">Add new user</button>
                 </form>
+            </div>
+            <div class="col-md-8">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>Page</th>
+                                <th>URL of video tutorial</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($data['pages'] as $row){ ?>
+                                <tr>
+                                    <td><?= $row['pages_name'] ?></td>
+                                    <td>
+                                        <form class="justify-content-between d-flex" method="post" >
+                                            <input type="hidden" value="<?= $row['page_id'] ?>" name="id_url">
+                                            <textarea name="url" class="url_area notes_textarea" placeholder="Enter your url here..."><?= $row['page_url_video'] ?></textarea>
+
+                                            <button class="url_sbm btn btn-primary" type="submit">Save</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
             </div>
         </div>
     </div>

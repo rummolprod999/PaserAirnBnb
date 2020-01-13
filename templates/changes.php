@@ -11,10 +11,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="not_full_width"><h1 class="changes__title text-left">CHANGES <?php if (isset($data['descr'])) {
+                <div class="main_tutorial changes__title not_full_width">
+                    <h1 style="margin-top: 50px;" class="text-left">CHANGES <?php if (isset($data['descr'])) {
                             echo " <span class=\"under-text text-secondary\">{$data['descr']['apartment_name']} </span>";
 //                            {$data['descr']['apartment_name']}
-                        } ?></h1></div>
+                        } ?></h1>
+                    <a target="_blank" href="<?= $data['video_url'] ?>" class="float-right tutorial__text">Watch tutorial</a>
+                </div>
         <form class="not_full_width changes__form_dates">
             <div class="form-group row">
                 <label for="date_start" class="changes__start_title col-sm-1 col-form-label">Start date:</label>
