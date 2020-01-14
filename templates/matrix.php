@@ -39,7 +39,7 @@
                                     <?php foreach ($month as $day): ?>
                                         <?php
                                         if ($day['available'] === '1') {
-                                            echo '<td class="table-success"><span class="text-dark">X</span></td>';
+                                            echo "<td class=\"table-success\"><span class=\"text-dark\">\${$day['price_day']}</span></td>";
                                         } else {
                                             echo "<td class='table-secondary'>&nbsp;</td>";
                                         } ?>
