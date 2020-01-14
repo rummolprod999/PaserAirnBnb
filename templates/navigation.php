@@ -71,6 +71,9 @@
                                 <a class="nav-link <?php active('search'); ?>" href="/search">Search</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link <?php active('matrix'); ?>" href="/matrix">Matrix</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link <?php active('settings'); ?>" href="/settings">Logs</a>
                             </li>
                         </ul>

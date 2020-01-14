@@ -12,6 +12,7 @@ require_once 'controllers/AdminDefaultController.php';
 require_once 'controllers/ChangeUserController.php';
 require_once 'controllers/NotFoundController.php';
 require_once 'controllers/SearchController.php';
+require_once 'controllers/MatrixController.php';
 
 final class RouterLite
 {

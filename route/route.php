@@ -23,6 +23,7 @@ if (AuthController::$uid !== 0 && AuthController::$is_admin) {
     RouterLite::addRoute('/analytics', 'AnalitycsController/index_page');
     RouterLite::addRoute('/analytics2', 'Analitycs2Controller/index_page');
     RouterLite::addRoute('/search', 'SearchController/index_page');
+    RouterLite::addRoute('/matrix', 'MatrixController/index_page');
 } else {
     RouterLite::addRoute('/', 'AuthController');
 }
