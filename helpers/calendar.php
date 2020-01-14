@@ -168,14 +168,14 @@ function return_moths_calendar($date, $period, $case_bookable)
                 if ($per !== null) {
                     if ($case_bookable === 'all') {
                         if ($per['available'] === '1' && $per['bookable'] === '1'  /* && $data[$c]['available_for_checkin'] == '1'  */) {
-                            echo "<td class=\"table-success\"><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$per['price_day']}</span></td>";
+                            echo "<td class=\"table-success\"><div style='float: left'><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$per['price_day']}</span></div><div style='float: right'><span class=\"text-dark\">\${$per['max_price']}</span></br><span class=\"text-dark\">\${$per['min_price']}</span></br><span class=\"text-dark\">{$per['only_book']}/{$per['all_app']}</span></div></td>";
                         } elseif ($per['available'] === '1' /* && $data[$c]['bookable'] === '1'  && $data[$c]['available_for_checkin'] == '1'  */) {
                             echo "<td class=\"table-secondary\"><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$per['price_day']}</span></td>";
                         } else {
-                            echo "<td><span class=\"text - dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$per['price_day']}</span></td>";
+                            echo "<td><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$per['price_day']}</span></td>";
                         }
                     } else {
-                        echo "<td class=\"table-success\"><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$per['price_day']}</span></td>";
+                        echo "<td class=\"table-success\"><div style='float: left'><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$per['price_day']}</span></div><div style='float: right'><span class=\"text-dark\">\${$per['max_price']}</span></br><span class=\"text-dark\">\${$per['min_price']}</span></br><span class=\"text-dark\">{$per['only_book']}/{$per['all_app']}</span></div></td>";
                     }
 
                 } else {
