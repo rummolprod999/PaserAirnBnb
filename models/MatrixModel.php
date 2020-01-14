@@ -13,7 +13,19 @@ class MatrixModel extends Model
     {
         $data = [];
         $data['matrix'] = $this->get_8_months_matrix();
+        // set a name of page
+        $data['url_video'] = $this->get_URL('Matrix');
         return $data;
+    }
+
+    private function get_URL($name)
+    {
+        $stmt = $this->conn->prepare('SELECT page_url_video FROM pages WHERE pages_name = :name');
+        $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result[0]['page_url_video'];
     }
 
     private function get_8_months_matrix()

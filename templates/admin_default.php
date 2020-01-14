@@ -9,6 +9,10 @@
         echo "<div class='alert alert-danger' role='alert'>{$_SESSION['remove_user']}</div>";
         unset($_SESSION['remove_user']);
     }
+    if (isset($_SESSION['new_page'])) {
+        echo "<div class='alert alert-danger' role='alert'>{$_SESSION['new_page']}</div>";
+        unset($_SESSION['new_page']);
+    }
     if (isset($_SESSION['disable_report'])) {
         echo "<div class='alert alert-danger' role='alert'>{$_SESSION['disable_report']}</div>";
         unset($_SESSION['disable_report']);
@@ -187,6 +191,16 @@
                             <?php } ?>
                             </tbody>
                         </table>
+
+                        <button class="js_create_page btn btn-primary">Add page</button>
+                        <form method="post" class="d-none" id="create_page">
+                            <input style="width: 250px;" type="text" class="form-control" name="page_name" placeholder="Enter name of page" required>
+                            &nbsp&nbsp&nbsp&nbsp
+                            <button class="btn btn-primary" type="submit">Create</button>
+                        </form>
+                        <script>
+
+                        </script>
                     </div>
             </div>
         </div>
@@ -200,5 +214,6 @@
                 content: $(this).prop("title").text
             }).tooltip('show');
         })</script>
+    <script src="/js/newPage.js"></script>
 </div>
 

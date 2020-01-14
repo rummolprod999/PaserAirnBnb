@@ -1,5 +1,10 @@
 <?php require_once 'templates/navigation.php' ?>
-<?php //$loader = 1; ?>
+<?php
+    $ind = count ($data) - 2;
+
+    $url = $data[$ind][1];
+    array_pop($data[$ind]);
+?>
 <div id="article">
 
     <div class="container">
@@ -7,7 +12,7 @@
         <div class="col-lg-12">
     <div>
         <h1 class="text-center">ANALITYCS 2</h1>
-        <a style="display: block; text-align: right !important;" target="_blank" href="<?= $data['video_url'] ?>" class="text-center main_tutorial tutorial__text">Watch tutorial</a>
+        <a style="display: block; text-align: right !important;" target="_blank" href="<?= $url ?>" class="text-center main_tutorial tutorial__text">Watch tutorial</a>
     </div>
     </div>
     </div>

@@ -1,12 +1,18 @@
 <?php require_once 'templates/navigation.php' ?>
 <?php require_once 'helpers/otherHelpers.php' ?>
+
+<?php
+        $ind = count ($data['url_arr']) - 1;
+        $url = $data['url_arr'][$ind][1];
+        array_pop($data['url_arr'][$ind]);
+?>
 <div id="article">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="main_tutorial not_full_width">
                     <h1  class="mainTitle">APARTMENTS LIST</h1>
-                    <a target="_blank" href="<?= $data['video_url'] ?>" class="float-right tutorial__text">Watch tutorial</a>
+                    <a target="_blank" href="<?= $url ?>" class="float-right tutorial__text">Watch tutorial</a>
                 </div>
                 <div id="table_div">
                     <div class="not_full_width">

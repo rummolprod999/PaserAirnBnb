@@ -42,7 +42,9 @@ class Analitycs2Model extends Model
             }
             $data['inter'] = $days;
         }
-        $data['video_url'] = $this->get_URL(3);
+        $url = $this->get_URL(3);
+        $ind = count ($data) - 1;
+        $data[$ind][1] = $url;
 
         return $data;
     }

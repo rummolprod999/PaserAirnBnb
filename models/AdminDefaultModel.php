@@ -11,6 +11,12 @@ class AdminDefaultModel extends Model
 
     public function get_data()
     {
+        $new_page =  $this->add_page();
+        if ($new_page !== null) {
+            $_SESSION['new_page'] = $new_page;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
+        }
         $add_new_user = $this->add_new_user();
         if ($add_new_user !== null) {
             $_SESSION['add_user'] = $add_new_user;
@@ -41,10 +47,28 @@ class AdminDefaultModel extends Model
             header("Location: {$_SERVER['REQUEST_URI']}");
             exit();
         }
+
         $data = [];
         $data['users_list'] = $this->get_users_list();
         $data['pages'] = $this->get_url_list();
         return $data;
+    }
+
+    private function add_page()
+    {
+        if(isset($_POST['page_name'])){
+            $stmt = $this->conn->prepare('INSERT INTO pages SET pages_name = :pages_name, page_url_video = ""');
+            $stmt->bindValue(':pages_name', $_POST['page_name'], PDO::PARAM_STR);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                return 'new page has been added';
+            } else {
+                return 'new page has not been added';
+            }
+        }
+
+        return null;
     }
 
     private function add_new_user()

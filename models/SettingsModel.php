@@ -17,7 +17,15 @@ class SettingsModel extends Model
         $stmt->execute();
         $data = [];
         $data['date_last'] = $stmt->fetch(PDO::FETCH_ASSOC);
-        $data['video_url'] = $this->get_URL(7);
+        $url = $this->get_URL(7);
+
+//        if(count($data['date_last']) > 0){
+//            $ind = count($data['date_last']) - 1;
+//        } else{
+//            $ind = count($data['date_last']);
+//        }
+        $data['date_last'][1] = $url;
+
         return $data;
     }
 

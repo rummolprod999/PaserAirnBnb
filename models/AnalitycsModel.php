@@ -36,8 +36,9 @@ class AnalitycsModel extends Model
                 $data[] = [$i => $period];
             }
         }
-
-        $data['video_url'] = $this->get_URL(2);
+        $url = $this->get_URL(2);
+        $ind = count ($data) - 1;
+        $data[$ind][1] = $url;
 
         return $data;
     }

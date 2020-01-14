@@ -11,6 +11,9 @@ if (!function_exists('array_key_first')) {
 }
 $tabs = 0;
 $divs = 0;
+$ind = count ($data) - 1;
+$url = $data[$ind][1];
+array_pop($data[$ind]);
 ?>
 <div id="article">
     <div class="container">
@@ -18,7 +21,7 @@ $divs = 0;
             <div class="col-lg-12">
                 <div class="not_full_width title_margin">
                     <h1 class="analitycs__title text-left">ANALITYCS</h1>
-                    <a target="_blank" href="<?= $data['video_url'] ?>" class="float-right main_tutorial tutorial__text">Watch tutorial</a>
+                    <a target="_blank" href="<?= $url ?>" class="float-right main_tutorial tutorial__text">Watch tutorial</a>
                 </div>
 
                  <div class="analitycs__setNights not_full_width d-flex">

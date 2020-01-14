@@ -1,21 +1,23 @@
 <?php require_once 'templates/navigation.php' ?>
 <?php require_once 'helpers/calendar.php' ?>
+<?php
+if(!isset($_GET['date_start'], $_GET['date_end'], $_GET['bookopt'])){
+    $url1 = $data;
+} else{
+    $ind = count ($data) - 1;
+    $url1 = $data[$ind][1];
+    array_pop($data[$ind]);
+}
+
+
+
+?>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
 <div>
     <h1 class="text-center">Search for available apartments</h1>
-    <?php
-    if(count($data) == 1){
-        if(!empty($data['video_url'])){
-            $url1 = $data['video_url'];
-        } else{
-            $url1 = $data;
-        }
-    } else if(count($data) > 1){
-        $url1 = $data['video_url'];
-    }
-    ?>
+
     <a style="display: block; text-align: right !important; margin-bottom: 0;" target="_blank" href="<?= $url1 ?>" class="text-center main_tutorial tutorial__text">Watch tutorial</a>
 </div>
         </div>

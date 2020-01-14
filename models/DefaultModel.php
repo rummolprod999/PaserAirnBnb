@@ -16,7 +16,9 @@ class DefaultModel extends Model
         $rem_mess = $this->remove_url();
         $launch_mess = $this->launch_parser();
         $data = $this->get_list_url();
-        $data['video_url'] = $this->get_URL(1);
+        $url = $this->get_URL(1);
+        $ind = count ($data['url_arr']) - 1;
+        $data['url_arr'][$ind][1] = $url;
         $change_notes = $this->change_notes();
         $reorders = $this->reorder_table();
         if ($launch_mess !== '') {
@@ -44,6 +46,7 @@ class DefaultModel extends Model
             header("Location: {$_SERVER['REQUEST_URI']}");
             exit();
         }
+
         return $data;
     }
 

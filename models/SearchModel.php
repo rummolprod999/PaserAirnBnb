@@ -12,8 +12,8 @@ class SearchModel extends Model
     public function get_data()
     {
         $data = [];
+        $url = $this->get_URL(6);
         if (!isset($_GET['date_start'], $_GET['date_end'], $_GET['bookopt'])) {
-            $url = $this->get_URL(6);
             return $url;
         }
         $start_date = $_GET['date_start'];
@@ -21,7 +21,14 @@ class SearchModel extends Model
         $case_bookable = $_GET['bookopt'];
         $data = $this->get_free($start_date, $end_date, $case_bookable);
 
-        $data['video_url'] = $this->get_URL(6);
+        if(count($data) > 0){
+            $ind = count ($data) - 1;
+        } else{
+            $ind = count ($data);
+        }
+
+        $data[$ind][1] = $url;
+
         return $data;
     }
 

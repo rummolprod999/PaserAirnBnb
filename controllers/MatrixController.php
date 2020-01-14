@@ -14,6 +14,6 @@ class MatrixController extends Controller
     function index_page()
     {
         $data = $this->model->get_data();
-        echo $this->template('templates/matrix.php', ["title" => "Availability tables", "data" => $data]);
+        echo $this->template('templates/matrix.php', ["title" => "Availability table", "data" => $data]);
     }
 }
