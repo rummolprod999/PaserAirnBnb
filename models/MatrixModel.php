@@ -34,10 +34,10 @@ class MatrixModel extends Model
         for ($i = 0; $i < 8; $i++) {
             $stmt = '';
             if ($i === 0) {
-                $stmt = $this->conn->prepare("SELECT a.id, MONTH(d.date) month FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id_user = :id_user AND MONTH(d.date) = MONTH(CURDATE()) GROUP BY a.id");
+                $stmt = $this->conn->prepare("SELECT a.id, MONTH(d.date) month FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id_user = :id_user AND MONTH(d.date) = MONTH(CURDATE()) GROUP BY a.id ORDER BY order_main DESC, apartment_name ASC");
 
             } else {
-                $stmt = $this->conn->prepare("SELECT a.id, MONTH(d.date) month FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id_user = :id_user AND MONTH(d.date) = MONTH(DATE_ADD(CURDATE(), INTERVAL ${i} MONTH)) GROUP BY a.id");
+                $stmt = $this->conn->prepare("SELECT a.id, MONTH(d.date) month FROM anb_url a LEFT JOIN  checkup ch ON a.id = ch.iid_anb LEFT JOIN days d on ch.id = d.id_checkup WHERE a.id_user = :id_user AND MONTH(d.date) = MONTH(DATE_ADD(CURDATE(), INTERVAL ${i} MONTH)) GROUP BY a.id ORDER BY order_main DESC, apartment_name ASC");
             }
             $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
             $stmt->execute();

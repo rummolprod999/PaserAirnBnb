@@ -29,14 +29,14 @@
                                     <img src="/img/custom_checkbox.svg" class="js_checkBox__img" aria-hidden="true">
                                 </label>
                             </div>
-                            <button type="submit" class="btn_add_items btn btn-primary mb-2">+add</button>
+                            <button type="submit" class="btn_add_items btn btn-primary mb-2">+add property</button>
                         </form>
                             <div class="btns_rightside d-flex ml-auto">
                                 <form id="reorder_table" class="form-inline" method="post"><input type="hidden" name="reorder" value="true">
                                     <button type="submit" class="btn_reorder btn">Reorder table</button>
                                 </form>
                                 <form class="form-inline" method="post"><input type="hidden" name="launch" value="true">
-                                    <button type="submit" class="btn_parse btn">Launch parser</button>
+                                    <button type="submit" class="btn_parse btn">Launch date update</button>
                                 </form>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                                 } elseif ($row['id'] === '38') {
                                     echo 'class="table-danger"';
                                 } ?>>
-                                    <tr>
+<!--                                    <tr>-->
                                     <th><?php echo ++$count_app ?></th>
                                     <td><input class="order__field w-100" min="0" max="999" type="number" title="from 0 to 999"
                                                form="reorder_table"
@@ -202,7 +202,13 @@
 <!--                                        </form>-->
 <!--                                    </td>-->
                                 </tr>
-                            <tr>
+                            <tr
+                                <?php if ($row['own'] === '1') {
+                                    echo 'class="table-warning"';
+                                } elseif ($row['id'] === '38') {
+                                    echo 'class="table-danger"';
+                                } ?>
+                            >
                                 <td colspan="8">
                                     <?php //if ($row['notes'] !== ''): ?>
                                     <form method="post" class=" d-flex" id="notes_form<?php echo $row['id'] ?>">
@@ -221,7 +227,7 @@
                                     <!--                                                data-target="#Modal--><?php //echo $row['id'] ?><!--">change-->
                                     <!--                                        </button>-->
                                 </td>
-                            </tr>
+<!--                            </tr>-->
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

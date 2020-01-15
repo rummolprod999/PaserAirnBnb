@@ -162,7 +162,7 @@ class DefaultModel extends Model
     public function get_list_url()
     {
         $data = [];
-        $query = 'SELECT id, url, owner, own, num_parsing, suspend, apartment_name, notes, order_main FROM anb_url WHERE anb_url.id_user = :id_user ORDER BY order_main DESC';
+        $query = 'SELECT id, url, owner, own, num_parsing, suspend, apartment_name, notes, order_main FROM anb_url WHERE anb_url.id_user = :id_user ORDER BY order_main DESC, apartment_name ASC';
         $data_new = [];
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);

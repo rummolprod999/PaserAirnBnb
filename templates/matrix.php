@@ -13,15 +13,15 @@
             <?php if (count($matrix) > 0): ?>
 
                 <div class="row border border-2 border-secondary rounded mb-3 p-2">
-                    <div class="py-4 col-12">
+                    <div style="padding-left: 5px; padding-right: 5px;" class="py-4 col-12">
                         <h2><?php echo $matrix[0][0]['date']->format('F') ?></h2>
                         <div class="table-responsive">
-                            <table class="table table-bordered">
+                            <table class="matrix-table table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>&nbsp;</th>
+                                    <th style="padding: .75rem 0;">&nbsp;</th>
                                     <?php for ($d = 1, $dMax = count($matrix[0]); $d <= $dMax; $d++) {
-                                        echo "<th style='min-width: 41px'>$d</th>";
+                                        echo "<th class='subtable' style='min-width: 41px'>$d</th>";
                                     } ?>
                                 </tr>
                                 </thead>
@@ -30,7 +30,7 @@
 
                                 as $month): ?>
                                 <tr>
-                                    <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: .75rem 0;">
                                         <a class="table_name_link"
                                            title="<?php echo (string)($month[0]['apartment_name']) ?>"
                                            target="_blank"
@@ -39,9 +39,9 @@
                                     <?php foreach ($month as $day): ?>
                                         <?php
                                         if ($day['available'] === '1') {
-                                            echo "<td class=\"table-success\"><span class=\"text-dark\">\${$day['price_day']}</span></td>";
+                                            echo "<td style='padding: .75rem 0; width: 30px;' class=\"subtable table-success\"><span class=\"text-dark\">\${$day['price_day']}</span></td>";
                                         } else {
-                                            echo "<td class='table-secondary'>&nbsp;</td>";
+                                            echo "<td style='background-color: #fff;' class='subtable table-secondary'>&nbsp;</td>";
                                         } ?>
                                     <?php endforeach; ?>
                                     <?php endforeach; ?>

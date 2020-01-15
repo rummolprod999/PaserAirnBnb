@@ -926,6 +926,11 @@ textarea:disabled {
     margin-left: 0;
     border: 1px solid #999;
 }
+.matrix-table .subtable{
+    width: 30px;
+    max-width: 30px;
+    min-width: 30px;
+}
 .my-legend .legend-source {
     font-size: 70%;
     color: #999;
@@ -942,7 +947,7 @@ textarea:disabled {
 
 @media (max-width: 1500px) {
     .main_table{
-        wisth: 100%;
+        width: 100%;
         margin: 60px 0 0 0;
     }
     .main__table-resp{
