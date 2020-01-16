@@ -7,7 +7,7 @@ class Model
     private $host = 'localhost';
     private $db = 'anb';
     private $user_db = 'root';
-    private $pass_db = '1234';
+    private $pass_db = '5J9rH3dH7WSCs2';
 
     public function __construct()
     {

@@ -15,6 +15,7 @@ if (AuthController::$uid !== 0 && AuthController::$is_admin) {
     RouterLite::addRoute('/', 'AdminController');
     RouterLite::addRoute('/admin', 'AdminDefaultController');
     RouterLite::addRoute('/change_user', 'ChangeUserController');
+    RouterLite::addRoute('/logs', 'AdminSettingsController');
 } elseif (AuthController::$uid !== 0) {
     RouterLite::addRoute('/', 'DefaultController/index_page');
     RouterLite::addRoute('/stat/:num', 'StatController/index_page/$1');

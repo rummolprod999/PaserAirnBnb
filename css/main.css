@@ -394,7 +394,7 @@ tbody th{
     background-color: #ffffff;
     font-size: 14px;
 }
-.main_table tr:nth-child(3n+2){
+.main_table tr:nth-child(odd){
     border-bottom: 2px solid rgba(0, 0, 0, .1);
 }
 .main_table td, .main_table th{
@@ -883,7 +883,11 @@ textarea:disabled {
 .no-result {
     display: none;
 }
-
+.search_table th, .search_table td{
+    width: 85px;
+    min-width: 85px;
+    max-width: 85px;
+}
 .results tr[visible='true'] {
     display: table-row;
 }

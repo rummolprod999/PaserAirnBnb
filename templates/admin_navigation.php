@@ -10,6 +10,9 @@
                     <a class="nav-link <?php active('admin'); ?>" href="/">Main</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link <?php active('logs'); ?>" href="/logs">Logs</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-danger <?php active('/?action=out'); ?>"
                        href="/?action=out">Logout</a>
                 </li>

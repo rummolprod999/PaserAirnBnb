@@ -9,6 +9,7 @@ require_once 'controllers/AnalitycsController.php';
 require_once 'controllers/Analitycs2Controller.php';
 require_once 'controllers/AdminController.php';
 require_once 'controllers/AdminDefaultController.php';
+require_once 'controllers/AdminSettingsController.php';
 require_once 'controllers/ChangeUserController.php';
 require_once 'controllers/NotFoundController.php';
 require_once 'controllers/SearchController.php';
