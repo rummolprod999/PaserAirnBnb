@@ -7,12 +7,16 @@
         <button class="btn btn-primary" type="submit">Find</button>
         <button class="btn btn-primary" type="button" onclick="location.href = '/logs'">Drop</button>
     </form>
-
+    <?php
+        if(count($data) == 0){
+            echo "<div class=\"alert alert-success\" role=\"alert\">Not found user</div>";
+        }
+    ?>
     <?php foreach ($data as $d) { ?>
 
     <div class="container-fluid">
         <div class="row my-5">
-            <div class="col-12"><p><?php echo $d['names']['user_name'] ?></p></div>
+            <div class="col-12"><p style="color: #000;"><?php echo $d['names']['user_name'] ?></p></div>
             <div class="col-sm border border-info"><pre
                     class="pre-scrollable"><code><?php if (isset($data)) {
                             foreach ($d['logs'] as $user) {

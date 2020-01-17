@@ -38,7 +38,7 @@
                                     </td>
                                     <?php foreach ($month as $day): ?>
                                         <?php
-                                        if ($day['available'] === '1') {
+                                        if ($day['available'] === '1' && $day['bookable'] === '1') {
                                             echo "<td style='padding: .75rem 0; width: 30px;' class=\"subtable table-success\"><span class=\"text-dark\">\${$day['price_day']}</span></td>";
                                         } else {
                                             echo "<td style='background-color: #fff;' class='subtable table-secondary'>&nbsp;</td>";

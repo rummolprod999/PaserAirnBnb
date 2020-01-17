@@ -65,7 +65,7 @@ function print_calendar($data, $book_changes)
                 if (in_array($data[$c]['date'], $book_changes, true)) {
                     echo "<td class=\"table-danger\"><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$data[$c]['price_day']}</span></td>";
                 } elseif ($data[$c]['available'] === '1' && $data[$c]['bookable'] === '1'  /* && $data[$c]['available_for_checkin'] == '1'  */) {
-                    echo "<td class=\"table-success\"><div class='float-left'><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$data[$c]['price_day']}</span></div> <div class='float-right'><span class=\"text - dark\">\${$per['max_price']}</span> <br> <span class=\"text - dark\">\${$per['min_price']}</span> <br> <span class=\"text - dark\">{$per['only_book']}/{$per['all_app']}</span></div></td>";
+                    echo "<td class=\"table-success\"><div class='float-left'><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$data[$c]['price_day']}</span></div> <div class='float-right'><span class=\"text - dark\">\${$data[$c]['max_price']}</span> <br> <span class=\"text - dark\">\${$data[$c]['min_price']}</span> <br> <span class=\"text - dark\">{$data[$c]['only_book']}/{$data[$c]['all_app']}</span></div></td>";
                 } elseif ($data[$c]['available'] === '1' /* && $data[$c]['bookable'] === '1'  && $data[$c]['available_for_checkin'] == '1'  */) {
                     echo "<td class=\"table-secondary\"><span class=\"text-dark\">{$iValue[$j]}</span></br><span class=\"text-success\">\${$data[$c]['price_day']}</span></td>";
                 } else {

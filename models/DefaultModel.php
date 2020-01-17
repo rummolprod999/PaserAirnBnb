@@ -15,6 +15,7 @@ class DefaultModel extends Model
         $add_mess = $this->add_url();
         $rem_mess = $this->remove_url();
         $launch_mess = $this->launch_parser();
+        $clean_changes = $this->bookable_seen();
         $data = $this->get_list_url();
         $url = $this->get_URL(1);
         $ind = count ($data['url_arr']) - 1;
@@ -23,6 +24,11 @@ class DefaultModel extends Model
         $reorders = $this->reorder_table();
         if ($launch_mess !== '') {
             $_SESSION['launch_mess'] = $launch_mess;
+            header("Location: {$_SERVER['REQUEST_URI']}");
+            exit();
+        }
+        if ($clean_changes !== '') {
+            $_SESSION['clean_changes'] = $clean_changes;
             header("Location: {$_SERVER['REQUEST_URI']}");
             exit();
         }
@@ -48,6 +54,27 @@ class DefaultModel extends Model
         }
 
         return $data;
+    }
+
+    private function bookable_seen()
+    {
+        $message = '';
+        if (isset($_POST['remove_bookable']) && !empty($_POST['remove_bookable']) && $_POST['remove_bookable'] === 'remove') {
+            $stmt = $this->conn->prepare('UPDATE bookable_changes b JOIN anb_url a ON b.id_url = a.id SET b.seen = 1 WHERE a.id_user = :id_user');
+            $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
+            $stmt->execute();
+            $clean_book = $stmt->rowCount();
+
+            $stmt = $this->conn->prepare('UPDATE price_changes p JOIN anb_url a ON p.id_url = a.id SET  p.seen = 1 WHERE a.id_user = :id_user');
+            $stmt->bindValue(':id_user', AuthController::$uid, PDO::PARAM_INT);
+            $stmt->execute();
+            $clean_price = $stmt->rowCount();
+            if ($clean_book > 0 || $clean_price > 0) {
+                $message = '<div class="alert alert-warning" role="alert">Changes have been cleaned</div>';
+                return $message;
+            }
+        }
+        return $message;
     }
 
     function reorder_table()

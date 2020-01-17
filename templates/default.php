@@ -35,6 +35,9 @@
                                 <form id="reorder_table" class="form-inline" method="post"><input type="hidden" name="reorder" value="true">
                                     <button type="submit" class="btn_reorder btn">Reorder table</button>
                                 </form>
+                                <form class="form-inline" method="post"><input type="hidden" name="remove_bookable" value="remove">
+                                    <button type="submit" class="btn_reorder btn">I have seen all updates. Reset</button>
+                                </form>
                                 <form class="form-inline" method="post"><input type="hidden" name="launch" value="true">
                                     <button type="submit" class="btn_parse btn">Launch date update</button>
                                 </form>
@@ -60,7 +63,11 @@
                         if (isset($_SESSION['reorder'])) {
                             echo $_SESSION['reorder'];
                             unset($_SESSION['reorder']);
-                        } ?>
+                        }
+                        if (isset($_SESSION['clean_changes'])) {
+                            echo $_SESSION['clean_changes'];
+                            unset($_SESSION['clean_changes']);
+                        }?>
 <!--                        <div class="float-right">-->
 <!--                            <div class="form-group pull-right">-->
 <!--                                <input type="text" class="search form-control" placeholder="What you looking for?">-->
