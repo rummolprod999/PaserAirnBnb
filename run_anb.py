@@ -4,7 +4,7 @@ import time
 import pymysql as pymysql
 
 USERDB = 'root'
-PASSDB = '5J9rH3dH7WSCs2'
+PASSDB = ''
 DB = 'anb'
 
 
