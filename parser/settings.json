@@ -2,11 +2,11 @@
   "database": "anb",
   "prefix": "",
   "userdb": "root",
-  "passdb": "5J9rH3dH7WSCs2",
+  "passdb": "",
   "server": "localhost",
   "port": "3306",
-  "user_email": "faridgazizov@outlook.com",
-  "pass_email": "Nikolai2019!",
+  "user_email": "",
+  "pass_email": "",
   "smtp_server": "smtp-mail.outlook.com",
   "smtp_port": "587"
 }
